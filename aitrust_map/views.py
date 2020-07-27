@@ -15,5 +15,5 @@ def process_loc(request):
         "lat": lat,
         "lng": lng, 
         }
-    # return JsonResponse(data)
-    return HttpResponse(data)
+    return JsonResponse(data)
+    # return HttpResponse(data)

@@ -101,7 +101,7 @@ $(function(){
         L.marker([54.391091, 18.600883]).addTo(map).bindPopup('Some lazy Coder cave').openPopup();
         var popup = L.popup();
         console.log('submitting');
-        console.log("szerokość geograczina: " + latLngs.lat + "długość geograczina: " + latLngs.lng);
+        console.log("szerokość geograczina: " + latLngs.lat + " długość geograczina: " + latLngs.lng);
         $.ajax({
             type: "GET",
             url: 'process_loc/',
