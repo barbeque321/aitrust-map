@@ -104,7 +104,7 @@ $(function(){
         console.log('submitting')
         var ajaxRequest = $.ajax({
             type: "GET",
-            url: "{% url 'process_loc/' %}",
+            url: 'process_loc/',
             data: JSON.stringify({
                 "latLngs": latLngs,
             }),
