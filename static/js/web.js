@@ -62,11 +62,10 @@ var layer = e.layer;
 if (type === 'circle') {
     theRadius = layer.getRadius();
     latLngs = layer.getLatLng();
-    console.log("Coordinates: " + latLngs.toString() + " Radius: " + theRadius.toString());
                         }
 if (type === 'polygon') {
     latLngs = layer.getLatLngs();
-    console.log("Coordinates: " + latLngs.toString());
+    console.log("Coordinates: " + latLngs);
     theRadius = 0;
                         }
 if (type === 'rectangle') {
@@ -100,7 +99,7 @@ map.on('draw:edited', function (e) {
 
 $(function(){
     $("#update_log_button").bind('click', function(){
-        console.log('submitting');
+        console.log('Sending data from client to server');
         if (latLngs != 0 && theRadius != 0){
             $.ajax({
                 type: "GET",
