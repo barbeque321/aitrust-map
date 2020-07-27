@@ -67,10 +67,12 @@ if (type === 'circle') {
 if (type === 'polygon') {
     latLngs = layer.getLatLngs();
     console.log("Coordinates: " + latLngs.toString());
+    theRadius = 0;
                         }
 if (type === 'rectangle') {
     latLngs = layer.getLatLngs();
     console.log("Coordinates: " + latLngs.toString());
+    theRadius = 0;
                         }    
 
 
@@ -119,10 +121,10 @@ $(function(){
                        console.log(jqXhr);
                  },
             
-                });};
+                });}
         else {
             console.log("Brak współrzędnych!");
-        }
+        };
             
 
                                                     });
