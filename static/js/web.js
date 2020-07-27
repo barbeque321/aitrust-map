@@ -105,10 +105,10 @@ $(function(){
         $.ajax({
             type: "GET",
             url: 'process_loc/',
-            data: JSON.stringify({
+            data: {
                 "lat": latLngs.lat,
                 "lng": latLngs.lng,
-            }),
+            },
             contentType: 'application/json; charset=utf-8',
             dataType: 'json',
             success: function(data){
