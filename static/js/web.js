@@ -103,7 +103,7 @@ $(function(){
         latLngs = latLngs.toString()
         $.ajax({
             type: "GET",
-            url: process_loc,
+            url: 'process_loc',
             data:{
                 'latLngs': latLngs,
             },
