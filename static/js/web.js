@@ -120,8 +120,10 @@ $(function(){
                  },
             
                 });};
-        else:
+        else {
             console.log("Brak współrzędnych!");
+        }
+            
 
                                                     });
             });
