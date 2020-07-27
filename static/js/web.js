@@ -100,7 +100,7 @@ $(function(){
     $("#update_log_button").bind('click', function(){
         console.log('submitting');
         console.log(theRadius);
-        if (latLngs != 0) and (theRadius != 0):
+        if (latLngs != 0) and (theRadius != 0){
             $.ajax({
                 type: "GET",
                 url: 'process_loc/',
@@ -111,13 +111,15 @@ $(function(){
                 contentType: 'application/json; charset=utf-8',
                 dataType: 'json',
                 success: function(data){
-                    console.log("Zwracam otrzymaną wartość centrum okręgu: " + JSON.stringify(data))}, 
+                         console.log("Zwracam otrzymaną wartość centrum okręgu: " + JSON.stringify(data))
+
+                }, 
                 error: function (jqXhr, textStatus, errorThrown) {
-                    console.log('ERROR');
-                    console.log(jqXhr);
-                                                                    },
+                       console.log('ERROR');
+                       console.log(jqXhr);
+                 },
             
-                });
+                });};
         else:
             console.log("Brak współrzędnych!");
 
