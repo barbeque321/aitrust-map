@@ -60,7 +60,7 @@ var type = e.layerType;
 var layer = e.layer;
 
 if (type === 'circle') {
-    var theRadius = layer.getRadius();
+    theRadius = layer.getRadius();
     latLngs = layer.getLatLng();
     console.log("Coordinates: " + latLngs.toString() + " Radius: " + theRadius.toString());
                         }
