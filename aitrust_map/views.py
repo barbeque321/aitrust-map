@@ -9,4 +9,5 @@ def process_loc(request):
     if request.method == "GET":
         latLngs = request.GET.get('latLngs')
         data = { 'latLngs': latLngs }
-    return JsonResponse(data)
+    # return JsonResponse(data)
+    return HttpResponse(latLngs)
