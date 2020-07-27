@@ -104,9 +104,9 @@ $(function(){
         $.ajax({
             type: "GET",
             url: "{% url 'process_loc' %}",
-            data:{
-                'latLngs': JSON.stringify(latLngs),
-            },
+            data: JSON.stringify({
+                'latLngs': latLngs,
+            }),
             contentType: 'application/json; charset=utf-8',
             dataType: 'json',
             success: function(){
