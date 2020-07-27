@@ -65,12 +65,10 @@ if (type === 'circle') {
                         }
 if (type === 'polygon') {
     latLngs = layer.getLatLngs();
-    console.log(latLngs);
     theRadius = 0;
                         }
 if (type === 'rectangle') {
     latLngs = layer.getLatLngs();
-    console.log(latLngs);
     theRadius = 0;
                         }    
 
@@ -85,7 +83,7 @@ map.on('draw:edited', function (e) {
             latLngs = layer.getLatLng();
             }
         if (layer instanceof L.Polyline){
-             latLngs = layer.getLatLngs();
+            latLngs = layer.getLatLngs();
         }
         
     });
