@@ -8,4 +8,4 @@ def azure_map_project(request):
 def process_loc(request):
     if request.method == "GET":
         latLngs = request.GET.get('latLngs')
-    return render(request,"aitrust_map.html",{})
+    return JsonResponse(latLngs)
