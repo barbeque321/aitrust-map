@@ -108,9 +108,9 @@ $(function(){
                 'latLngs': latLngs,
             },
             dataType : "json",
-            error: function (response) {
-                // alert the error if any error occured
-                alert(response["responseJSON"]["error"]);
+            error: function(xhr, status, error){
+            var errorMessage = xhr.status + ': ' + xhr.statusText
+            alert('Error - ' + errorMessage);
             },
             
 });
