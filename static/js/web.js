@@ -100,6 +100,7 @@ $(function(){
     $("#update_log_button").bind('click', function(){
         L.marker([54.391091, 18.600883]).addTo(map).bindPopup('Some lazy Coder cave').openPopup();
         var popup = L.popup();
+        var data = jQuery.parseJSON( '{ "name": "John" }' );
         var ajaxRequest = $.ajax({
             type: "GET",
             url: "{% url 'process_loc' %}",
@@ -109,11 +110,11 @@ $(function(){
             contentType: 'application/json; charset=utf-8',
             dataType: 'json',
             success: function(){
-            console.log("Ok")
+            console.log("Ok");
             }, 
-            error: function(xhr, status, error){
-            var errorMessage = xhr.status + ': ' + xhr.statusText
-            alert('Error - ' + errorMessage);
+            error: function (jqXhr, textStatus, errorThrown) {
+                console.log('ERROR');
+                console.log(jqXhr);
             },
             
 });
