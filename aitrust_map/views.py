@@ -9,7 +9,11 @@ def azure_map_project(request):
 
 def process_loc(request):
     if request.method == "GET":
-        latLngs = request.GET.get('latLngs')
-        data = { 'latLngs': latLngs }
+        lat = request.GET.get('lat')
+        lng = request.GET.get('lng')
+        data = { 
+        "lat": lat,
+        "lng": lng, 
+        }
     # return JsonResponse(data)
-    return HttpResponse(latLngs)
+    return HttpResponse(data)
