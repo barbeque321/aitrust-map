@@ -100,8 +100,7 @@ $(function(){
     $("#update_log_button").bind('click', function(){
         L.marker([54.391091, 18.600883]).addTo(map).bindPopup('Some lazy Coder cave').openPopup();
         var popup = L.popup();
-        latLngs = latLngs.toString()
-        $.ajax({
+        var ajaxRequest = $.ajax({
             type: "GET",
             url: "{% url 'process_loc' %}",
             data: JSON.stringify({
