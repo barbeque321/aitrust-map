@@ -101,9 +101,10 @@ $(function(){
         L.marker([54.391091, 18.600883]).addTo(map).bindPopup('Some lazy Coder cave').openPopup();
         var popup = L.popup();
         var data = jQuery.parseJSON( '{ "name": "John" }' );
+        console.log('submitting')
         var ajaxRequest = $.ajax({
             type: "GET",
-            url: "{% url 'process_loc' %}",
+            url: "{% url 'process_loc/' %}",
             data: JSON.stringify({
                 "latLngs": latLngs,
             }),
