@@ -73,7 +73,12 @@ if (type === 'polygon') {
 if (type === 'rectangle') {
     latLngs = layer.getLatLngs();
     console.log("Coordinates: " + latLngs.toString());
-                        }                })
+                        }    
+
+
+
+
+                                    })
 
 
 map.on('draw:edited', function (e) {
@@ -93,12 +98,26 @@ map.on('draw:edited', function (e) {
 });
 
 
+$(function(){
+    $("#update_log_button").bind('click', function(){
+        L.marker([54.391091, 18.600883]).addTo(map).bindPopup('Some lazy Coder cave').openPopup();
+        var popup = L.popup();
+        $.ajax({
+            type: "GET",
+            url: "{% url 'process_loc' %}",
+            data:{
+                'latLngs': latLngs,
+            },
+            dataType : "json",
+            error: function (response) {
+                // alert the error if any error occured
+                alert(response["responseJSON"]["error"]);
+            },
+            
+)};
 
-
-function Action_1(){
-    L.marker([54.391091, 18.600883]).addTo(map).bindPopup('Some lazy Coder cave').openPopup();
-    var popup = L.popup();
-      }
+      });
+      });
 
 
 L.control.scale().addTo(map);
