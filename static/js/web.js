@@ -65,12 +65,12 @@ if (type === 'circle') {
                         }
 if (type === 'polygon') {
     latLngs = layer.getLatLngs();
-    console.log("Coordinates: " + latLngs);
+    console.log(latLngs);
     theRadius = 0;
                         }
 if (type === 'rectangle') {
     latLngs = layer.getLatLngs();
-    console.log("Coordinates: " + latLngs.toString());
+    console.log(latLngs);
     theRadius = 0;
                         }    
 
@@ -84,13 +84,11 @@ map.on('draw:edited', function (e) {
     var layers = e.layers;
     layers.eachLayer(function (layer) {
         if (layer instanceof L.Circle){
-            var theRadius = layer.getRadius();
+            theRadius = layer.getRadius();
             latLngs = layer.getLatLng();
-            console.log("Coordinates: " + latLngs.toString() + " Radius: " + theRadius.toString());
             }
         if (layer instanceof L.Polyline){
              latLngs = layer.getLatLngs();
-             console.log("Coordinates: " + latLngs.toString());
         }
         
     });
