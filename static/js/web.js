@@ -120,7 +120,7 @@ $(function(){
                 type: "GET",
                 url: 'process_loc2/',
                 data: {
-                    "latLngs": latLngs,
+                    "latLngs": JSON.stringify(latLngs),
                 },
                 contentType: 'application/json; charset=utf-8',
                 dataType: 'json',
