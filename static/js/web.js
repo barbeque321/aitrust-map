@@ -112,7 +112,7 @@ $(function(){
             contentType: 'application/json; charset=utf-8',
             dataType: 'json',
             success: function(data){
-                console.log("Centrum okręgu to: " + data)}, 
+                console.log("Centrum okręgu to: " + JSON.stringify(data))}, 
             error: function (jqXhr, textStatus, errorThrown) {
                 console.log('ERROR');
                 console.log(jqXhr);
