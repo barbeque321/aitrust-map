@@ -108,6 +108,9 @@ $(function(){
                 'latLngs': latLngs,
             },
             dataType : "json",
+            success: function(){
+            console.log("Ok")
+            }, 
             error: function(xhr, status, error){
             var errorMessage = xhr.status + ': ' + xhr.statusText
             alert('Error - ' + errorMessage);

@@ -7,6 +7,6 @@ def azure_map_project(request):
 
 def process_loc(request):
     if (request.is_ajax) and (request.method == "GET"):
-        latLngs = float(request.GET.get('latLngs'))
+        latLngs = request.GET.get('latLngs')
     else:
         return JsonResponse({"error": ""}, status=400)
