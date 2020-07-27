@@ -101,7 +101,6 @@ map.on('draw:edited', function (e) {
 $(function(){
     $("#update_log_button").bind('click', function(){
         console.log('submitting');
-        console.log(theRadius);
         if (latLngs != 0 && theRadius != 0){
             $.ajax({
                 type: "GET",
@@ -109,11 +108,12 @@ $(function(){
                 data: {
                     "lat": latLngs.lat,
                     "lng": latLngs.lng,
+                    "rad": theRadius,
                 },
                 contentType: 'application/json; charset=utf-8',
                 dataType: 'json',
                 success: function(data){
-                         console.log("Zwracam otrzymaną wartość centrum okręgu: " + JSON.stringify(data))
+                         console.log("Zwracam otrzymaną wartość centrum okręgu i jego promień: " + JSON.stringify(data))
 
                 }, 
                 error: function (jqXhr, textStatus, errorThrown) {
