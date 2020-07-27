@@ -100,7 +100,7 @@ $(function(){
     $("#update_log_button").bind('click', function(){
         console.log('submitting');
         console.log(theRadius);
-        if (latLngs != 0) and (theRadius != 0){
+        if (latLngs != 0 && theRadius != 0){
             $.ajax({
                 type: "GET",
                 url: 'process_loc/',
