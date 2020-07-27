@@ -98,10 +98,7 @@ map.on('draw:edited', function (e) {
 
 $(function(){
     $("#update_log_button").bind('click', function(){
-        L.marker([54.391091, 18.600883]).addTo(map).bindPopup('Some lazy Coder cave').openPopup();
-        var popup = L.popup();
         console.log('submitting');
-        console.log("szerokość geograczina: " + latLngs.lat + " długość geograczina: " + latLngs.lng);
         $.ajax({
             type: "GET",
             url: 'process_loc/',
@@ -112,7 +109,7 @@ $(function(){
             contentType: 'application/json; charset=utf-8',
             dataType: 'json',
             success: function(data){
-                console.log("Centrum okręgu to: " + JSON.stringify(data))}, 
+                console.log("Zwracam otrzymaną wartość centrum okręgu: " + JSON.stringify(data))}, 
             error: function (jqXhr, textStatus, errorThrown) {
                 console.log('ERROR');
                 console.log(jqXhr);
