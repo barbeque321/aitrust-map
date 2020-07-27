@@ -114,7 +114,7 @@ $(function(){
                 alert(response["responseJSON"]["error"]);
             },
             
-)};
+});
 
       });
       });
