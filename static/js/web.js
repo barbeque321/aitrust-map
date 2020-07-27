@@ -1,7 +1,7 @@
 var latLngs;
 var theRadius;
 
-
+$(document).ready(function(){
 
 
 var osmUrl = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
@@ -255,7 +255,7 @@ L.drawLocal = {
 
 
 
-
+}
 
 
 
