@@ -105,8 +105,10 @@ $(function(){
             type: "GET",
             url: "{% url 'process_loc' %}",
             data:{
-                'latLngs': latLngs,
+                'latLngs': JSON.stringify(latLngs),
             },
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'json',
             success: function(){
             console.log("Ok")
             }, 
@@ -119,6 +121,10 @@ $(function(){
 
       });
       });
+
+
+
+
 
 
 L.control.scale().addTo(map);
