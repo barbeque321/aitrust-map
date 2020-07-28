@@ -104,9 +104,9 @@ $(function(){
                 },
                 contentType: 'application/json; charset=utf-8',
                 dataType: 'json',
-                success: function(e){
+                success: function(data){
                          console.log("Returning data from backend: " + JSON.stringify(data));
-                         $('#generated_data').html(e(data));
+                         $('#generated_data').html(data);
 
                 }, 
                 error: function (jqXhr, textStatus, errorThrown) {
