@@ -31,7 +31,7 @@ def process_loc(request):
         promien = request.GET.get('rad')
         print(lat, lng, centrum, promien)
     start_time = time.time()
-    data_base = joblib.load(urlopen("http://51.195.46.168/dataPL.p"))
+    data_base = joblib.load(open("dataPL.p"))
     print("zaladowano")
     mid_time = time.time()
     adresy = []
