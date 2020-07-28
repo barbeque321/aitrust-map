@@ -30,14 +30,15 @@ def jestWkole(centrum, promien, punkt):
 
 def process_loc(request):
     if request.method == "GET":
+        start_time = time.time()
         lat = request.GET.get('lat')
         lng = request.GET.get('lng')
         centrum = [lat,lng]
         promien = request.GET.get('rad')
-    start_time = time.time()
+    
     # data_place = os.path.join(BASE_DIR,'aitrust_map/dataPL.p')
     # data_base = pickle.load(open(data_place, 'rb'))
-    mid_time = time.time()
+    server_respond = "Returning data from backend"
     # adresy = []
     # adresy_num = 0
     # for i, line in enumerate(data_base):
@@ -50,10 +51,15 @@ def process_loc(request):
     #         adresy.append(line)
     #         adresy_num += 1
     #         break
+    end_time = time.time()
     data = { 
-        "liczba_adresow": promien,
         "start_time": start_time,
-        "mid_time": mid_time,
+        "server_respond": server_respond,
+        "promien": promien,
+        "lat": lat,
+        "lng": lng,
+        "centrum": centrum,
+        "end_time": mid_time,
         }
     return JsonResponse(data)
 
