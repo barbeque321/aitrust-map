@@ -51,6 +51,7 @@ def process_loc(request):
         if jestWkole(centrum, promien, [float(coord[0]), float(coord[1])]):
             adresy.append(line)
             adresy_num += 1
+            break
     data = { 
         "liczba_adresow": adresy_num,
         "start_time": start_time,
