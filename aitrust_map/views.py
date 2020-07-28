@@ -11,6 +11,10 @@ import cloudpickle
 import joblib
 import os
 
+
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+
 # Create your views here.
 def azure_map_project(request):
     return render(request, 'aitrust_map.html', {})
