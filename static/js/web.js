@@ -105,7 +105,7 @@ $(function(){
                 contentType: 'application/json; charset=utf-8',
                 dataType: 'json',
                 success: function(data){
-                         console.log("Liczba punktów w okręgu: " + JSON.stringify(data))
+                         console.log("Returning data from backend: " + JSON.stringify(data))
 
                 }, 
                 error: function (jqXhr, textStatus, errorThrown) {

@@ -38,7 +38,6 @@ def process_loc(request):
     
     # data_place = os.path.join(BASE_DIR,'aitrust_map/dataPL.p')
     # data_base = pickle.load(open(data_place, 'rb'))
-    server_respond = "Returning data from backend"
     # adresy = []
     # adresy_num = 0
     # for i, line in enumerate(data_base):
@@ -54,7 +53,6 @@ def process_loc(request):
     end_time = time.time()
     data = { 
         "start_time": start_time,
-        "server_respond": server_respond,
         "promien": promien,
         "lat": lat,
         "lng": lng,
