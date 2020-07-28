@@ -38,22 +38,21 @@ def process_loc(request):
     start_time = time.time()
     data_place = os.path.join(BASE_DIR,'aitrust_map/dataPL.p')
     data_base = joblib.load(open(data_place, 'rb'))
-    print("zaladowano")
     mid_time = time.time()
-    adresy = []
-    adresy_num = 0
-    for i, line in enumerate(data_base):
-        if i == 0:  # pominiecie nagłówka
-            adresy.append(line)
-            continue
+    # adresy = []
+    # adresy_num = 0
+    # for i, line in enumerate(data_base):
+    #     if i == 0:  # pominiecie nagłówka
+    #         adresy.append(line)
+    #         continue
 
-        coord = line[8].split(' ')
-        if jestWkole(centrum, promien, [float(coord[0]), float(coord[1])]):
-            adresy.append(line)
-            adresy_num += 1
-            break
+    #     coord = line[8].split(' ')
+    #     if jestWkole(centrum, promien, [float(coord[0]), float(coord[1])]):
+    #         adresy.append(line)
+    #         adresy_num += 1
+    #         break
     data = { 
-        "liczba_adresow": adresy_num,
+        "liczba_adresow": promien,
         "start_time": start_time,
         "mid_time": mid_time,
         }
