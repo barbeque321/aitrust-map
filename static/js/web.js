@@ -96,7 +96,6 @@ $(function(){
         if (latLngs != 0 && theRadius != 0){
             $.ajax({
                 type: "GET",
-                timeout: 60000000,
                 url: 'process_loc/',
                 data: {
                     "lat": latLngs.lat,
