@@ -4,14 +4,15 @@
 
 {% block page_content %}
 
-<div id="map" style="position: absolute; top: 0; left: 0; width: 100%;">
+<div id="map" style="position: relative; top: 0; left: 0; width: 100%;">
     <div class="leaflet-bottom leaflet-left" > 
     	<button id="update_log_button">Generuj dane</button>
     </div>   
+    
 </div>
 <div id="generated_data">
         {{ generated_data }}
-</div> 
+	</div> 
 
 {% endblock %}
 
