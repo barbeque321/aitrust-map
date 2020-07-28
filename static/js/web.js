@@ -97,7 +97,7 @@ $(function(){
             $.ajax({
                 type: "GET",
                 url: 'process_loc/',
-                timeout: 4000,
+                timeout: 180000,
                 data: {
                     "lat": latLngs.lat,
                     "lng": latLngs.lng,
