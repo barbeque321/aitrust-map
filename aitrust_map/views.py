@@ -8,7 +8,7 @@ import time
 from shapely.geometry import Point, Polygon
 from urllib.request import urlopen
 import cloudpickle 
-from sklearn.externals import joblib
+import joblib
 
 # Create your views here.
 def azure_map_project(request):
