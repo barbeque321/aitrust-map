@@ -34,10 +34,9 @@ def process_loc(request):
         lng = request.GET.get('lng')
         centrum = [lat,lng]
         promien = request.GET.get('rad')
-        print(lat, lng, centrum, promien)
     start_time = time.time()
-    data_place = os.path.join(BASE_DIR,'aitrust_map/dataPL.p')
-    data_base = pickle.load(open(data_place, 'rb'))
+    # data_place = os.path.join(BASE_DIR,'aitrust_map/dataPL.p')
+    # data_base = pickle.load(open(data_place, 'rb'))
     mid_time = time.time()
     # adresy = []
     # adresy_num = 0
