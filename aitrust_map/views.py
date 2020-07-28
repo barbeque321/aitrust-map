@@ -8,6 +8,7 @@ import time
 from shapely.geometry import Point, Polygon
 from urllib.request import urlopen
 import cloudpickle 
+from sklearn.externals import joblib
 
 # Create your views here.
 def azure_map_project(request):
@@ -30,7 +31,7 @@ def process_loc(request):
         promien = request.GET.get('rad')
         
     start_time = time.time()
-    data_base = pickle.load(open("http://51.195.46.168/dataPL.p", 'rb'))
+    data_base = joblib.load(urlopen("http://51.195.46.168/dataPL.p"))
     mid_time = time.time()
     adresy = []
     adresy_num = 0
