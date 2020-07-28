@@ -33,7 +33,7 @@ def process_loc(request):
         print(lat, lng, centrum, promien)
     start_time = time.time()
     data_place = os.path.join(BASE_DIR,'aitrust_map/dataPL.p')
-    data_base = joblib.load(open(data_place))
+    data_base = joblib.load(open(data_place, 'rb'))
     print("zaladowano")
     mid_time = time.time()
     adresy = []
