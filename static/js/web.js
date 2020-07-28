@@ -105,7 +105,7 @@ $(function(){
                 contentType: 'application/json; charset=utf-8',
                 dataType: 'json',
                 success: function(data){
-                         console.log("Zwracam otrzymaną wartość centrum okręgu i jego promień: " + JSON.stringify(data))
+                         console.log("Liczba punktów w okręgu: " + JSON.stringify(data))
 
                 }, 
                 error: function (jqXhr, textStatus, errorThrown) {

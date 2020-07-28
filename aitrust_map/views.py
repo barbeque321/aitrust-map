@@ -30,7 +30,7 @@ def process_loc(request):
         promien = request.GET.get('rad')
         
     start_time = time.time()
-    data_base = cloudpickle.load(urlopen("http://51.195.46.168/dataPL.p"))
+    data_base = cloudpickle.load(urlopen("http://51.195.46.168/dataPL.p", 'rb'))
     mid_time = time.time()
     adresy = []
     adresy_num = 0
