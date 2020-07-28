@@ -59,7 +59,7 @@ def process_loc(request):
         "lat": lat,
         "lng": lng,
         "centrum": centrum,
-        "end_time": mid_time,
+        "end_time": end_time,
         }
     return JsonResponse(data)
 
