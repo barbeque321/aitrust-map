@@ -9,6 +9,7 @@ from shapely.geometry import Point, Polygon
 from urllib.request import urlopen
 import cloudpickle 
 import joblib
+import os
 
 # Create your views here.
 def azure_map_project(request):
@@ -31,7 +32,8 @@ def process_loc(request):
         promien = request.GET.get('rad')
         print(lat, lng, centrum, promien)
     start_time = time.time()
-    data_base = joblib.load(open('D:/home/site/wwwroot/aitrust_map/dataPL.p'))
+    data_place = os.path.join(BASE_DIR,'aitrust_map/dataPL.p')
+    data_base = joblib.load(open(data_place))
     print("zaladowano")
     mid_time = time.time()
     adresy = []
