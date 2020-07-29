@@ -30,7 +30,6 @@ def jestWkole(centrum, promien, punkt):
 
 def process_loc(request):
     if request.method == "GET":
-        start_time = time.time()
         lat = request.GET.get('lat')
         lng = request.GET.get('lng')
         centrum = [lat,lng]
@@ -50,9 +49,7 @@ def process_loc(request):
     #         adresy.append(line)
     #         adresy_num += 1
     #         break
-    end_time = time.time()
-    data = { "generated_info": [start_time, promien, lat, lng, centrum, end_time]
-
+    data = { "promien": promien, "centrum": centrum
         }
     return JsonResponse(data)
 

@@ -105,8 +105,9 @@ $(function(){
                 contentType: 'application/json; charset=utf-8',
                 dataType: 'json',
                 success: function(data){
-                         console.log("Returning data from backend: " + data.generated_info);
-                         $('#generated_data').append(data.generated_info);
+                         console.log("Returning data from backend");
+                         $('#center').contents()[0].textContent = 'Centrum okręgu: ' + data.centrum
+                         $('#radius').contents()[0].textContent = 'Promień okręgu: ' + data.promien
 
                 }, 
                 error: function (jqXhr, textStatus, errorThrown) {
