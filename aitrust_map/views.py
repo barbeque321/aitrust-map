@@ -59,7 +59,7 @@ def process_loc(request):
         "centrum": centrum,
         "end_time": end_time,
         }
-    return render(request, 'aitrust_map.html', {"data":data})
+    return render(request, '#', {"data":data})
 
 
 
