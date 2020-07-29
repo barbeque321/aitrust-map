@@ -106,7 +106,7 @@ $(function(){
                 dataType: 'json',
                 success: function(data){
                          console.log("Returning data from backend: " + JSON.stringify(data));
-                         $('#generated_data').html(data);
+                         $('#generated_data').html(data.generated_info);
 
                 }, 
                 error: function (jqXhr, textStatus, errorThrown) {
