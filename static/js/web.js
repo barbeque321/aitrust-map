@@ -106,8 +106,8 @@ $(function(){
                 dataType: 'json',
                 success: function(data){
                          console.log("Returning data from backend");
-                         $('#center').contents()[0].textContent = 'Centrum okręgu: ' + data.centrum
-                         $('#radius').contents()[0].textContent = 'Promień okręgu: ' + data.promien
+                         $('#center').contents()[0].textContent = data.centrum
+                         $('#radius').contents()[0].textContent = data.promien
 
                 }, 
                 error: function (jqXhr, textStatus, errorThrown) {
