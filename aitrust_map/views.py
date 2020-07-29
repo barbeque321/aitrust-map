@@ -54,7 +54,7 @@ def process_loc(request):
     context = { "data": [start_time, promien, lat, lng, centrum, end_time]
 
         }
-    return HttpResponse.getvalue(context)
+    return HttpResponse.getvalue("data")
 
 
 
