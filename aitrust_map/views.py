@@ -51,15 +51,10 @@ def process_loc(request):
     #         adresy_num += 1
     #         break
     end_time = time.time()
-    data = { 
-        "start_time": start_time,
-        "promien": promien,
-        "lat": lat,
-        "lng": lng,
-        "centrum": centrum,
-        "end_time": end_time,
+    context = { "data": [start_time, promien, lat, lng, centrum, end_time]
+
         }
-    return HttpResponse(request, data)
+    return HttpResponse.getvalue(context)
 
 
 
