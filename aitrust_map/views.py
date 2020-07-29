@@ -59,7 +59,7 @@ def process_loc(request):
         "centrum": centrum,
         "end_time": end_time,
         }
-    return HttpResponse(request, {"data":data})
+    return HttpResponse(request, data)
 
 
 
