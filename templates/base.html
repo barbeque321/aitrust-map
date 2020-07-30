@@ -37,54 +37,62 @@
 }
 
 .frame {
-  position: absolute;
-  top: 50%;
-  left: 50%;
+  display: block;
+  position: relative;
   width: 400px;
   height: 400px;
-  margin-top: -200px;
-  margin-left: -200px;
+  margin: auto;
   border-radius: 2px;
   box-shadow: 1px 2px 10px 0px rgba(0,0,0,0.3);
   background: #CA7C4E;
-  background: -webkit-linear-gradient(bottom left, #EEBE6C 0%, #CA7C4E 100%);
-  background: -moz-linear-gradient(bottom left, #EEBE6C 0%, #CA7C4E 100%);
-  background: -o-linear-gradient(bottom left, #EEBE6C 0%, #CA7C4E 100%);
-  background: linear-gradient(to top right, #EEBE6C 0%, #CA7C4E 100%); 
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#EEBE6C', endColorstr='#CA7C4E',GradientType=1 ); 
+  background: -webkit-linear-gradient(bottom left, #177098 0%, #3a83a4 100%);
+  background: -moz-linear-gradient(bottom left, #177098 0%, #3a83a4 100%);
+  background: -o-linear-gradient(bottom left, #177098 0%, #3a83a4 100%);
+  background: linear-gradient(to top right, #177098 0%, #3a83a4 100%); 
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#177098', endColorstr='#3a83a4',GradientType=1 ); 
   color: #786450;
   font-family: 'Open Sans', Helvetica, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-.frame .center {
+.center {
+  display: block;
   position: absolute;
-  top: 50px;
-  left: 40px;
-  height: 299px;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  height: 15rem;
   width: 320px;
-  background: #ffffff;
+  background: #d6deec;
   border-radius: 3px;
   overflow: hidden;
   box-shadow: 10px 10px 15px 0 rgba(0,0,0,0.3);
 }
 
-.center .profile {
+.profile {
   float: left;
   width: 200px;
   height: 320px;
   text-align: center;
 }
   
-  .profile .image {
+.image {
     position: relative;
     width: 70px;
     height: 70px;
-    margin: 38px auto 0 auto;
+    margin: 5.625rem auto 0 auto;
   }
-    
-    .profile .image .circle-1 {
+
+
+.image img {
+      display: block;
+      border-radius: 50%;
+      background: #F5E8DF;
+    }
+
+.circle-1 {
       position: absolute;
       box-sizing: border-box;
       width: 76px;
@@ -96,9 +104,16 @@
       border-color: #786450 #786450 #786450 transparent;
       border-radius: 50%;
       transition: all 1.5s ease-in-out;
+      animation: my_animation_circle_a 5s infinite;
     }
-    
-    .profile .image .circle-2 {
+
+@keyframes my_animation_circle_a {
+  0%{transform: rotate(0deg);}
+  100%{transform: rotate(360deg);}
+  
+}
+
+.circle-2 {
       position: absolute;
       box-sizing: border-box;
       width: 82px;
@@ -110,84 +125,38 @@
       border-width: 1px;
       border-style: solid;
       transition: all 1.5s ease-in-out;
+      animation: my_animation_circle_b 5s infinite;
     }
-    
-    .image img {
-      display: block;
-      border-radius: 50%;
-      background: #F5E8DF;
-    }
-    
-    .image img:hover {
-      cursor: pointer;
-    }
-      
-     .image .circle-1 img:hover  {
-        transform: rotate(360deg);
-      }
-      
-     .image .circle-2 img:hover  {
-        transform: rotate(-360deg);
-      }
-      
+@keyframes my_animation_circle_b {
+  0%{transform: rotate(0deg);}
+  100%{transform: rotate(-360deg);}
   
-  .profile .name {
-    font-size: 15px;
-    font-weight: 600;
-    margin-top: 20px;
-  }
-  
-  .profile .job {
-    font-size: 11px;
-    line-height: 15px;
-  }
-  
-  .profile .actions {
-    margin-top: 33px;
-  }
-    
-    .profile .actions .btn {
-      display: block;
-      width: 120px;
-      height: 30px;
-      margin: 0 auto 10px auto;
-      background: none;
-      border: 1px solid #786450;
-      border-radius: 15px;
-      font-size: 12px;
-      font-weight: 600;
-      box-sizing: border-box;
-      transition: all .3s ease-in-out;
-      color: #786450;
-    }
-      
-      .profile .actions .btn:hover {
-        background: #786450;
-        color: #fff;
-      }
- 
-
-.center .stats {
-  float: left;
 }
   
-.stats .box {
+.stats {
+  float: left;
+  vertical-align: middle;
+}
+  
+.box {
     box-sizing: border-box;
-    width: 120px;
-    height: 99px;
-    background: #F5E8DF;
+    width: 7.5rem;
+    height: 7.5rem;
+    background: #7dbbde;
     text-align: center;
-    padding-top: 28px;
+    color: #ffffff;
+    vertical-align: middle;
+    padding-top: 2.375rem;
     transition: all .4s ease-in-out;
   }
     
-    .stats .box:hover {
-      background: #E1CFC2;
+    .box:hover {
+      background: #95cae8;
       cursor: pointer;
     }
     
-    .stats .box:nth-child(2) {
-      margin: 1px 0;
+    .box:nth-child(2) {
+      margin: 0px 0;
     }
     
   
@@ -195,12 +164,12 @@
     display: block;
   }
   
-  .stats .value {
+.value {
     font-size: 18px;
     font-weight: 600;
   }
   
-  .stats .parameter {
+.parameter {
     font-size: 11px;
   }
   
