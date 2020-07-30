@@ -302,8 +302,8 @@ L.drawLocal = {
 
 
 
-$('.avatar').click(function(e) {
-  $('.card').toggleClass('active');
+$('#avatar').click(function(e) {
+  $('#card').toggleClass('active');
 });
 
 // Ripple effect
