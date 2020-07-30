@@ -99,29 +99,34 @@
     }
     
     .profile .image .circle-2 {
-      @extend .circle-1;
+      position: absolute;
+      box-sizing: border-box;
       width: 82px;
       height: 82px;
       top: -6px;
       left: -6px;
       border-color: #786450 transparent #786450 #786450;
+      border-radius: 50%;
+      border-width: 1px;
+      border-style: solid;
+      transition: all 1.5s ease-in-out;
     }
     
-    img {
+    .image img {
       display: block;
       border-radius: 50%;
       background: #F5E8DF;
     }
     
-    img:hover {
+    .image img:hover {
       cursor: pointer;
     }
       
-     img:hover .circle-1 {
+     .image .circle-1 img:hover  {
         transform: rotate(360deg);
       }
       
-     img:hover .circle-2 {
+     .image .circle-2 img:hover  {
         transform: rotate(-360deg);
       }
       
