@@ -58,31 +58,33 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.center {
+.frame .center {
   position: absolute;
   top: 50px;
   left: 40px;
   height: 299px;
   width: 320px;
-  background: #fff;
+  background: #ffffff;
   border-radius: 3px;
   overflow: hidden;
   box-shadow: 10px 10px 15px 0 rgba(0,0,0,0.3);
 }
 
-.profile {
+.center .profile {
   float: left;
   width: 200px;
   height: 320px;
   text-align: center;
+}
   
-  .image {
+  .profile .image {
     position: relative;
     width: 70px;
     height: 70px;
     margin: 38px auto 0 auto;
+  }
     
-    .circle-1 {
+    .profile .image .circle-1 {
       position: absolute;
       box-sizing: border-box;
       width: 76px;
@@ -96,7 +98,7 @@
       transition: all 1.5s ease-in-out;
     }
     
-    .circle-2 {
+    .profile .image .circle-2 {
       @extend .circle-1;
       width: 82px;
       height: 82px;
@@ -111,36 +113,35 @@
       background: #F5E8DF;
     }
     
-    &:hover {
+    img:hover {
       cursor: pointer;
+    }
       
-      .circle-1 {
+     img:hover .circle-1 {
         transform: rotate(360deg);
       }
       
-      .circle-2 {
+     img:hover .circle-2 {
         transform: rotate(-360deg);
       }
       
-    }
-    
-  }
   
-  .name {
+  .profile .name {
     font-size: 15px;
     font-weight: 600;
     margin-top: 20px;
   }
   
-  .job {
+  .profile .job {
     font-size: 11px;
     line-height: 15px;
   }
   
-  .actions {
+  .profile .actions {
     margin-top: 33px;
+  }
     
-    .btn {
+    .profile .actions .btn {
       display: block;
       width: 120px;
       height: 30px;
@@ -153,20 +154,19 @@
       box-sizing: border-box;
       transition: all .3s ease-in-out;
       color: #786450;
+    }
       
-      &:hover {
+      .profile .actions .btn:hover {
         background: #786450;
         color: #fff;
       }
-    }
-  }
-  
-}
+ 
 
-.stats {
+.center .stats {
   float: left;
+}
   
-  .box {
+.stats .box {
     box-sizing: border-box;
     width: 120px;
     height: 99px;
@@ -174,32 +174,31 @@
     text-align: center;
     padding-top: 28px;
     transition: all .4s ease-in-out;
+  }
     
-    &:hover {
+    .stats .box:hover {
       background: #E1CFC2;
       cursor: pointer;
     }
     
-    &:nth-child(2) {
+    .stats .box:nth-child(2) {
       margin: 1px 0;
     }
     
-  }
   
   span {
     display: block;
   }
   
-  .value {
+  .stats .value {
     font-size: 18px;
     font-weight: 600;
   }
   
-  .parameter {
+  .stats .parameter {
     font-size: 11px;
   }
   
-}
 
 
 
