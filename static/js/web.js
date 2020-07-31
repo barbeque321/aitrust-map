@@ -316,7 +316,8 @@ $(function(){
               $frame.children().children().toggleClass('is-active')
               switching = false
            }, frameTransitionTime / 2)
-        }
+        })
+});
 
 
 
