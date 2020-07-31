@@ -39,15 +39,27 @@
 .frame {
   display: block;
   position: relative;
+  perspective: 600px;
 }
 
 .frame .is-switched .frame__wrapper {
-         animation: rotate $frame-transition-time linear both;
+         animation: rotate 0.5s linear both;
       }
    
 .frame__wrapper {
   transform-style: preserve-3d;
-  animation: rotate-inverse $frame-transition-time linear both;
+  animation: rotate-inverse 0.5s linear both;
+}
+
+.frame__side {
+  backface-visibility: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.frame__side .frame__side--back {
+  transform: rotateY(180deg);
 }
 
 .frame__side{
@@ -67,26 +79,17 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+.frame__side .is-active {
+     position: static;
+  }
 
 .frame__side--back {
    background-color: #0074d9;
 }
 
-.frame__side {
-  backface-visibility: hidden;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-}
 
-.frame__side .frame__side--back {
-  transform: rotateY(180deg);
-}
 
-.frame__side .is-active {
-     position: static;
-  }
+
 
 
 
