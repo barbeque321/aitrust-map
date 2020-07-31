@@ -250,7 +250,7 @@ span {
   vertical-align: middle;
 }
 
-#info_header {
+.info_header {
   display: block;
   position: absolute;
   width: 100%;
@@ -269,6 +269,8 @@ span {
   font-size: 22px;
   text-decoration: none;
   margin: 1rem auto;
+  left: 30%;
+  right: 30%;
   color: #fff;
   position: relative;
   display: inline-block;
