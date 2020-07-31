@@ -300,10 +300,25 @@ L.drawLocal = {
 
 
 
+let frameTransitionTime = 500;
 
+let $frame = $('.frame')
+let switching = false
 
+$('#postal').click(flipFrame)
 
-
+function flipFrame () {
+   if (switching) {
+      return false
+   }
+   switching = true
+   
+   $frame.toggleClass('is-switched')
+   window.setTimeout(function () {
+      $frame.children().children().toggleClass('is-active')
+      switching = false
+   }, frameTransitionTime / 2)
+}
 
 
 

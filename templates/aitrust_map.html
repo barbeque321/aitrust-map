@@ -10,9 +10,39 @@
     </div>   
 </div>
 <div id="generated_data">
-	<p>Here will be your data</p>
+	<p>Wygenerowane dane:</p>
 	<p></p>
 </div> 
+
+<div id=frame_div>
+	<div class="frame">
+	  <div class="center">
+	  	<div frame__side is-active>
+			<div class="logo">
+				<div class="image">
+					<div class="circle-1"></div>
+					<div class="circle-2"></div>
+					<img src="{% static 'images/logo.png' %}" width="70" height="70" alt="kody-na-mapie">
+				</div>
+			</div>
+			
+			<div class="stats">
+				<div id="postal" class="box">
+					<span class="value">523</span>
+					<span class="parameter">Kodów pocztowych</span>
+				</div>
+				<div class="box">
+					<span class="value">1387</span>
+					<span class="parameter">Punktów adresowych</span>
+				</div>
+			</div>
+		</div>
+			<div class="frame__side frame__side--back">
+				<h2>hello</h2>
+			</div>
+	  </div>
+	</div>
+</div>
 <div>
 	<p>Centrum okręgu:</p>
 	<div id=center>
@@ -23,31 +53,6 @@
 	<div id=radius>
 	</div>
 </div>
-<div id=frame_div>
-	<div class="frame">
-	  <div class="center">
-			<div class="logo">
-				<div class="image">
-					<div class="circle-1"></div>
-					<div class="circle-2"></div>
-					<img src="{% static 'images/logo.png' %}" width="70" height="70" alt="Jessica Potter">
-				</div>
-			</div>
-			
-			<div class="stats">
-				<div class="box">
-					<span class="value">523</span>
-					<span class="parameter">Kodów pocztowych</span>
-				</div>
-				<div class="box">
-					<span class="value">1387</span>
-					<span class="parameter">Punktów adresowych</span>
-				</div>
-			</div>
-	  </div>
-	</div>
-</div>
-
 {% endblock %}
 
 {% block script %}
