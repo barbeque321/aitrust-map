@@ -252,9 +252,9 @@ span {
 
 .info_header {
   display: block;
-  position: absolute;
+  position: relative;
   width: 100%;
-  margin: 1rem auto;
+  margin: 2rem auto;
   text-align: center;
   color: #ffffff;
   font-size: 16px;
@@ -269,11 +269,9 @@ span {
   font-size: 22px;
   text-decoration: none;
   margin: 1rem auto;
-  left: 30%;
-  right: 30%;
   color: #fff;
   position: relative;
-  display: inline-block;
+  display: block;
   text-transform: uppercase;
   font-weight: 600;
 }
