@@ -41,6 +41,15 @@
   position: relative;
 }
 
+.frame .is-switched .frame__wrapper {
+         animation: rotate $frame-transition-time linear both;
+      }
+   
+.frame__wrapper {
+  transform-style: preserve-3d;
+  animation: rotate-inverse $frame-transition-time linear both;
+}
+
 .frame__side{
   width: 400px;
   height: 400px;
@@ -62,6 +71,25 @@
 .frame__side--back {
    background-color: #0074d9;
 }
+
+.frame__side {
+  backface-visibility: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+
+.frame__side .frame__side--back {
+  transform: rotateY(180deg);
+}
+
+.frame__side .is-active {
+     position: static;
+  }
+
+
+
 
 .center {
   display: block;
@@ -192,32 +220,8 @@
 
 
 
-.frame .is-switched .frame__wrapper {
-         animation: rotate $frame-transition-time linear both;
-      }
-   
-
-.frame__wrapper {
-  transform-style: preserve-3d;
-  animation: rotate-inverse $frame-transition-time linear both;
-}
-
-.frame__side {
-  backface-visibility: hidden;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-}
-
-.frame__side .is-active {
-     position: static;
-  }
 
 
-.frame__side--back {
-  transform: rotateY(180deg);
-}
 
 
 
