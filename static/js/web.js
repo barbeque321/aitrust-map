@@ -305,7 +305,7 @@ let $frame = $('.js-frame')
 let switching = false
 
 $(function(){
-    $("#postal").bind('click', function(){
+    $("#postal, #btn").bind('click', function(){
         if (switching) {
               return false
            }
