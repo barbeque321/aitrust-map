@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'aitrust_map'
+    'aitrust_map',
+    'django_sass',
 ]
 
 MIDDLEWARE = [
