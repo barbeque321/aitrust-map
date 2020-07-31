@@ -204,7 +204,7 @@ span {
   font-size: 11px;
 }
 
-map {
+#map {
   height: 600px;
   display: block;
 }
