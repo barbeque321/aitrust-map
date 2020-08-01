@@ -206,6 +206,17 @@ span {
   font-size: 11px;
 }
 
+.postal_codes {
+  position: relative;
+  width: 100%;
+  margin: 2rem auto 2rem auto;
+  text-align: center;
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 400;
+}
+
+
 #map {
   height: 600px;
   display: block;
@@ -250,7 +261,7 @@ span {
   vertical-align: middle;
 }
 
-.frame__side > .info_header {
+.info_header {
   display: block;
   position: relative;
   width: 100%;
@@ -261,16 +272,7 @@ span {
   font-weight: 600;
 }
 
-.frame__side--back > .postal_codes {
-  display: block;
-  position: relative;
-  width: 100%;
-  margin: 2rem auto 2rem auto;
-  text-align: center;
-  color: #ffffff;
-  font-size: 12px;
-  font-weight: 400;
-}
+
 
 .info_back_button {
   outline: none;
