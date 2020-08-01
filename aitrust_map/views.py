@@ -28,8 +28,8 @@ def jestWkole(centrum, promien, punkt):
 #ylat
 def process_loc(request):
     if request.method == "GET":
-        lat = request.GET.get('lat')
-        lng = request.GET.get('lng')
+        str(lat) = request.GET.get('lat')
+        str(lng) = request.GET.get('lng')
         centrum = [lat,lng]
         promien = request.GET.get('rad')
     
@@ -55,7 +55,7 @@ def process_loc(request):
     #         adresy.append(line)
     #         adresy_num += 1
     #         break
-    data = { "promien": promien, "centrum": postal_codes
+    data = { "promien": postal_codes, "centrum": centrum
         }
     return JsonResponse(data)
 
