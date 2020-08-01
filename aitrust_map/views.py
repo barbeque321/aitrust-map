@@ -43,7 +43,7 @@ def process_loc(request):
     postal_code = []
     for keyval in data_base:
         if (lat == keyval['Y']) and (lng == keyval['X']):
-            postal_codes.append(keyval['KodPocztowy'])
+            postal_code.append(keyval['KodPocztowy'])
         else:
             pass 
     # data_base = pickle.load(open(data_place, 'rb'))
