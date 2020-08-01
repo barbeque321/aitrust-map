@@ -1,9 +1,10 @@
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:600,300);
 
-body {
-  background: #c4e6f9;
-}
 
+.main-body {
+  background-color: #c4e6f9;
+  font-family: 'Open Sans', Helvetica, sans-serif;
+}
 
 .frame {
   display: block;
