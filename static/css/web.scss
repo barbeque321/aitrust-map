@@ -5,6 +5,10 @@
 
 $frame-transition-time: 0.5s;
 
+body {
+  background: #c4e6f9;
+}
+
 .frame {
   display: block;
   perspective: 600px;
@@ -62,12 +66,6 @@ $frame-transition-time: 0.5s;
   }
 }
 
-
-
-
-body{
-  background: #e0e5ec;
-}
 
 .frame {
    max-width: 400px;

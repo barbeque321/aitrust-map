@@ -1,4 +1,10 @@
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:600,300);
+
+body {
+  background: #c4e6f9;
+}
+
+
 .frame {
   display: block;
   perspective: 600px;
@@ -54,9 +60,7 @@
   }
 }
 
-body {
-  background: #e0e5ec;
-}
+
 
 .frame {
   margin: 3rem auto 3rem auto;
