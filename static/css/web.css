@@ -261,7 +261,7 @@ span {
   font-weight: 600;
 }
 
-.postal_codes {
+#postal_codes {
   display: block;
   position: relative;
   width: 100%;
