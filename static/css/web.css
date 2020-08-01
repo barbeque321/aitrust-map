@@ -250,7 +250,7 @@ span {
   vertical-align: middle;
 }
 
-.info_header {
+.frame__side > .info_header {
   display: block;
   position: relative;
   width: 100%;
@@ -261,7 +261,7 @@ span {
   font-weight: 600;
 }
 
-#postal_codes {
+.frame__side > .postal_codes {
   display: block;
   position: relative;
   width: 100%;
