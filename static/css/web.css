@@ -209,14 +209,15 @@ span {
 .postal_codes {
   position: relative;
   width: 100%;
-  margin: 2rem auto 2rem auto;
+  margin: 1rem auto 1rem auto;
+  padding-left: 2rem;
+  padding-right: 2rem;
   text-align: center;
   color: #ffffff;
   font-size: 12px;
   font-weight: 400;
 }
-
-
+    
 #map {
   height: 600px;
   display: block;
