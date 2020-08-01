@@ -107,7 +107,7 @@ $(function(){
                 success: function(data){
                          console.log("Returning data from backend");
                          $('#center').contents()[0].textContent = data.centrum
-                         $('#radius').contents()[0].textContent = data.promien
+                         $('#postal_code').contents()[0].textContent = data.postal_code
 
                 }, 
                 error: function (jqXhr, textStatus, errorThrown) {

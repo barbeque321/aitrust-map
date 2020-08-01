@@ -32,13 +32,15 @@ def process_loc(request):
         lng = request.GET.get('lng')
         lat = str(lat)
         lng = str(lng)
+        lat = '53.8421932504199'
+        lng = '19.4034783860024'
         centrum = [lat,lng]
         promien = request.GET.get('rad')
     
     data_place = os.path.join(BASE_DIR,'aitrust_map/pomorskieJSON.json')
     data_base = json.loads(open(data_place).read())
     
-    postal_codes = []
+    postal_code = []
     for keyval in data_base:
         if (lat == keyval['Y']) and (lng == keyval['X']):
             postal_codes.append(keyval['KodPocztowy'])
@@ -57,7 +59,7 @@ def process_loc(request):
     #         adresy.append(line)
     #         adresy_num += 1
     #         break
-    data = { "promien": postal_codes, "centrum": centrum
+    data = { "postal_code": postal_code, "centrum": centrum
         }
     return JsonResponse(data)
 
