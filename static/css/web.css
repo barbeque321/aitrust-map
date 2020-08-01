@@ -254,7 +254,7 @@ span {
   display: block;
   position: relative;
   width: 100%;
-  margin: 2rem auto;
+  margin: 2rem auto 2rem auto;
   text-align: center;
   color: #ffffff;
   font-size: 16px;
@@ -290,10 +290,13 @@ span {
   background-color: #6FC6FF;
 }
    
-   
-
-
-
+.postal_codes {
+  margin: 2rem auto 2rem auto;
+  text-align: center;
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 400;
+}
 
 
 
