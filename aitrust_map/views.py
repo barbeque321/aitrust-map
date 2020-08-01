@@ -28,8 +28,10 @@ def jestWkole(centrum, promien, punkt):
 #ylat
 def process_loc(request):
     if request.method == "GET":
-        str(lat) = request.GET.get('lat')
-        str(lng) = request.GET.get('lng')
+        lat = request.GET.get('lat')
+        lng = request.GET.get('lng')
+        lat = string(lat)
+        lng = string(lng)
         centrum = [lat,lng]
         promien = request.GET.get('rad')
     
