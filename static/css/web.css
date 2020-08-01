@@ -290,7 +290,7 @@ span {
   background-color: #6FC6FF;
 }
    
-.postal_codes {
+.frame__side.postal_codes {
   margin: 2rem auto 2rem auto;
   text-align: center;
   color: #ffffff;
