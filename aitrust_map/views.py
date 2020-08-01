@@ -30,8 +30,8 @@ def process_loc(request):
     if request.method == "GET":
         lat = request.GET.get('lat')
         lng = request.GET.get('lng')
-        lat = string(lat)
-        lng = string(lng)
+        lat = str(lat)
+        lng = str(lng)
         centrum = [lat,lng]
         promien = request.GET.get('rad')
     
