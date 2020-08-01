@@ -7,6 +7,7 @@ import pickle
 import time
 from shapely.geometry import Point, Polygon
 import os
+import json
 
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -24,7 +25,7 @@ def jestWkole(centrum, promien, punkt):
         return False
 
 
-
+#ylat
 def process_loc(request):
     if request.method == "GET":
         lat = request.GET.get('lat')
@@ -32,7 +33,15 @@ def process_loc(request):
         centrum = [lat,lng]
         promien = request.GET.get('rad')
     
-    # data_place = os.path.join(BASE_DIR,'aitrust_map/dataPL.p')
+    data_place = os.path.join(BASE_DIR,'aitrust_map/pomorskieJSON.json')
+    data_base = json.loads(open(data_place).read())
+    
+    postal_codes = []
+    for keyval in data_base:
+        if (lat == keyval['Y']) and (lng == keyval['X']):
+            postal_codes.append(keyval['KodPocztowy'])
+        else:
+            pass 
     # data_base = pickle.load(open(data_place, 'rb'))
     # adresy = []
     # adresy_num = 0
@@ -46,7 +55,7 @@ def process_loc(request):
     #         adresy.append(line)
     #         adresy_num += 1
     #         break
-    data = { "promien": promien, "centrum": centrum
+    data = { "promien": promien, "centrum": postal_codes
         }
     return JsonResponse(data)
 

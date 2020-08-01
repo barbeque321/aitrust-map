@@ -76,7 +76,6 @@ $font-family-base: 'Open Sans', Helvetica, sans-serif;
 
 .frame__side{
   height: 400px;
-  margin: 3rem auto 3rem auto;
   border-radius: 2px;
   box-shadow: 1px 2px 10px 0px rgba(0,0,0,0.3);
   background: #CA7C4E;
@@ -85,7 +84,6 @@ $font-family-base: 'Open Sans', Helvetica, sans-serif;
   background: -o-linear-gradient(bottom left, #177098 0%, #3a83a4 100%);
   background: linear-gradient(to top right, #177098 0%, #3a83a4 100%); 
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#177098', endColorstr='#3a83a4',GradientType=1 ); 
-  color: #786450;
   font-family: 'Open Sans', Helvetica, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
