@@ -40,32 +40,23 @@ def process_loc(request):
         lng = str(lng)
         lat = lat[:16]
         lng = lng[:16]    
-        centrum = [lat,lng]
+        centrum = float(lat), float(lng)
         promien = request.GET.get('rad')
         
     
     data_place = os.path.join(BASE_DIR,'aitrust_map/pomorskieJSON2180.json')
     data_base = json.loads(open(data_place).read())
     
+
     postal_code = []
     for keyval in data_base:
-        if (lat == keyval['Y']) and (lng == keyval['X']):
-            postal_code.append(keyval['KodPocztowy'])
+    if jestWkole(centrum, promien, [float(keyval['Y']), float(keyval['X'])]):
+        if keyval['kodPocztowy'] in postal_code:
+            pass
         else:
-            pass 
-    # data_base = pickle.load(open(data_place, 'rb'))
-    # adresy = []
-    # adresy_num = 0
-    # for i, line in enumerate(data_base):
-    #     if i == 0:  # pominiecie nagłówka
-    #         adresy.append(line)
-    #         continue
+            postal_code.append(keyval['kodPocztowy'])
 
-    #     coord = line[8].split(' ')
-    #     if jestWkole(centrum, promien, [float(coord[0]), float(coord[1])]):
-    #         adresy.append(line)
-    #         adresy_num += 1
-    #         break
+
     data = { "postal_code": postal_code, "centrum": centrum
         }
     return JsonResponse(data)
