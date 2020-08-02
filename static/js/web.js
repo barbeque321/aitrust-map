@@ -106,7 +106,8 @@ $(function(){
                 dataType: 'json',
                 success: function(data){
                          console.log("Returning data from backend");
-                         $('#center').contents()[0].textContent = data.centrum
+                         $('#points_sum').contents()[0].textContent = data.points_sum
+                         $('#postal_code_sum').contents()[0].textContent = data.postal_code_sum
                          $('#postal_code').contents()[0].textContent = data.postal_code
 
                 }, 

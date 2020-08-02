@@ -43,7 +43,7 @@ def process_loc(request):
         centrum = float(lat), float(lng)
         promien = request.GET.get('rad')
         promien = round(float(promien), 2)
-        
+
 
         
     
@@ -61,8 +61,8 @@ def process_loc(request):
             else:
                 postal_code.append(keyval['kodPocztowy'])
 
-
-    data = { "postal_code": postal_code, "centrum": centrum
+    postal_code_sum = len(postal_code)
+    data = { "postal_code": postal_code, "points_sum": points_sum, "postal_code_sum": postal_code_sum
         }
     return JsonResponse(data)
 

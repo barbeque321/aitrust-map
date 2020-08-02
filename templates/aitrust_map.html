@@ -27,11 +27,11 @@
 				</div>
 				<div class="stats">
 					<div id="postal" class="box">
-						<span class="value">523</span>
+						<span id="postal_code_sum"class="value"></span>
 						<span class="parameter">Kodów pocztowych</span>
 					</div>
 					<div class="box">
-						<span class="value">1387</span>
+						<span id="points_sum"class="value"></span>
 						<span class="parameter">Punktów adresowych</span>
 					</div>
 				</div>
@@ -39,23 +39,14 @@
 	    </div>
 	    <div class="frame__side frame__side--back">
 	    	<div class="info_header">
-	    		Zaznaczony obszar obejmuje:
+	    		Obszar obejmuje kody pocztowe:
 			</div>
-			<span id="postal_codes" class="postal_codes">Kody pocztowe: 60-001, 60-002, 60-003, 60-004, 60-005, 60-006, 60-007, 60-001, 60-002, 60-003, 60-004, 60-005, 60-006, 60-007, 60-001, 60-002, 60-003, 60-004, 60-005, 60-006, 60-007, 60-001, 60-002, 60-003, 60-004, 60-005, 60-006, 60-007, 60-001, 60-002, 60-003, 60-004, 60-005, 60-006, 60-007,60-001, 60-002, 60-003, 60-004, 60-005, 60-006, 60-007</span>
+			<span id="postal_code" class="postal_codes"></span>
 				<button id="info_back_button" class="info_back_button btn--blue">Powrót</button>
 	    </div>
 	</div>
 </div>
-<div>
-	<p>Centrum okręgu:</p>
-	<div id=center>
-	</div>
-</div>
-<div>
-	<p>Kod pocztowy:</p>
-	<div id=postal_code>
-	</div>
-</div>
+
 {% endblock %}
 
 {% block script %}
