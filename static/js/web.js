@@ -1,5 +1,6 @@
 var latLngs = 0;
 var theRadius = 0;
+var theAdressInfo = 0;
 
 $(document).ready(function(){
 
@@ -90,63 +91,8 @@ map.on('draw:edited', function (e) {
 });
 
 
-$(function(){
-    $("#update_log_button").bind('click', function(){
-        console.log('Sending data from client to server');
-        if (latLngs != 0 && theRadius != 0){
-            $.ajax({
-                type: "GET",
-                url: 'process_loc/',
-                data: {
-                    "lat": latLngs.lat,
-                    "lng": latLngs.lng,
-                    "rad": theRadius,
-                },
-                contentType: 'application/json; charset=utf-8',
-                dataType: 'json',
-                success: function(data){
-                         console.log("Returning data from backend");
-                         $('#points_sum').contents()[0].textContent = data.points_sum
-                         $('#postal_code_sum').contents()[0].textContent = data.postal_code_sum
-                         $('#postal_code').contents()[0].textContent = data.postal_code
-
-                }, 
-                error: function (jqXhr, textStatus, errorThrown) {
-                       console.log('ERROR');
-                       console.log(jqXhr);
-                 },
-                });}
-        else if (latLngs != 0 && theRadius == 0){
-            $.ajax({
-                type: "GET",
-                url: 'process_loc2/',
-                data: {
-                    "latLngs": JSON.stringify(latLngs),
-                },
-                contentType: 'application/json; charset=utf-8',
-                dataType: 'json',
-                success: function(data){
-                         console.log("Zwracam otrzymane wartości punktów: " + JSON.stringify(data))
-
-                }, 
-                error: function (jqXhr, textStatus, errorThrown) {
-                       console.log('ERROR');
-                       console.log(jqXhr);
-                 },
-                });}
-        
-        else {
-            console.log("Brak współrzędnych!");
-        };
-            
-
-                                                    });
-            });
 
 
-
-
-// (result.latlng).addTo(map).bindPopup(result.address.Match_addr).openPopup(
 
 L.control.scale().addTo(map);
 
@@ -168,21 +114,100 @@ searchControl.on('results', function (data) {
 
     results.eachLayer(function (layer) {
     if (layer instanceof L.Marker){
-        var theAdress;
+        var theAdresslatlng;
+        
 
-        theAdress = layer.getLatLng();
-        console.log("Coordinates: " + theAdress.toString());
-        map.setView(theAdress, 11, { animation: true });  
+        theAdresslatlng = layer.getLatLng();
+        console.log("Coordinates: " + theAdresslatlng.toString());
+        map.setView(theAdresslatlng, 11, { animation: true });  
         geocodeService.reverse().latlng(layer.getLatLng()).run(function (error, result) {
             if (error) {
                 return;
             }
+        theAdressInfo = result.address.Match_addr
         console.log("Adress: " + result.address.Match_addr);
         });
         }
     }
     )
   });
+
+
+
+
+
+$(function(){
+    $("#update_log_button").bind('click', function(){
+        console.log('Sending data from client to server');
+        if theAdressInfo != 0 {
+            if (latLngs != 0 && theRadius != 0){
+                $.ajax({
+                    type: "GET",
+                    url: 'process_loc/',
+                    data: {
+                        "lat": latLngs.lat,
+                        "lng": latLngs.lng,
+                        "rad": theRadius,
+                        "theAdressInfo": theAdressInfo,
+                    },
+                    contentType: 'application/json; charset=utf-8',
+                    dataType: 'json',
+                    success: function(data){
+                             console.log("Returning data from backend");
+                             $('#points_sum').contents()[0].textContent = data.points_sum
+                             $('#postal_code_sum').contents()[0].textContent = data.postal_code_sum
+                             $('#postal_code').contents()[0].textContent = data.postal_code
+
+                    }, 
+                    error: function (jqXhr, textStatus, errorThrown) {
+                           console.log('ERROR');
+                           console.log(jqXhr);
+                     },
+                    });}
+            else if (latLngs != 0 && theRadius == 0){
+                $.ajax({
+                    type: "GET",
+                    url: 'process_loc2/',
+                    data: {
+                        "latLngs": JSON.stringify(latLngs),
+                    },
+                    contentType: 'application/json; charset=utf-8',
+                    dataType: 'json',
+                    success: function(data){
+                             console.log("Zwracam otrzymane wartości punktów: " + JSON.stringify(data))
+
+                    }, 
+                    error: function (jqXhr, textStatus, errorThrown) {
+                           console.log('ERROR');
+                           console.log(jqXhr);
+                     },
+                    });}
+            
+            else {
+                console.log("Brak współrzędnych!");
+            };
+        else {
+            console.log("Brak współrzędnych!");
+        }  
+    };
+                                                    });
+            });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
