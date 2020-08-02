@@ -42,6 +42,7 @@ def process_loc(request):
         lng = lng[:16]    
         centrum = float(lat), float(lng)
         promien = request.GET.get('rad')
+        promien = float(promien)
         
     
     data_place = os.path.join(BASE_DIR,'aitrust_map/pomorskieJSON2180.json')
