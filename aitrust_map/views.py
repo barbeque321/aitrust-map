@@ -30,15 +30,19 @@ def process_loc(request):
     if request.method == "GET":
         lat = request.GET.get('lat')
         lng = request.GET.get('lng')
+        source="epsg:4326"
+        target ="epsg:2180" 
+        transformer = Transformer.from_crs(source, target)
+        transformer.transform(lng, lat)
         lat = str(lat)
         lng = str(lng)
-        lat = lat[:16]
-        lng = lng[:16]    
+        # lat = lat[:16]
+        # lng = lng[:16]    
         centrum = [lat,lng]
         promien = request.GET.get('rad')
-
+        
     
-    data_place = os.path.join(BASE_DIR,'aitrust_map/pomorskieJSON.json')
+    data_place = os.path.join(BASE_DIR,'aitrust_map/pomorskieJSON2180.json')
     data_base = json.loads(open(data_place).read())
     
     postal_code = []
