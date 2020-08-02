@@ -57,6 +57,8 @@ def process_loc(request):
     if request.method == "GET":
         lat = request.GET.get('lat')
         lng = request.GET.get('lng')
+        theAdressInfo = request.GET.get('theAdressInfo')
+        theAdressInfo = str(theAdressInfo)
         lat = float(lat)
         lng = float(lng)
         source="epsg:4326"
@@ -73,9 +75,9 @@ def process_loc(request):
 
 
         
-    
-    data_place = os.path.join(BASE_DIR,'aitrust_map/pomorskieJSON2180.json')
-    data_base = json.loads(open(data_place).read())
+    if "Woj. Pomorskie" in theAdressInfo:
+        data_place = os.path.join(BASE_DIR,'aitrust_map/pomorskieJSON2180.json')
+        data_base = json.loads(open(data_place).read())
     
 
     postal_code = []
