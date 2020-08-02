@@ -30,14 +30,16 @@ def process_loc(request):
     if request.method == "GET":
         lat = request.GET.get('lat')
         lng = request.GET.get('lng')
+        lat = float(lat)
+        lng = float(lng)
         source="epsg:4326"
         target ="epsg:2180" 
         transformer = Transformer.from_crs(source, target)
-        transformer.transform(lng, lat)
+        lat, lng = transformer.transform(lat, lng)
         lat = str(lat)
         lng = str(lng)
-        # lat = lat[:16]
-        # lng = lng[:16]    
+        lat = lat[:16]
+        lng = lng[:16]    
         centrum = [lat,lng]
         promien = request.GET.get('rad')
         
