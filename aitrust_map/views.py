@@ -17,6 +17,33 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 def azure_map_project(request):
     return render(request, 'aitrust_map.html', {})
 
+# def punktyWpolygonie(data, polygon):
+
+#     poly = Polygon(polygon)
+#     adresy = []
+#     for i, line in enumerate(data):
+
+#         if i == 0:  # pominiecie nagłówka
+#             adresy.append(line)
+#             continue
+
+#         coord = line[8].split(' ')
+#         p = Point(float(coord[0]), float(coord[1]))
+#         # print(i)
+#         if p.within(poly):
+#             adresy.append(line)
+#             #print(i, ' zapisano')
+#     return adresy
+
+# def transformPoly(polygon,source="epsg:3857",target ="epsg:2180" ):
+
+#     transformer = Transformer.from_crs(source, target)
+#     poly = []
+#     for point in polygon:
+#         poly.append(transformer.transform(*point))
+
+#     return poly
+
 
 def jestWkole(centrum, promien, punkt):
     if (promien**2) >= ((punkt[0]-centrum[0])**2)+((punkt[1]-centrum[1])**2):

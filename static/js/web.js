@@ -146,7 +146,7 @@ $(function(){
 
 
 
-
+// (result.latlng).addTo(map).bindPopup(result.address.Match_addr).openPopup(
 
 L.control.scale().addTo(map);
 
@@ -168,6 +168,7 @@ searchControl.on('results', function (data) {
     results.eachLayer(function (layer) {
     if (layer instanceof L.Marker){
         var theAdress;
+        
         theAdress = layer.getLatLng();
         console.log("Coordinates: " + theAdress.toString());
         map.setView(theAdress, 11, { animation: true });  
@@ -176,8 +177,17 @@ searchControl.on('results', function (data) {
     )
   });
 
+var geocodeService = L.esri.Geocoding.geocodeService();
 
+  map.on('click', function (e) {
+    geocodeService.reverse().latlng(e.latlng).run(function (error, result) {
+      if (error) {
+        return;
+      }
 
+      L.marker(result.latlng).addTo(map).bindPopup(result.address.Match_addr).openPopup();
+    });
+});
 
 
 L.drawLocal = {
