@@ -199,15 +199,18 @@ span {
   }
   
 .value {
+    display: block;
     font-size: 18px;
     font-weight: 600;
   }
   
 .parameter {
+    display: block;
     font-size: 11px;
   }
 
 .postal_codes {
+  display: block;
   position: relative;
   width: 100%;
   margin: 1rem auto 1rem auto;
