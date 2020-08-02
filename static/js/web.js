@@ -173,7 +173,7 @@ searchControl.on('results', function (data) {
         theAdress = layer.getLatLng();
         console.log("Coordinates: " + theAdress.toString());
         map.setView(theAdress, 11, { animation: true });  
-        geocodeService.reverse().latlng(layer.latlng).run(function (error, result) {
+        geocodeService.reverse().latlng(layer.getLatLng()).run(function (error, result) {
             if (error) {
                 return;
             }
