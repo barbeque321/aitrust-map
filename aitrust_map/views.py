@@ -75,9 +75,9 @@ def process_loc(request):
 
 
         
-    
-    data_place = os.path.join(BASE_DIR,'aitrust_map/all_states.json')
-    data_base = json.loads(open(data_place).read())
+    if "Woj. Pomorskie" in theAdressInfo:
+        data_place = os.path.join(BASE_DIR,'aitrust_map/pomorskieJSON2180.json')
+        data_base = json.loads(open(data_place).read())
     
 
     postal_code = []
