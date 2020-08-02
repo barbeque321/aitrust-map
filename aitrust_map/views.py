@@ -49,12 +49,14 @@ def process_loc(request):
     
 
     postal_code = []
+    points_sum = 0
     for keyval in data_base:
-    if jestWkole(centrum, promien, [float(keyval['Y']), float(keyval['X'])]):
-        if keyval['kodPocztowy'] in postal_code:
-            pass
-        else:
-            postal_code.append(keyval['kodPocztowy'])
+        if jestWkole(centrum, promien, [float(keyval['Y']), float(keyval['X'])]):
+            points_sum = points_sum + 1
+            if keyval['kodPocztowy'] in postal_code:
+                pass
+            else:
+                postal_code.append(keyval['kodPocztowy'])
 
 
     data = { "postal_code": postal_code, "centrum": centrum
