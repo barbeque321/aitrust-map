@@ -157,6 +157,7 @@ var searchControl = L.esri.Geocoding.geosearch({
     }).addTo(map);
 
 var results = L.layerGroup().addTo(map);
+var geocodeService = L.esri.Geocoding.geocodeService();
 
 searchControl.on('results', function (data) {
     results.clearLayers();
@@ -168,26 +169,21 @@ searchControl.on('results', function (data) {
     results.eachLayer(function (layer) {
     if (layer instanceof L.Marker){
         var theAdress;
-        
+
         theAdress = layer.getLatLng();
         console.log("Coordinates: " + theAdress.toString());
         map.setView(theAdress, 11, { animation: true });  
+        geocodeService.reverse().latlng(layer.latlng).run(function (error, result) {
+            if (error) {
+                return;
+            }
+        console.log("Adress: " + result.address.Match_addr);
+        });
         }
     }
     )
   });
 
-var geocodeService = L.esri.Geocoding.geocodeService();
-
-  map.on('click', function (e) {
-    geocodeService.reverse().latlng(e.latlng).run(function (error, result) {
-      if (error) {
-        return;
-      }
-
-      L.marker(result.latlng).addTo(map).bindPopup(result.address.Match_addr).openPopup();
-    });
-});
 
 
 L.drawLocal = {
