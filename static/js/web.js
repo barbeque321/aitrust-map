@@ -139,7 +139,7 @@ searchControl.on('results', function (data) {
 $(function(){
     $("#update_log_button").bind('click', function(){
         console.log('Sending data from client to server');
-        if theAdressInfo != 0 {
+        if (theAdressInfo != 0) {
             if (latLngs != 0 && theRadius != 0){
                 $.ajax({
                     type: "GET",
@@ -186,10 +186,11 @@ $(function(){
             else {
                 console.log("Brak współrzędnych!");
             };
+            };
         else {
             console.log("Brak współrzędnych!");
         }  
-    };
+    
                                                     });
             });
 
