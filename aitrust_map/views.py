@@ -8,7 +8,7 @@ import time
 from shapely.geometry import Point, Polygon
 import os
 import json
-
+from django.db import connection
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
