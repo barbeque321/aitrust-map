@@ -56,7 +56,7 @@ def process_loc(request):
         lat = float(lat)
         lng = float(lng)
         rad = request.GET.get('rad') 
-        rad = round(float(promien), 2)
+        rad = round(float(rad), 2)
         rad = rad/1000 # must be in kilometers!
         theAdressInfo = request.GET.get('theAdressInfo')
         theAdressInfo = str(theAdressInfo)
