@@ -92,7 +92,7 @@ def process_loc(request):
     #     }
         params = { 'lat': lat, 'lng': lng, 'minLat': minLat, 'minLng': minLng, 'maxLat': maxLat, 'maxLng': maxLng, 'rad': rad, 'R': R}
         cursor  = connection.cursor()
-        query = """SELECT Id, kodPocztowy, Lat, Lng, ACOS(SIN(lat=:lat)*SIN(RADIANS(Lat)) + COS(lat=:lat)*COS(RADIANS(Lat))*COS(RADIANS(Lng)-lng=:lng))*R=:R AS D FROM (SELECT Id, kodPocztowy, Lat, Lng FROM pomorskie WHERE Lat BETWEEN minLat=:minLat AND maxLat=:maxLat AND Lng BETWEEN minLng=:minLng AND maxLng=:maxLng) AS FirstCut WHERE ACOS(SIN(lat=:lat)*SIN(RADIANS(Lat)) + COS(lat=:lat)*COS(RADIANS(Lat))*COS(RADIANS(Lng)-lng=:lng))*R=:R < rad=:rad ORDER BY D;"""
+        query = """SELECT Id, kodPocztowy, Lat, Lng, ACOS(SIN(lat=%(lat)s)*SIN(RADIANS(Lat)) + COS(lat=%(lat)s)*COS(RADIANS(Lat))*COS(RADIANS(Lng)-lng=%(lng)s))*R=%(R)s AS D FROM (SELECT Id, kodPocztowy, Lat, Lng FROM pomorskie WHERE Lat BETWEEN minLat=%(minLat)s AND maxLat=%(maxLat)s AND Lng BETWEEN minLng=%(minLng)s AND maxLng=%(maxLng)s) AS FirstCut WHERE ACOS(SIN(lat=%(lat)s)*SIN(RADIANS(Lat)) + COS(lat=%(lat)s)*COS(RADIANS(Lat))*COS(RADIANS(Lng)-lng=%(lng)s))*R=%(R)s < rad=%(rad)s ORDER BY D;"""
         cursor.execute(query, params)
         data = cursor.fetchall()
 
