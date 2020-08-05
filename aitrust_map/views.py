@@ -95,6 +95,7 @@ def process_loc(request):
         query = """SELECT Id, kodPocztowy, Lat, Lng, ACOS(SIN(%(lat)s)*SIN(RADIANS(Lat)) + COS(%(lat)s)*COS(RADIANS(Lat))*COS(RADIANS(Lng)-%(lng)s))*%(R)s AS D FROM (SELECT Id, kodPocztowy, Lat, Lng FROM pomorskie WHERE Lat BETWEEN %(minLat)s AND %(maxLat)s AND Lng BETWEEN %(minLng)s AND %(maxLng)s) AS FirstCut WHERE ACOS(SIN(%(lat)s)*SIN(RADIANS(Lat)) + COS(%(lat)s)*COS(RADIANS(Lat))*COS(RADIANS(Lng)-%(lng)s))*%(R)s < %(rad)s ORDER BY D;"""
         cursor.execute(query, params)
         data = cursor.fetchall()
+        print(data)
 
 
     return JsonResponse(data, safe=False)
