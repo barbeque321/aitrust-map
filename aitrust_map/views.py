@@ -93,7 +93,6 @@ def process_loc(request):
         params = { 'lat': lat, 'lng': lng, 'minLat': minLat, 'minLng': minLng, 'maxLat': maxLat, 'maxLng': maxLng, 'rad': rad, 'R': R}
         cursor  = connection.cursor()
         query  = """SELECT Id, Lng, Lat, kodPocztowy FROM pomorskie WHERE Lat BETWEEN %(minLat)s AND %(maxLat)s AND Lng BETWEEN %(minLng)s AND %(maxLng)s AND ACOS(SIN(RADIANS(%(lat)s))*SIN(RADIANS(Lat)) + COS(RADIANS(%(lat)s))*COS(RADIANS(Lat))*COS(RADIANS(Lng)-RADIANS(%(lng)s)))*%(R)s < %(rad)s;"""
-        query2 = """SELECT Id, Lng, Lat, kodPocztowy FROM pomorskie WHERE Lat BETWEEN %(minLat)s AND %(maxLat)s AND Lng BETWEEN %(minLng)s AND %(maxLng)s;"""
         cursor.execute(query, params)
         sql_data = cursor.fetchall()
         
@@ -110,7 +109,6 @@ def process_loc(request):
         points_sum = len(postal_list)
         postal_list_no_repeats = list(dict.fromkeys(postal_list))
         postal_code_sum = len(postal_list_no_repeats)
-
 
         data = {"postal_code": postal_list_no_repeats, "points_sum": points_sum, "postal_code_sum": postal_code_sum
         }

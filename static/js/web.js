@@ -153,7 +153,7 @@ $(function(){
                     contentType: 'application/json; charset=utf-8',
                     dataType: 'json',
                     success: function(data){
-                            console.log("Returning data from backend ");
+                            console.log("Returning data from backend");
                             $('#points_sum').contents()[0].textContent = data.points_sum
                             $('#postal_code_sum').contents()[0].textContent = data.postal_code_sum
                             $('#postal_code').contents()[0].textContent = data.postal_code
