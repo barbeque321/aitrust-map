@@ -64,8 +64,8 @@ def process_loc(request):
         #graniczne punkty okregu (degrees)
         maxLat = lat + math.degrees(rad/R)
         minLat = lat - math.degrees(rad/R)
-        maxLon = lng + math.degrees(math.asin(rad/R) / math.cos(math.radians(lat)))
-        minLon = lng - math.degrees(math.asin(rad/R) / math.cos(math.radians(lat)))
+        maxLng = lng + math.degrees(math.asin(rad/R) / math.cos(math.radians(lat)))
+        minLng = lng - math.degrees(math.asin(rad/R) / math.cos(math.radians(lat)))
         # source="epsg:4326"
         # target ="epsg:2180" 
         # transformer = Transformer.from_crs(source, target)
@@ -90,9 +90,9 @@ def process_loc(request):
     # postal_code_sum = len(postal_code)
     # data = { "postal_code": postal_code, "points_sum": points_sum, "postal_code_sum": postal_code_sum
     #     }
-        params = { 'lat': lat, 'lon': lng, 'minLat': minLat, 'minLon': minLon, 'maxLat': maxLat, 'maxLon': maxLon, 'rad': rad, 'R': R}
+        params = { 'lat': lat, 'lng': lng, 'minLat': minLat, 'minLng': minLng, 'maxLat': maxLat, 'maxLng': maxLng, 'rad': rad, 'R': R}
         cursor  = connection.cursor()
-        query = """SELECT Id, kodPocztowy, Lat, Lng, ACOS(SIN(lat)*SIN(RADIANS(Lat)) + COS(lat)*COS(RADIANS(Lat))*COS(RADIANS(Lng)-lng))*R AS D FROM (SELECT Id, kodPocztowy, Lat, Lng FROM pomorskie WHERE Lat BETWEEN minLat AND maxLat AND Lng BETWEEN minLng AND maxLng) AS FirstCut WHERE ACOS(SIN(lat)*SIN(RADIANS(Lat)) + COS(lat)*COS(RADIANS(Lat))*COS(RADIANS(Lng)-lng))*R < rad ORDER BY D;"""
+        query = """SELECT Id, kodPocztowy, Lat, Lng, ACOS(SIN(lat=:lat)*SIN(RADIANS(Lat)) + COS(lat=:lat)*COS(RADIANS(Lat))*COS(RADIANS(Lng)-lng=:lng))*R=:R AS D FROM (SELECT Id, kodPocztowy, Lat, Lng FROM pomorskie WHERE Lat BETWEEN minLat=:minLat AND maxLat=:maxLat AND Lng BETWEEN minLng=:minLng AND maxLng=:maxLng) AS FirstCut WHERE ACOS(SIN(lat=:lat)*SIN(RADIANS(Lat)) + COS(lat=:lat)*COS(RADIANS(Lat))*COS(RADIANS(Lng)-lng=:lng))*R=:R < rad=:rad ORDER BY D;"""
         cursor.execute(query, params)
         data = cursor.fetchall()
 
