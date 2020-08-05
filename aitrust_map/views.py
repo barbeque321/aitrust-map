@@ -92,18 +92,18 @@ def process_loc(request):
     #     }
         params = { 'lat': lat, 'lon': lng, 'minLat': minLat, 'minLon': minLon, 'maxLat': maxLat, 'maxLon': maxLon, 'rad': rad, 'R': R}
         cursor  = connection.cursor()
-        query = "Select Id, kodPocztowy, Lat, Lng, " \
-            "acos(sin(:lat)*sin(radians(Lat)) " \
-            "+ cos(:lat)*cos(radians(Lat))*cos(radians(Lng)-:lng)) * :R As D " \
-            "From ( " \
-            "Select Id, kodPocztowy, Lat, Lng " \
-            "From pomorskie " \
-            "Where Lat Between :minLat And :maxLat" \
-            "And Lng Between :minLng And :maxLng" \
-            ") As FirstCut " \
-            "Where acos(sin(:lat)*sin(radians(Lat)) " \
-            "+ cos(:lat)*cos(radians(Lat))*cos(radians(Lng)-:lng)) * :R < :rad " \
-            "Order by D"
+        query = """SELECT Id, kodPocztowy, Lat, Lng,  
+            ACOS(SIN(:lat)*SIN(RADIANS(Lat))  
+            + COS(:lat)*COS(RADIANS(Lat))*COS(RADIANS(Lng)-:lng)) * :R AS D 
+            FROM ( 
+            SELECT Id, kodPocztowy, Lat, Lng
+            FROM pomorskie
+            WHERE Lat BETWEEN :minLat AND :maxLat
+            AND Lng BETWEEN :minLng AND :maxLng
+            ) AS FirstCut 
+            WHERE ACOS(SIN(:lat)*SIN(RADIANS(Lat))
+            + COS(:lat)*COS(RADIANS(Lat))*COS(RADIANS(Lng)-:lng)) * :R < :rad 
+            ORDER BY D;"""
         cursor.execute(query, params)
         data = cursor.fetchall()
 
