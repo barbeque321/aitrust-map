@@ -100,23 +100,20 @@ def process_loc(request):
         colnames = ['Id', 'Lng', 'Lat', 'kodPocztowy']
         process_data = {}
         for row in sql_data:
-            colindex = 3
+            colindex = 0
             for col in colnames:
-                if col == 'Id' or col == 'Lng' or col == 'Lat':
-                    pass
-                else:
-                # if not col in process_data:
+                if not col in process_data:
                     process_data[col] = []
                 process_data[col].append(row[colindex])
-                # colindex += 1
+                colindex += 1
         
-        postal_code = process_data
+        # postal_code = []
         # for elem in process_data[kodPocztowy]:
         #     postal_code.append(elem)
         # postal_code = list(dict.fromkeys(postal_code))
 
-        data = {"postal_code": postal_code}
-
+        # data = {"postal_code": postal_code}
+        data = process_data
         
     return JsonResponse(data)
 
