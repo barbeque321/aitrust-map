@@ -106,7 +106,7 @@ def process_loc(request):
                     process_data[col] = []
                 process_data[col].append(row[colindex])
                 colindex += 1
-        my_list = process_data['kodPocztowy'].tolist()
+        my_list = process_data['kodPocztowy']
         # postal_code = []
         # for elem in process_data[kodPocztowy]:
         #     postal_code.append(elem)
