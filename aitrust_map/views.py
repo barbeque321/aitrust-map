@@ -108,13 +108,9 @@ def process_loc(request):
                 colindex += 1
         
 
-        postal_code = []
-        for row in process_data:
-            for element in row:
-                if element[3] in postal_code:
-                    pass
-                else:
-                   postal_code.append(element[3]) 
+
+        postal_code = row[3] for row in process_data
+        postal_code = list(dict.fromkeys(postal_code))
 
         data = {"postal_code": postal_code}
 
