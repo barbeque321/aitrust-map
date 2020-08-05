@@ -106,16 +106,15 @@ def process_loc(request):
                     process_data[col] = []
                 process_data[col].append(row[colindex])
                 colindex += 1
-        my_list = process_data['kodPocztowy']
-        # postal_code = []
-        # for elem in process_data[kodPocztowy]:
-        #     postal_code.append(elem)
-        # postal_code = list(dict.fromkeys(postal_code))
+        postal_list = process_data['kodPocztowy']
+        adress_num = len(postal_list)
+        postal_list_no_repeats = list(dict.fromkeys(postal_list))
 
-        # data = {"postal_code": postal_code}
-        data = my_list
+
+        data = {"postal_code": postal_list_no_repeats}
+
         
-    return JsonResponse(data, safe=False)
+    return JsonResponse(data)
 
 
 
