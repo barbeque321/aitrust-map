@@ -92,7 +92,7 @@ def process_loc(request):
     #     }
         params = { 'lat': lat, 'lng': lng, 'minLat': minLat, 'minLng': minLng, 'maxLat': maxLat, 'maxLng': maxLng, 'rad': rad, 'R': R}
         cursor  = connection.cursor()
-        query = """SELECT Id, Lng, Lat, kodPocztowy FROM (SELECT Id, Lng, Lat, kodPocztowy FROM pomorskie WHERE Lat BETWEEN %(minLat)s AND %(maxLat)s AND Lng BETWEEN %(minLng)s AND %(maxLng)s) WHERE ACOS(SIN(%(lat)s)*SIN(RADIANS(Lat)) + COS(%(lat)s)*COS(RADIANS(Lat))*COS(RADIANS(Lng)-%(lng)s))*%(R)s < %(rad)s;"""
+        query  = """SELECT Id, Lng, Lat, kodPocztowy FROM pomorskie WHERE Lat BETWEEN %(minLat)s AND %(maxLat)s AND Lng BETWEEN %(minLng)s AND %(maxLng)s AND ACOS(SIN(%(lat)s)*SIN(RADIANS(Lat)) + COS(%(lat)s)*COS(RADIANS(Lat))*COS(RADIANS(Lng)-%(lng)s))*%(R)s < %(rad)s;"""
         query2 = """SELECT Id, Lng, Lat, kodPocztowy FROM pomorskie WHERE Lat BETWEEN %(minLat)s AND %(maxLat)s AND Lng BETWEEN %(minLng)s AND %(maxLng)s;"""
         cursor.execute(query, params)
         sql_data = cursor.fetchall()
