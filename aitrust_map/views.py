@@ -65,7 +65,7 @@ def process_loc(request):
         # calculating the amount of postal codes obtained in circle
         postal_code_sum = len(postal_list_no_repeats)
 
-        postal_list_no_repeats_sorted = postal_list_no_repeats.sorted()
+        postal_list_no_repeats_sorted = postal_list_no_repeats.sort()
 
         data = {"postal_code": postal_list_no_repeats_sorted, "points_sum": points_sum, "postal_code_sum": postal_code_sum
         }
