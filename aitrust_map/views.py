@@ -99,7 +99,7 @@ def process_loc(request):
         colnames = ['Id', 'Lng', 'Lat', 'kodPocztowy']
         data = {}
 
-        for row in sql_data.fetchall():
+        for row in sql_data:
             colindex = 0
             for col in colnames:
                 if not col in data:
