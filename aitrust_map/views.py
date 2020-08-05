@@ -115,7 +115,7 @@ def process_loc(request):
         # data = {"postal_code": postal_code}
         data = my_list
         
-    return JsonResponse(data)
+    return JsonResponse(data, safe=False)
 
 
 
