@@ -110,10 +110,12 @@ def process_loc(request):
 
         postal_code = []
         for row in process_data:
-            if process_data['kodPocztowy'][row] in postal_code:
-                pass
-            else:
-                postal_code.append(process_data['kodPocztowy'][row])
+            for element in row:
+                if element[3] in postal_code:
+                    pass
+                else:
+                   postal_code.append(element[3]) 
+
         data = {"postal_code": postal_code}
 
         
