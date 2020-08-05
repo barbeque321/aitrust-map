@@ -107,12 +107,13 @@ def process_loc(request):
                 process_data[col].append(row[colindex])
                 colindex += 1
         postal_list = process_data['kodPocztowy']
-        adress_num = len(postal_list)
+        points_sum = len(postal_list)
         postal_list_no_repeats = list(dict.fromkeys(postal_list))
+        postal_code_sum = len(postal_list_no_repeats)
 
 
-        data = {"postal_code": postal_list_no_repeats}
-
+        data = {"postal_code": postal_list_no_repeats, "points_sum": points_sum, "postal_code_sum": postal_code_sum
+        }
         
     return JsonResponse(data)
 
