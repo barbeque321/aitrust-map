@@ -97,7 +97,7 @@ def process_loc(request):
         data = cursor.fetchall()
 
 
-    return JsonResponse(data)
+    return JsonResponse(data, safe=False)
 
 
 
