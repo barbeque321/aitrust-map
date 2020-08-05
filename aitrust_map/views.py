@@ -66,8 +66,9 @@ def process_loc(request):
         postal_code_sum = len(postal_list_no_repeats)
 
         postal_list_no_repeats_sorted = postal_list_no_repeats.sort()
+        postal_code = postal_list_no_repeats_sorted
 
-        data = {"postal_code": postal_list_no_repeats_sorted, "points_sum": points_sum, "postal_code_sum": postal_code_sum
+        data = {"postal_code": postal_code, "points_sum": points_sum, "postal_code_sum": postal_code_sum
         }
         
     return JsonResponse(data)
