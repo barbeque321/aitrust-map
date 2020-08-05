@@ -98,7 +98,7 @@ def process_loc(request):
         sql_data = cursor.fetchall()
         
         colnames = ['Id', 'Lng', 'Lat', 'kodPocztowy']
-        data = {}
+        process_data = {}
 
         for row in sql_data:
             colindex = 0
@@ -107,6 +107,14 @@ def process_loc(request):
                     data[col] = []
                 data[col].append(row[colindex])
                 colindex += 1
+        postal_code = []
+        for row in process_data:
+            if process_data['kodPocztowy'][row] in postal_code:
+                pass
+            else:
+                postal_code.append(process_data['kodPocztowy'][row])
+        data = {"postal_code": postal_code}
+
         
     return JsonResponse(data)
 
