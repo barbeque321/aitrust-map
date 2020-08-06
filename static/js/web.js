@@ -26,10 +26,8 @@ var drawControlFull = new L.Control.Draw({
         polygon: false,
         circlemarker: false,
         rectangle: false,
-        polygon: {
-            allowIntersection: false,
-            showArea: true
-    }},
+        
+},
     edit: {
         featureGroup: drawnItems
     }
