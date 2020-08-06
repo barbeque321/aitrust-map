@@ -23,9 +23,9 @@ var drawControlFull = new L.Control.Draw({
         polyline: false,
         marker: false,
         circle: true,
-        polygon: true,
+        polygon: false,
         circlemarker: false,
-        rectangle: true,
+        rectangle: false,
         polygon: {
             allowIntersection: false,
             showArea: true
