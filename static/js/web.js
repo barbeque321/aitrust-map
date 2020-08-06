@@ -140,7 +140,7 @@ $(function(){
     $("#update_log_button").bind('click', function(){
         console.log('Sending data from client to server');
         
-            if (theAdressInfo != 0 && latLngs != 0 && theRadius != 0){
+            if (latLngs != 0 && theRadius != 0){
                 $.ajax({
                     type: "GET",
                     url: 'process_loc/',
@@ -148,7 +148,6 @@ $(function(){
                         "lat": latLngs.lat,
                         "lng": latLngs.lng,
                         "rad": theRadius,
-                        "theAdressInfo": theAdressInfo,
                     },
                     contentType: 'application/json; charset=utf-8',
                     dataType: 'json',
@@ -164,7 +163,7 @@ $(function(){
                            console.log(jqXhr);
                      },
                     });}
-            else if (theAdressInfo != 0 && latLngs != 0 && theRadius == 0){
+            else if (latLngs != 0 && theRadius == 0){
                 $.ajax({
                     type: "GET",
                     url: 'process_loc2/',
