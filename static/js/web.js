@@ -154,7 +154,7 @@ $(function(){
                         console.log("Returning data from backend");
                         $('#points_sum').contents()[0].textContent = data.points_sum
                         $('#postal_code_sum').contents()[0].textContent = data.postal_code_sum
-                        $('#postal_code').contents()[0].textContent = data.postal_code
+                        $('#postal_code').innerHTML = data.postal_code
                     }, 
                     error: function (jqXhr, textStatus, errorThrown) {
                         $('#loadingmessage').hide();
@@ -369,6 +369,7 @@ function truncate(el) {
 function reveal(el) {
   el.html(el.attr("data-originalContent"));
 }
+
 $(".truncate").each(function(){
 if($(this).length < 122) {
   $(this).parent().next().find(".read-more").hide();    
