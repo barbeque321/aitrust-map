@@ -23,8 +23,9 @@ def process_loc(request):
         lng = float(lng)
         rad = request.GET.get('rad') 
         rad = round(float(rad), 2) # unifying the data
+        rad2 = rad
         rad = rad/1000 # must be in kilometers!
-        rad_up_10 = rad * 1,1 # radius + 10%
+        rad_up_10 = rad2/1000 * 1,1 # radius + 10%
         theAdressInfo = request.GET.get('theAdressInfo')
         theAdressInfo = str(theAdressInfo)
         R = 6371  # earth radius in kilometers
@@ -36,14 +37,11 @@ def process_loc(request):
         maxLng = lng + math.degrees(math.asin(rad/R) / math.cos(math.radians(lat)))
         minLng = lng - math.degrees(math.asin(rad/R) / math.cos(math.radians(lat)))
 
-
         # border points max-min + 10%
         maxLat_up_10 = lat + math.degrees(rad_up_10/R)
         minLat_up_10 = lat - math.degrees(rad_up_10/R)
         maxLng_up_10 = lng + math.degrees(math.asin(rad_up_10/R) / math.cos(math.radians(lat)))
         minLng_up_10 = lng - math.degrees(math.asin(rad_up_10/R) / math.cos(math.radians(lat)))
-
-
 
         # initialise mysql database connection
         cursor  = connection.cursor()
