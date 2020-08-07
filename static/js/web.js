@@ -135,8 +135,6 @@ searchControl.on('results', function (data) {
 
 $(function(){
     $("#update_log_button").bind('click', function(){
-        $("#client").on("change", function() {
-            var clientid=$("#client").val();
             $('#loadingmessage').show();
             console.log('Sending data from client to server');
         
@@ -192,7 +190,7 @@ $(function(){
     
                                                     });
         });
-            });
+           
 
 
 
