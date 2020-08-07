@@ -228,18 +228,18 @@ map {
     }
 
 .leaflet-bottom {
-position: absolute;
-z-index: 1000;
-pointer-events: auto;
+  position: absolute;
+  z-index: 1000;
+  pointer-events: auto;
 }
 
 .leaflet-left {
-position: absolute;
-z-index: 1000;
-pointer-events: auto;
+  position: absolute;
+  z-index: 1000;
+  pointer-events: auto;
 }
 
-.leaflet-center {
+loadingmessage {
   position: absolute;
   z-index: 1000;
   margin-left: auto;
@@ -247,7 +247,7 @@ pointer-events: auto;
   display: none;
 }
 
-.leaflet-center img {
+loadingmessage img {
   position: absolute;
   margin: auto auto auto auto;
   z-index: 1000;
