@@ -136,6 +136,7 @@ searchControl.on('results', function (data) {
 
 $(function(){
     $("#update_log_button").bind('click', function(){
+        var objGlobalEvent = new RegisterGlobalEvents(true, "");
         console.log('Sending data from client to server');
         
             if (latLngs != 0 && theRadius != 0){
