@@ -246,6 +246,7 @@ span {
   z-index: 1000;
   margin-left: auto;
   margin-top: auto;
+  display: none;
 }
 
 #update_log_button {
