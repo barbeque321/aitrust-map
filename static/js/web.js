@@ -135,7 +135,10 @@ searchControl.on('results', function (data) {
 
 $(function(){
     $("#update_log_button").bind('click', function(){
-        console.log('Sending data from client to server');
+        $("#client").on("change", function() {
+            var clientid=$("#client").val();
+            $('#loadingmessage').show();
+            console.log('Sending data from client to server');
         
             if (latLngs != 0 && theRadius != 0){
                 $.ajax({
@@ -149,15 +152,16 @@ $(function(){
                     contentType: 'application/json; charset=utf-8',
                     dataType: 'json',
                     success: function(data){
-                            console.log("Returning data from backend");
-                            $('#points_sum').contents()[0].textContent = data.points_sum
-                            $('#postal_code_sum').contents()[0].textContent = data.postal_code_sum
-                            $('#postal_code').contents()[0].textContent = data.postal_code
-
+                        $('#loadingmessage').hide();
+                        console.log("Returning data from backend");
+                        $('#points_sum').contents()[0].textContent = data.points_sum
+                        $('#postal_code_sum').contents()[0].textContent = data.postal_code_sum
+                        $('#postal_code').contents()[0].textContent = data.postal_code
                     }, 
                     error: function (jqXhr, textStatus, errorThrown) {
-                           console.log('ERROR');
-                           console.log(jqXhr);
+                        $('#loadingmessage').hide();
+                        console.log('ERROR');
+                        console.log(jqXhr);
                      },
                     });}
             else if (latLngs != 0 && theRadius == 0){
@@ -170,12 +174,14 @@ $(function(){
                     contentType: 'application/json; charset=utf-8',
                     dataType: 'json',
                     success: function(data){
-                             console.log("Zwracam otrzymane wartości punktów: " + JSON.stringify(data))
+                        $('#loadingmessage').hide();
+                        console.log("Zwracam otrzymane wartości punktów: " + JSON.stringify(data))
 
                     }, 
                     error: function (jqXhr, textStatus, errorThrown) {
-                           console.log('ERROR');
-                           console.log(jqXhr);
+                        $('#loadingmessage').hide();
+                        console.log('ERROR');
+                        console.log(jqXhr);
                      },
                     });}
             
@@ -185,6 +191,7 @@ $(function(){
         
     
                                                     });
+        });
             });
 
 
