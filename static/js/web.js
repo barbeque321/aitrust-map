@@ -152,9 +152,10 @@ $(function(){
                     success: function(data){
                         $('#loadingmessage').hide();
                         console.log("Returning data from backend");
-                        $('#points_sum').contents()[0].textContent = data.points_sum
-                        $('#postal_code_sum').contents()[0].textContent = data.postal_code_sum
-                        document.getElementById("postal_code").innerHTML = data.postal_code
+                        $('#points_sum').contents()[0].textContent = data.points_sum;
+                        $('#postal_code_sum').contents()[0].textContent = data.postal_code_sum;
+                        document.getElementById("postal_code").innerHTML = data.postal_code;
+                        truncate('.truncate');
                     }, 
                     error: function (jqXhr, textStatus, errorThrown) {
                         $('#loadingmessage').hide();
@@ -378,11 +379,11 @@ if($(this).length < 122) {
 $("a").on("click", function (e) {
   e.preventDefault();
   var truncateElement = $(this).parent().prev().find(".truncate");
-  if ($(this).text() === "Read More") {
-      $(this).text("Read Less");
+  if ($(this).text() === "Więcej") {
+      $(this).text("Mniej");
       reveal(truncateElement);
   } else {
-      $(this).text("Read More");
+      $(this).text("Więcej");
       truncate(truncateElement);
   }
 });
