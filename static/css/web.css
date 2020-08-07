@@ -241,6 +241,13 @@ span {
   pointer-events: auto;
 }
 
+.leaflet-center {
+  position: absolute;
+  z-index: 1000;
+  margin-left: auto;
+  margin-top: auto;
+}
+
 #update_log_button {
   background-color: #3a83a4e0;
   border: 3px solid #177098;
