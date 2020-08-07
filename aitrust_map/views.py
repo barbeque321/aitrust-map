@@ -24,6 +24,7 @@ def process_loc(request):
         rad = request.GET.get('rad') 
         rad = round(float(rad), 2) # unifying the data
         rad = rad/1000 # must be in kilometers!
+        rad_up_10 = rad * 1,1 # radius + 10%
         theAdressInfo = request.GET.get('theAdressInfo')
         theAdressInfo = str(theAdressInfo)
         R = 6371  # earth radius in kilometers
@@ -34,20 +35,41 @@ def process_loc(request):
         minLat = lat - math.degrees(rad/R)
         maxLng = lng + math.degrees(math.asin(rad/R) / math.cos(math.radians(lat)))
         minLng = lng - math.degrees(math.asin(rad/R) / math.cos(math.radians(lat)))
-        
-        # dictionary for sql query
-        params = { 'lat': lat, 'lng': lng, 'minLat': minLat, 'minLng': minLng, 'maxLat': maxLat, 'maxLng': maxLng, 'rad': rad, 'R': R}
+
+
+        # border points max-min + 10%
+        maxLat_up_10 = lat + math.degrees(rad_up_10/R)
+        minLat_up_10 = lat - math.degrees(rad_up_10/R)
+        maxLng_up_10 = lng + math.degrees(math.asin(rad_up_10/R) / math.cos(math.radians(lat)))
+        minLng_up_10 = lng - math.degrees(math.asin(rad_up_10/R) / math.cos(math.radians(lat)))
+
+
+
+        # initialise mysql database connection
         cursor  = connection.cursor()
-        # mysql query
+
+        # dictionary for first sql query
+        params = { 'lat': lat, 'lng': lng, 'minLat': minLat, 'minLng': minLng, 'maxLat': maxLat, 'maxLng': maxLng, 'rad': rad, 'R': R }
+        
+        # mysql first query
         # initially, the boundary data serves as a pre-filter
         # that the query refers to a limited range of data in the database to make search efficient 
         # then using spherical law of cosines a more accurate circle is drawn and excess points are removed
         query  = """SELECT Id, Lng, Lat, kodPocztowy FROM pomorskie WHERE Lat BETWEEN %(minLat)s AND %(maxLat)s AND Lng BETWEEN %(minLng)s AND %(maxLng)s AND ACOS(SIN(RADIANS(%(lat)s))*SIN(RADIANS(Lat)) + COS(RADIANS(%(lat)s))*COS(RADIANS(Lat))*COS(RADIANS(Lng)-RADIANS(%(lng)s)))*%(R)s < %(rad)s;"""
+
+        # execute first query
         cursor.execute(query, params)
-        # get mysql data from query
+
+        # return mysql data from query
         sql_data = cursor.fetchall()
+
+        # second query is all the same but the radius which is 10% larger
+        params_up_10 = { 'lat': lat, 'lng': lng, 'minLat_up_10': minLat_up_10, 'minLng_up_10': minLng_up_10, 'maxLat_up_10': maxLat_up_10, 'maxLng_up_10': maxLng_up_10, 'rad_up_10': rad_up_10, 'R': R }
+        query_up_10  = """SELECT Id, Lng, Lat, kodPocztowy FROM pomorskie WHERE Lat BETWEEN %(minLat_up_10)s AND %(maxLat_up_10)s AND Lng BETWEEN %(minLng_up_10)s AND %(maxLng_up_10)s AND ACOS(SIN(RADIANS(%(lat)s))*SIN(RADIANS(Lat)) + COS(RADIANS(%(lat)s))*COS(RADIANS(Lat))*COS(RADIANS(Lng)-RADIANS(%(lng)s)))*%(R)s < %(rad_up_10)s;"""
+        cursor.execute(query_up_10, params_up_10)
+        sql_data_up_10 = cursor.fetchall()
         
-        # getting data from object type and turning arrays into a list
+        # getting data from object type and turning arrays into a list from first query
         colnames = ['Id', 'Lng', 'Lat', 'kodPocztowy']
         process_data = {}
         for row in sql_data:
@@ -65,11 +87,27 @@ def process_loc(request):
         # calculating the amount of postal codes obtained in circle
         postal_code_sum = len(postal_list_no_repeats)
 
-        # postal_list_no_repeats_sorted = postal_list_no_repeats.sort()
-        # postal_code = postal_list_no_repeats_sorted
+        # getting data from object type and turning arrays into a list from second query
+        colnames = ['Id', 'Lng', 'Lat', 'kodPocztowy']
+        process_data_up_10 = {}
+        for row in sql_data_up_10:
+            colindex = 0
+            for col in colnames:
+                if not col in process_data_up_10:
+                    process_data_up_10[col] = []
+                process_data_up_10[col].append(row[colindex])
+                colindex += 1
+        postal_list_up_10 = process_data['kodPocztowy']
+        # calculating the amount of adress points obtained in circle with radius 10% larger
+        points_sum_up_10 = len(postal_list_up_10)
+        # removing repetitions from the list and appending unique postal codes
+        postal_list_no_repeats_up_10 = list(dict.fromkeys(postal_list_up_10))
+        # calculating the amount of postal codes obtained in circle with radius 10% larger
+        postal_code_sum_up_10= len(postal_list_no_repeats_up_10)
 
-        data = {"postal_code": postal_list_no_repeats, "points_sum": points_sum, "postal_code_sum": postal_code_sum
-        }
+        # building dictionary for JsonResponse
+        data = {"postal_code": postal_list_no_repeats, "points_sum": points_sum, "postal_code_sum": postal_code_sum,
+        "points_sum_up_10": points_sum_up_10, "postal_code_sum_up_10": postal_code_sum_up_10, "rad": rad, "rad_up_10": rad_up_10}
         
     return JsonResponse(data)
 
