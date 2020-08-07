@@ -4,53 +4,55 @@
 
 {% block page_content %}
 
-<div id="map" style="position: relative; top: 0; left: 0; width: 100%;">
-    <div class="leaflet-bottom leaflet-left" > 
-    	<button id="update_log_button">Generuj dane</button>
-    	<div id='loadingmessage'>
-        	<img src="{% static 'images/ajax-loader.gif' %}" width="70" height="70"/>
+<div class="span9" style="height:100%">
+	<div id="map-wrapper">
+		<div id="map">
+		    <div class="leaflet-bottom leaflet-left" > 
+		    	<button id="update_log_button">Generuj dane</button>
+		    	<div id='loadingmessage'>
+		        	<img src="{% static 'images/ajax-loader.gif' %}" width="70" height="70"/>
+				</div>
+		    </div>   
 		</div>
-    </div>   
-    
-</div>
-<div id="generated_data">
-	<p>Wygenerowane dane:</p>
-	<p></p>
-</div> 
-
-<div class="frame js-frame">
-	<div class="frame__wrapper">
-	  	<div class="frame__side is-active">
-	  		<div class="center">
-				<div class="logo">
-					<div class="image">
-						<div class="circle-1"></div>
-						<div class="circle-2"></div>
-						<img src="{% static 'images/logo.png' %}" width="70" height="70" alt="kody-na-mapie">
-					</div>
-				</div>
-				<div class="stats">
-					<div id="postal" class="box">
-						<div id="postal_code_sum"class="value">0</div>
-						<div class="parameter">Kodów pocztowych</div>
-					</div>
-					<div class="box">
-						<div id="points_sum" class="value">0</div>
-						<div class="parameter">Punktów adresowych</div>
-					</div>
-				</div>
-			</div>
-	    </div>
-	    <div class="frame__side frame__side--back">
-	    	<div class="info_header">
-	    		Obszar obejmuje kody pocztowe:
-			</div>
-			<div id="postal_code" class="postal_codes"> </div>
-				<button id="info_back_button" class="info_back_button btn--blue">Powrót</button>
-	    </div>
 	</div>
-</div>
+	<div id="generated_data">
+			<p>Wygenerowane dane:</p>
+			<p></p>
+	</div> 
+	<div class="frame js-frame">
+		<div class="frame__wrapper">
+		  	<div class="frame__side is-active">
+		  		<div class="center">
+					<div class="logo">
+						<div class="image">
+							<div class="circle-1"></div>
+							<div class="circle-2"></div>
+							<img src="{% static 'images/logo.png' %}" width="70" height="70" alt="kody-na-mapie">
+						</div>
+					</div>
+					<div class="stats">
+						<div id="postal" class="box">
+							<div id="postal_code_sum"class="value">0</div>
+							<div class="parameter">Kodów pocztowych</div>
+						</div>
+						<div class="box">
+							<div id="points_sum" class="value">0</div>
+							<div class="parameter">Punktów adresowych</div>
+						</div>
+					</div>
+				</div>
+		    </div>
+		    <div class="frame__side frame__side--back">
+		    	<div class="info_header">
+		    		Obszar obejmuje kody pocztowe:
+				</div>
+				<div id="postal_code" class="postal_codes"> </div>
+					<button id="info_back_button" class="info_back_button btn--blue">Powrót</button>
+		    </div>
+		</div>
+	</div>
 
+</div>
 {% endblock %}
 
 {% block script %}

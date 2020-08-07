@@ -223,10 +223,21 @@ span {
   font-size: 12px;
   font-weight: 400;
 }
-    
-#map {
+
+#map-wrapper {
+  width: 100%;
   height: 580px;
+  position: relative;
   display: block;
+}
+
+#map {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  background-color: #177098;
+  top: 0; 
+  left: 0;
 }
 
 .leaflet-bottom {
@@ -241,9 +252,10 @@ span {
   pointer-events: auto;
 }
 
-#loadingmessage {
-  position: absolute;
-  z-index: 1000;
+#loadingmessage {     
+  position: absolute; 
+  z-index: 9999;
+  width: 100%;
   margin-left: auto;
   margin-top: auto;
   display: none;
