@@ -7,10 +7,11 @@
 <div id="map" style="position: relative; top: 0; left: 0; width: 100%;">
     <div class="leaflet-bottom leaflet-left" > 
     	<button id="update_log_button">Generuj dane</button>
+    	<div id='loadingmessage'>
+        	<img src="{% static 'images/ajax-loader.gif' %}" width="70" height="70"/>
+		</div>
     </div>   
-    <div id='loadingmessage'>
-       <img src="{% static 'images/ajax-loader.gif' %}" width="70" height="70"/>
-	</div>
+    
 </div>
 <div id="generated_data">
 	<p>Wygenerowane dane:</p>
