@@ -10,6 +10,8 @@
   display: block;
   perspective: 600px;
   position: relative;
+  margin: 3rem auto 3rem auto;
+  max-width: 400px;
 }
 
 .frame.is-switched .frame__wrapper {
@@ -21,12 +23,24 @@
   animation: rotate-inverse 0.5s linear both;
 }
 
-.frame__side {
+.frame__side{
   backface-visibility: hidden;
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
+  height: 400px;
+  border-radius: 2px;
+  box-shadow: 1px 2px 10px 0px rgba(0,0,0,0.3);
+  background: #CA7C4E;
+  background: -webkit-linear-gradient(bottom left, #177098 0%, #3a83a4 100%);
+  background: -moz-linear-gradient(bottom left, #177098 0%, #3a83a4 100%);
+  background: -o-linear-gradient(bottom left, #177098 0%, #3a83a4 100%);
+  background: linear-gradient(to top right, #177098 0%, #3a83a4 100%); 
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#177098', endColorstr='#3a83a4',GradientType=1 ); 
+  font-family: 'Open Sans', Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 .frame__side.is-active {
@@ -59,44 +73,6 @@
   100% {
     transform: rotateY(0);
   }
-}
-
-
-
-.frame {
-  margin: 3rem auto 3rem auto;
-  max-width: 400px;
-  
-}
-
-.frame__side{
-  height: 400px;
-  border-radius: 2px;
-  box-shadow: 1px 2px 10px 0px rgba(0,0,0,0.3);
-  background: #CA7C4E;
-  background: -webkit-linear-gradient(bottom left, #177098 0%, #3a83a4 100%);
-  background: -moz-linear-gradient(bottom left, #177098 0%, #3a83a4 100%);
-  background: -o-linear-gradient(bottom left, #177098 0%, #3a83a4 100%);
-  background: linear-gradient(to top right, #177098 0%, #3a83a4 100%); 
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#177098', endColorstr='#3a83a4',GradientType=1 ); 
-  font-family: 'Open Sans', Helvetica, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-.center {
-  display: block;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  -ms-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
-  height: 15rem;
-  width: 320px;
-  background: #d6deec;
-  border-radius: 3px;
-  overflow: hidden;
-  box-shadow: 10px 10px 15px 0 rgba(0, 0, 0, 0.3);
 }
 
 .logo {
@@ -320,5 +296,60 @@ span {
   background-color: #6FC6FF;
 }
    
+
+
+
+
+
+
+.center {
+  display: block;
+  position: relative;
+  perspective: 600px;
+  max-width: 320px;
+}
+
+.center.is-switched .center__wrapper {
+  animation: rotate 0.5s linear both;
+}
+
+.center__wrapper {
+  transform-style: preserve-3d;
+  animation: rotate-inverse 0.5s linear both;
+}
+
+.center__side {
+  backface-visibility: hidden;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  height: 15rem;
+  background: #d6deec;
+  border-radius: 3px;
+  overflow: hidden;
+  box-shadow: 10px 10px 15px 0 rgba(0, 0, 0, 0.3);
+}
+
+.center.is-active {
+  position: static;
+}
+
+.center__side--back {
+  transform: rotateY(180deg);
+}
+
+
+
+
+
+
+
+
+
+
+
 
 
