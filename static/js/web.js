@@ -155,7 +155,8 @@ $(function(){
                         $('#points_sum').contents()[0].textContent = data.points_sum;
                         $('#postal_code_sum').contents()[0].textContent = data.postal_code_sum;
                         document.getElementById("postal_code").innerHTML = data.postal_code;
-                        truncate('postal_code');
+                        truncate('postal_codes');
+                        $('#postal_codes').truncate();
                     }, 
                     error: function (jqXhr, textStatus, errorThrown) {
                         $('#loadingmessage').hide();
