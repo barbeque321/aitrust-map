@@ -97,7 +97,7 @@ def process_loc(request):
                     process_data_up_10[col] = []
                 process_data_up_10[col].append(row[colindex])
                 colindex += 1
-        postal_list_up_10 = process_data['kodPocztowy']
+        postal_list_up_10 = process_data_up_10['kodPocztowy']
         # calculating the amount of adress points obtained in circle with radius 10% larger
         points_sum_up_10 = len(postal_list_up_10)
         # removing repetitions from the list and appending unique postal codes
