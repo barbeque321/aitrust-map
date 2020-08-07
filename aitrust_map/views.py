@@ -23,9 +23,8 @@ def process_loc(request):
         lng = float(lng)
         rad = request.GET.get('rad') 
         rad = round(float(rad), 2) # unifying the data
-        rad2 = rad
         rad = rad/1000 # must be in kilometers!
-        rad_up_10 = rad2/1000 * 1,1 # radius + 10%
+        rad_up_10 = rad * 1.1 # radius + 10%
         theAdressInfo = request.GET.get('theAdressInfo')
         theAdressInfo = str(theAdressInfo)
         R = 6371  # earth radius in kilometers
