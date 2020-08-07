@@ -11,9 +11,9 @@
 		    	<button id="update_log_button">Generuj dane</button>
 		    </div> 
 		</div>
-		<div class= "loadingmessage" id='loadingmessage' style='display:none'>
-			<img src="{% static 'images/ajax-loader.gif' %}" width="70" height="70"/>
-		</div>
+	</div>
+	<div id="loadingmessage" style="display: none; width: 100%; height: 100%; top: 100px; left: 0px; position: fixed; z-index: 10000; text-align: center;">
+            <img src="{% static 'images/ajax-loader.gif' %}" width="70" height="70" alt="Loading..." style="position: fixed; top: 50%; left: 50%;" />
 	</div>
 	<div id="generated_data">
 			<p>Wygenerowane dane:</p>

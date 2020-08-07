@@ -252,22 +252,6 @@ span {
   pointer-events: auto;
 }
 
-.loadingmessage {     
-  position: absolute; 
-  z-index: 9999;
-  width: 100%;
-  margin-left: auto;
-  margin-top: auto;
-  display: none;
-}
-
-.loadingmessage img {
-  position: absolute;
-  margin: auto auto auto auto;
-  z-index: 1000;
-}
-
-
 #update_log_button {
   background-color: #3a83a4e0;
   border: 3px solid #177098;
