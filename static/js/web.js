@@ -3,7 +3,7 @@ var theRadius = 0;
 var theAdressInfo = 0;
 
 $(document).ready(function(){
-
+var objGlobalEvent = new RegisterGlobalEvents(true, "");
 
 var osmUrl = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
         osmAttrib = '&copy; <a href="http://openstreetmap.org/copyright">OpenStreetMap</a>',
@@ -135,7 +135,6 @@ searchControl.on('results', function (data) {
 
 
 $(function(){
-    var objGlobalEvent = new RegisterGlobalEvents(true, "");
     $("#update_log_button").bind('click', function(){
         console.log('Sending data from client to server');
         
