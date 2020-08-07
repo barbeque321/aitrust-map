@@ -353,7 +353,42 @@ $(function(){
 
 
 
+var charLimit = 122;
 
+function truncate(el) {
+  var clone = el.children().first(),
+      originalContent = el.html(),
+      text = clone.text();  
+  if(text.length>charLimit) {
+   el.attr("data-originalContent", originalContent);
+   clone.text(text.substring(0, charLimit) + "...")
+   el.empty().append(clone); 
+   } 
+}
+
+function reveal(el) {
+  el.html(el.attr("data-originalContent"));
+}
+$(".truncate").each(function(){
+if($(this).length < 122) {
+  $(this).parent().next().find(".read-more").hide();    
+  } 
+});  
+$("a").on("click", function (e) {
+  e.preventDefault();
+  var truncateElement = $(this).parent().prev().find(".truncate");
+  if ($(this).text() === "Read More") {
+      $(this).text("Read Less");
+      reveal(truncateElement);
+  } else {
+      $(this).text("Read More");
+      truncate(truncateElement);
+  }
+});
+
+$(".truncate").each(function () {
+    truncate($(this));
+});
 
 
 
