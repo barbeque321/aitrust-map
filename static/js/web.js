@@ -137,7 +137,6 @@ $(function(){
     $("#update_log_button").bind('click', function(){
             $('#loadingmessage').show();
             console.log('Sending data from client to server');
-        
             if (latLngs != 0 && theRadius != 0){
                 $.ajax({
                     type: "GET",
