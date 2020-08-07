@@ -334,9 +334,7 @@ L.drawLocal = {
 
 let frameTransitionTime = 500;
 let $frame = $('.js-frame')
-let $center = $('.js-center')
 let switching = false
-let switching2 = false
 
 $(function(){
     $("#postal, #info_back_button").bind('click', function(){
@@ -354,22 +352,6 @@ $(function(){
 });
 
 
-
-$(function(){
-    $("#map_points_box, #info_back_button_2").bind('click', function(){
-        if (switching2) {
-              return false
-           }
-           switching2 = true
-           
-           $center.toggleClass('is-switched')
-           window.setTimeout(function () {
-              $center.children().children().toggleClass('is-active')
-              switching2 = false
-           }, frameTransitionTime / 2)
-        })
-});
-   
 
 
 

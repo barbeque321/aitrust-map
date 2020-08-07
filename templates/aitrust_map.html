@@ -22,35 +22,24 @@
 	<div class="frame js-frame">
 		<div class="frame__wrapper">
 		  	<div class="frame__side is-active">
-		  		<div class="center js-center">
-			  		<div class="center__wrapper">
-				  		<div class="center__side is-active">
-							<div class="logo">
-								<div class="image">
-									<div class="circle-1"></div>
-									<div class="circle-2"></div>
-									<img src="{% static 'images/logo.png' %}" width="70" height="70" alt="kody-na-mapie">
-								</div>
-							</div>
-							<div class="stats">
-								<div id="postal" class="box">
-									<div id="postal_code_sum"class="value">0</div>
-									<div class="parameter">Kodów pocztowych</div>
-								</div>
-								<div id="map_points_box" class="box">
-									<div id="points_sum" class="value">0</div>
-									<div class="parameter">Punktów adresowych</div>
-								</div>
-							</div>
+		  		<div class="center">
+					<div class="logo">
+						<div class="image">
+							<div class="circle-1"></div>
+							<div class="circle-2"></div>
+							<img src="{% static 'images/logo.png' %}" width="70" height="70" alt="kody-na-mapie">
 						</div>
-						<div class="center__side center__side--back">
-		    				<div class="info_header">
-		    					W zaznaczonym obszarze:
-							</div>
-							<div id="map_points" class="postal_codes"> </div>
-								<button id="info_back_button_2" class="info_back_button btn--blue">Powrót</button>
-		    			</div>
-					</div>	
+					</div>
+					<div class="stats">
+						<div id="postal" class="box">
+							<div id="postal_code_sum"class="value">0</div>
+							<div class="parameter">Kodów pocztowych</div>
+						</div>
+						<div id="map_points_box" class="box">
+							<div id="points_sum" class="value">0</div>
+							<div class="parameter">Punktów adresowych</div>
+						</div>
+					</div>
 				</div>
 		    </div>
 		    <div class="frame__side frame__side--back">
