@@ -330,13 +330,19 @@ span {
   font-weight: 400;
 }
 
-.module a {
+
+.module2 {
+  width: 350px;
+  margin: 0rem auto 0rem auto;
+  overflow: hidden;
+}
+
+.module2 a {
   color: #ffffff;
   margin: 0;
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 600;
 }
-
 
 
 
