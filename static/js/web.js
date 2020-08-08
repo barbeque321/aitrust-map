@@ -154,8 +154,7 @@ $(function(){
                         $('#points_sum').contents()[0].textContent = data.points_sum;
                         $('#postal_code_sum').contents()[0].textContent = data.postal_code_sum;
                         document.getElementById("postal_code").innerHTML = data.postal_code;
-                        truncate('postal_codes');
-                        $('#postal_codes').truncate();
+
                     }, 
                     error: function (jqXhr, textStatus, errorThrown) {
                         $('#loadingmessage').hide();
@@ -196,48 +195,6 @@ $(function(){
 
 
 
-
-var charLimit = 122;
-
-function truncate(el) {
-  var clone = el.children().first(),
-      originalContent = el.html(),
-      text = clone.text();  
-  if(text.length>charLimit) {
-   el.attr("data-originalContent", originalContent);
-   clone.text(text.substring(0, charLimit) + "...")
-   el.empty().append(clone); 
-   } 
-}
-
-function reveal(el) {
-  el.html(el.attr("data-originalContent"));
-}
-
-$(".truncate").each(function(){
-if($(this).length < 122) {
-  $(this).parent().next().find(".read-more").hide();    
-  } 
-});  
-
-
-
-
-$("a").on("click", function (e) {
-  e.preventDefault();
-  var truncateElement = $(this).parent().prev().find(".truncate");
-  if ($(this).text() === "Więcej") {
-      $(this).text("Mniej");
-      reveal(truncateElement);
-  } else {
-      $(this).text("Więcej");
-      truncate(truncateElement);
-  }
-});
-
-$(".truncate").each(function () {
-    truncate($(this));
-});
 
 
 
