@@ -198,12 +198,12 @@
 
 .box.js-postal.is-switched {
   transform: translate(0%, 0%) scale(0);
-  transition: 1200ms ease-in-out;
+  transition: 1500ms ease-in-out;
 }
 
 .box.js-map_points_box.is-switched {
   transform: translate(0%, 0%) scale(0);
-  transition: 1200ms ease-in-out;
+  transition: 1500ms ease-in-out;
 }
 
 span {
