@@ -495,40 +495,40 @@ $(window).bind('load', function() {
 
 
 
-const openModalButtons = document.querySelectorAll('[data-modal-target]')
-const closeModalButtons = document.querySelectorAll('[data-close-button]')
+const openPopupboxButtons = document.querySelectorAll('[data-popupbox-target]')
+const closePopupboxButtons = document.querySelectorAll('[data-popupbox-button]')
 const overlay = document.getElementById('overlay')
 
-openModalButtons.forEach(button => {
+openPopupboxButtons.forEach(button => {
   button.addEventListener('click', () => {
-    const modal = document.querySelector(button.dataset.modalTarget)
-    openModal(modal)
+    const popupbox = document.querySelector(button.dataset.popupboxTarget)
+    openPopupbox(popupbox)
   })
 })
 
 overlay.addEventListener('click', () => {
-  const modals = document.querySelectorAll('.modal.active')
-  modals.forEach(modal => {
-    closeModal(modal)
+  const popupbox = document.querySelectorAll('.popupbox.active')
+  popupbox.forEach(popupbox => {
+    closePopupbox(popupbox)
   })
 })
 
-closeModalButtons.forEach(button => {
+closePopupboxButtons.forEach(button => {
   button.addEventListener('click', () => {
-    const modal = button.closest('.modal')
-    closeModal(modal)
+    const popupbox = button.closest('.popupbox')
+    closePopupbox(popupbox)
   })
 })
 
-function openModal(modal) {
-  if (modal == null) return
-  modal.classList.add('active')
+function openPopupbox(popupbox) {
+  if (popupbox == null) return
+  popupbox.classList.add('active')
   overlay.classList.add('active')
 }
 
-function closeModal(modal) {
-  if (modal == null) return
-  modal.classList.remove('active')
+function closePopupbox(popupbox) {
+  if (popupbox == null) return
+  popupbox.classList.remove('active')
   overlay.classList.remove('active')
 }
 
