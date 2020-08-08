@@ -157,7 +157,7 @@ $(function(){
                         $('#postal_code_sum').contents()[0].textContent = data.postal_code_sum;
                         document.getElementById("postal_code").innerHTML = data.postal_code;
                         document.dispatchEvent(clamp_event);
-                        $("postal_code").clamp().trigger('clamp_event');
+                        clamp(document.getElementById('postal_code'), 3).trigger('clamp_event');
 
                     }, 
                     error: function (jqXhr, textStatus, errorThrown) {
