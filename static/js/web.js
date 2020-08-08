@@ -6,7 +6,6 @@ $(document).ready(function(){
 var detail = 'clamp fired';
 var clamp_event = new CustomEvent('clamp_event', {detail:detail });
 
-
 // create map instance 
 var osmUrl = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
         osmAttrib = '&copy; <a href="http://openstreetmap.org/copyright">OpenStreetMap</a>',
@@ -77,7 +76,6 @@ if (type === 'rectangle') {
 
 });
 
-
 map.on('draw:edited', function (e) {
     var layers = e.layers;
     layers.eachLayer(function (layer) {
@@ -91,9 +89,6 @@ map.on('draw:edited', function (e) {
         
     });
 });
-
-
-
 
 // add map scale
 L.control.scale().addTo(map);
@@ -114,7 +109,6 @@ searchControl.on('results', function (data) {
     for (var i = data.results.length - 1; i >= 0; i--) {
     results.addLayer(L.marker(data.results[i].latlng));
     }
-
     results.eachLayer(function (layer) {
     if (layer instanceof L.Marker){
         var theAdresslatlng;
@@ -192,7 +186,6 @@ $(function(){
                     success: function(data){
                         $('#loadingmessage').hide();
                         console.log("Zwracam otrzymane wartości punktów: " + JSON.stringify(data));
-
                     }, 
                     error: function (jqXhr, textStatus, errorThrown) {
                         $('#loadingmessage').hide();
@@ -320,7 +313,7 @@ L.drawLocal = {
             }
         }
     }
-}
+};
 
 
 // js code for handling result box transitions
@@ -502,5 +495,5 @@ function closePopupbox(popupbox) {
 };
 
 
-
+});
 
