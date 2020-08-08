@@ -1,10 +1,10 @@
 var latLngs = 0;
 var theRadius = 0;
 var theAdressInfo = 0;
+var clamp_event = new CustomEvent('clamp_event', { detail:detail });
 
 $(document).ready(function(){
 var detail = 'clamp fired';
-var clamp_event = new CustomEvent('clamp_event', { detail:detail });
 
 // create map instance 
 var osmUrl = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
@@ -126,10 +126,7 @@ searchControl.on('results', function (data) {
     });
 });
 
-
-
 // main js connection function
-
 $(function(){
     $("#update_log_button").bind('click', function(){
             // show loading image
@@ -315,7 +312,6 @@ L.drawLocal = {
     }
 };
 
-
 // js code for handling result box transitions
 let frameTransitionTime = 500;
 let $frame = $('.js-frame');
@@ -339,10 +335,6 @@ $(function(){
            frameTransitionTime / 2);
         });
 });
-
-
-
-
 
 // clamping great number of postal codes to smaller window
 if (!Function.prototype.bind) {
@@ -454,7 +446,6 @@ if (!Function.prototype.bind) {
 $(window).bind('load', function() {
   clamp(document.getElementById('postal_code'), 3);
 });
-
 
 // js code for handling new popupbox with all postal codes 
 const openPopupboxButtons = document.querySelectorAll('[data-popupbox-target]');
