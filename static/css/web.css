@@ -350,7 +350,7 @@ span {
 .popupbox {
   position: absolute;
   top: 50%;
-  left: 25%;
+  left: 50%;
   transform: translate(0%, 0%) scale(0);
   transition: 200ms ease-in-out;
   border: 1px solid black;
