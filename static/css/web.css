@@ -351,6 +351,7 @@ span {
   position: absolute;
   top: 50%;
   left: 50%;
+  right: 50%;
   transform: translate(0%, 0%) scale(0);
   transition: 200ms ease-in-out;
   border: 1px solid black;
@@ -369,7 +370,7 @@ span {
 }
 
 .popupbox.active {
-  transform: translate(0%, 0%) scale(1);
+  transform: translate(-50%, -50%) scale(1);
 }
 
 .popupbox-header {
