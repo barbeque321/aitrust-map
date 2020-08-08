@@ -81,6 +81,7 @@ def process_loc(request):
         points_sum = len(postal_list)
         # removing repetitions from the list and appending unique postal codes
         postal_list_no_repeats = list(dict.fromkeys(postal_list))
+        postal_list_no_repeats_add_breaks = postal_list_no_repeats.split(',') 
         # calculating the amount of postal codes obtained in circle
         postal_code_sum = len(postal_list_no_repeats)
 
@@ -103,7 +104,7 @@ def process_loc(request):
         postal_code_sum_up_10= len(postal_list_no_repeats_up_10)
 
         # building dictionary for JsonResponse
-        data = {"postal_code": postal_list_no_repeats, "points_sum": points_sum, "postal_code_sum": postal_code_sum,
+        data = {"postal_code": postal_list_no_repeats_add_breaks, "points_sum": points_sum, "postal_code_sum": postal_code_sum,
         "points_sum_up_10": points_sum_up_10, "postal_code_sum_up_10": postal_code_sum_up_10, "rad": rad, "rad_up_10": rad_up_10}
         
     return JsonResponse(data)
