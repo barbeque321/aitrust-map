@@ -183,6 +183,7 @@
   padding-top: 2.375rem;
   transition: all .4s ease-in-out;
   overflow: hidden;
+  transform: translate(0%, 0%) scale(1);
 }
 
 .box:hover {
@@ -195,13 +196,13 @@
 }
 
 .box.js-postal.is-switched {
-  transition: all 1s ease-in-out;
-  display: none;
+  transform: translate(0%, 0%) scale(0);
+  transition: 600ms ease-in-out;
 }
 
 .box.js-map_points_box.is-switched {
-  transition: all 1s ease-in-out;
-  display: none;
+  transform: translate(0%, 0%) scale(0);
+  transition: 600ms ease-in-out;
 }
 
 span {
