@@ -180,6 +180,7 @@ $font-family-base: 'Open Sans', Helvetica, sans-serif;
     vertical-align: middle;
     padding-top: 2.375rem;
     transition: all .4s ease-in-out;
+    overflow: hidden;
   }
     
 .box:hover {
@@ -199,6 +200,7 @@ span {
     display: block;
     font-size: 18px;
     font-weight: 600;
+    overflow: hidden;
   }
   
 .parameter {
