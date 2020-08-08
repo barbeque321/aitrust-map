@@ -362,21 +362,22 @@ generated_data {
 
 
 .modal {
-  position: fixed;
+  position: absolute;
   top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) scale(0);
+  left: 25%;
+  transform: translate(0%, 0%) scale(0);
   transition: 200ms ease-in-out;
   border: 1px solid black;
   border-radius: 10px;
-  z-index: 10;
+  z-index: 1000000;
   background-color: white;
   width: 500px;
-  max-width: 80%;
+  height: 400px;
+  max-width: 100%;
 }
 
-.modal.active {
-  transform: translate(-50%, -50%) scale(1);
+$.active {
+  transform: translate(0%, 0%) scale(1);
 }
 
 .modal-header {
@@ -387,19 +388,19 @@ generated_data {
   border-bottom: 1px solid black;
 }
 
-.modal-header .title {
-  font-size: 1.25rem;
-  font-weight: bold;
-}
+  .title {
+    font-size: 1.25rem;
+    font-weight: bold;
+  }
 
-.modal-header .close-button {
-  cursor: pointer;
-  border: none;
-  outline: none;
-  background: none;
-  font-size: 1.25rem;
-  font-weight: bold;
-}
+  .close-button {
+    cursor: pointer;
+    border: none;
+    outline: none;
+    background: none;
+    font-size: 1.25rem;
+    font-weight: bold;
+  }
 
 .modal-body {
   padding: 10px 15px;
@@ -417,7 +418,8 @@ overlay {
   pointer-events: none;
 }
 
-overlay.active {
+&.active {
   opacity: 1;
   pointer-events: all;
 }
+
