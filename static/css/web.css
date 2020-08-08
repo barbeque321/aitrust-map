@@ -289,7 +289,7 @@ span {
   outline: none;
   border: none;
   border-radius: 5px;
-  padding: 6px 25px;
+  padding: 1px 25px;
   font-size: 16px;
   font-family: 'Open Sans', Helvetica, sans-serif;
   text-decoration: none;
@@ -330,9 +330,18 @@ span {
   font-weight: 400;
 }
 
+.read-more {
+  width: 350px;
+  margin: 1rem auto 1rem auto;
+  overflow: hidden;
+}
 
-
-
+.read-more a {
+  color: #ffffff;
+  margin: 0;
+  font-size: 14px;
+  font-weight: 500;
+}
 
 
 
