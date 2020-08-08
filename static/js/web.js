@@ -3,6 +3,8 @@ var theRadius = 0;
 var theAdressInfo = 0;
 
 $(document).ready(function(){
+var detail = 'clamp fired';
+var clamp_event = new CustomEvent('clamp_event', {detail:detail});
 
 var osmUrl = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
         osmAttrib = '&copy; <a href="http://openstreetmap.org/copyright">OpenStreetMap</a>',
@@ -154,6 +156,8 @@ $(function(){
                         $('#points_sum').contents()[0].textContent = data.points_sum;
                         $('#postal_code_sum').contents()[0].textContent = data.postal_code_sum;
                         document.getElementById("postal_code").innerHTML = data.postal_code;
+                        document.dispatchEvent(clamp_event);
+                        $("postal_code").clamp().trigger('clamp_event');
 
                     }, 
                     error: function (jqXhr, textStatus, errorThrown) {
