@@ -354,7 +354,7 @@ span {
   right: 50%;
   transform: translate(0%, 0%) scale(0);
   transition: 200ms ease-in-out;
-  border: 1px solid black;
+  border: 1px solid #177098;
   border-radius: 10px;
   z-index: 1000000;
   background-color: #c4e6f9;
@@ -378,7 +378,7 @@ span {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid #177098;
 }
 
 .popupbox-header .title {
