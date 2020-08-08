@@ -1,11 +1,10 @@
 var latLngs = 0;
 var theRadius = 0;
 var theAdressInfo = 0;
+var detail = 'clamp fired';
 var clamp_event = new CustomEvent('clamp_event', { detail:detail });
 
 $(document).ready(function(){
-var detail = 'clamp fired';
-
 // create map instance 
 var osmUrl = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
         osmAttrib = '&copy; <a href="http://openstreetmap.org/copyright">OpenStreetMap</a>',
