@@ -195,10 +195,12 @@
 }
 
 .box.js-postal.is-switched {
+  transition: all 1s ease-in-out;
   display: none;
 }
 
 .box.js-map_points_box.is-switched {
+  transition: all 1s ease-in-out;
   display: none;
 }
 
