@@ -361,7 +361,7 @@ generated_data {
 
 
 
-.modal {
+.popupbox {
   position: absolute;
   top: 50%;
   left: 25%;
@@ -380,7 +380,7 @@ $.active {
   transform: translate(0%, 0%) scale(1);
 }
 
-.modal-header {
+.popupbox-header {
   padding: 10px 15px;
   display: flex;
   justify-content: space-between;
@@ -402,7 +402,7 @@ $.active {
     font-weight: bold;
   }
 
-.modal-body {
+.popupbox-body {
   padding: 10px 15px;
 }
 

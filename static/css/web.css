@@ -360,7 +360,7 @@ span {
 
 
 
-.modal {
+.popupbox {
   position: absolute;
   top: 50%;
   left: 25%;
@@ -375,11 +375,11 @@ span {
   max-width: 100%;
 }
 
-.modal.active {
+.popupbox.active {
   transform: translate(0%, 0%) scale(1);
 }
 
-.modal-header {
+.popupbox-header {
   padding: 10px 15px;
   display: flex;
   justify-content: space-between;
@@ -387,12 +387,12 @@ span {
   border-bottom: 1px solid black;
 }
 
-.modal-header .title {
+.popupbox-header .title {
   font-size: 1.25rem;
   font-weight: bold;
 }
 
-.modal-header .close-button {
+.popupbox-header .close-button {
   cursor: pointer;
   border: none;
   outline: none;
@@ -401,7 +401,7 @@ span {
   font-weight: bold;
 }
 
-.modal-body {
+.popupbox-body {
   padding: 10px 15px;
 }
 
