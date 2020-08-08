@@ -4,13 +4,16 @@ var theAdressInfo = 0;
 
 $(document).ready(function(){
 var detail = 'clamp fired';
-var clamp_event = new CustomEvent('clamp_event', {detail:detail});
+var clamp_event = new CustomEvent('clamp_event', {detail:detail });
 
+
+// create map instance 
 var osmUrl = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
         osmAttrib = '&copy; <a href="http://openstreetmap.org/copyright">OpenStreetMap</a>',
         osm = L.tileLayer(osmUrl, { maxZoom: 17, attribution: osmAttrib }),
         map = new L.Map('map', { center: new L.LatLng(52.415823, 18.874512), zoom: 6 }),
         drawnItems = L.featureGroup().addTo(map);
+
 L.control.layers({
     'Mapa': osm.addTo(map),
     "Satelita": L.tileLayer('http://www.google.cn/maps/vt?lyrs=s@189&gl=cn&x={x}&y={y}&z={z}', {
@@ -18,7 +21,7 @@ L.control.layers({
     })
 }, { 'Zaznaczenia': drawnItems }, { position: 'topleft', collapsed: false }).addTo(map);
 
-
+// create control panel 
 var drawControlFull = new L.Control.Draw({
     draw: {
         polyline: false,
@@ -26,13 +29,13 @@ var drawControlFull = new L.Control.Draw({
         circle: true,
         polygon: false,
         circlemarker: false,
-        rectangle: false,
-        
-},
+        rectangle: false,     
+    },
     edit: {
         featureGroup: drawnItems
     }
 });
+
 var drawControlEditOnly = new L.Control.Draw({
     edit: {
         featureGroup: drawnItems
@@ -54,7 +57,7 @@ map.on(L.Draw.Event.DELETED, function(e) {
     }
 });
 
-
+// get geo parameters of area
 map.on('draw:created', function (e) {
 var type = e.layerType;
 var layer = e.layer;
@@ -62,17 +65,17 @@ var layer = e.layer;
 if (type === 'circle') {
     theRadius = layer.getRadius();
     latLngs = layer.getLatLng();
-                        }
+    }
 if (type === 'polygon') {
     latLngs = layer.getLatLngs();
     theRadius = 0;
-                        }
+    }
 if (type === 'rectangle') {
     latLngs = layer.getLatLngs();
     theRadius = 0;
-                        }    
+    }    
 
-                                    })
+});
 
 
 map.on('draw:edited', function (e) {
@@ -84,7 +87,7 @@ map.on('draw:edited', function (e) {
             }
         if (layer instanceof L.Polyline){
             latLngs = layer.getLatLngs();
-        }
+            }
         
     });
 });
@@ -92,15 +95,17 @@ map.on('draw:edited', function (e) {
 
 
 
-
+// add map scale
 L.control.scale().addTo(map);
 
+// add search 
 var searchControl = L.esri.Geocoding.geosearch({
     placeholder: "Wyszukaj lokalizację siedziby",
     title: "Wyszukaj siedzibę",
     zoomToResult: false
     }).addTo(map);
 
+// reverse geocoding
 var results = L.layerGroup().addTo(map);
 var geocodeService = L.esri.Geocoding.geocodeService();
 
@@ -109,13 +114,10 @@ searchControl.on('results', function (data) {
     for (var i = data.results.length - 1; i >= 0; i--) {
     results.addLayer(L.marker(data.results[i].latlng));
     }
-    
 
     results.eachLayer(function (layer) {
     if (layer instanceof L.Marker){
         var theAdresslatlng;
-        
-
         theAdresslatlng = layer.getLatLng();
         console.log("Coordinates: " + theAdresslatlng.toString());
         map.setView(theAdresslatlng, 11, { animation: true });  
@@ -123,21 +125,22 @@ searchControl.on('results', function (data) {
             if (error) {
                 return;
             }
-        theAdressInfo = result.address.Match_addr
+        theAdressInfo = result.address.Match_addr;
         console.log("Adress: " + result.address.Match_addr);
         });
         }
-    }
-    )
-  });
+    });
+});
 
 
 
-
+// main js connection function
 
 $(function(){
     $("#update_log_button").bind('click', function(){
+            // show loading image
             $('#loadingmessage').show();
+            // get geo params of circle
             if (latLngs != 0 && theRadius != 0){
                 console.log('Sending data...');
                 $.ajax({
@@ -167,16 +170,16 @@ $(function(){
                         document.getElementById("info_adress_sum_difference").innerHTML = " (+" + data.differene_points_num + ")";
                         document.dispatchEvent(clamp_event);
                         clamp(document.getElementById('postal_code'), 3).trigger('clamp_event');
-                        
-
                     }, 
                     error: function (jqXhr, textStatus, errorThrown) {
                         $('#loadingmessage').hide();
                         console.log('ERROR');
                         console.log(jqXhr);
-                     },
-                    });}
+                    },
+                });
+            }
             else if (latLngs != 0 && theRadius == 0){
+                // get geo params of polygon
                 console.log('Sending data...');
                 $.ajax({
                     type: "GET",
@@ -188,7 +191,7 @@ $(function(){
                     dataType: 'json',
                     success: function(data){
                         $('#loadingmessage').hide();
-                        console.log("Zwracam otrzymane wartości punktów: " + JSON.stringify(data))
+                        console.log("Zwracam otrzymane wartości punktów: " + JSON.stringify(data));
 
                     }, 
                     error: function (jqXhr, textStatus, errorThrown) {
@@ -196,43 +199,19 @@ $(function(){
                         console.log('ERROR');
                         console.log(jqXhr);
                      },
-                    });}
-            
+                });
+            }          
                 else {
+                    // if no fugure drawn on map show popup
                     $('#loadingmessage').hide();
                     alert("Brak współrzędnych!");
                 };
-        
-    
-                                                    });
-        });
+    });
+});
            
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+// edition of tooltip messages 
 L.drawLocal = {
-    // format: {
-    //  numeric: {
-    //      delimiters: {
-    //          thousands: ',',
-    //          decimal: '.'
-    //      }
-    //  }
-    // },
     draw: {
         toolbar: {
             buttons: {
@@ -344,59 +323,52 @@ L.drawLocal = {
 }
 
 
-
+// js code for handling result box transitions
 let frameTransitionTime = 500;
-let $frame = $('.js-frame')
-let $postal = $('.js-postal')
-let $map_points_box = $('.js-map_points_box')
-
-let switching = false
+let $frame = $('.js-frame');
+let $postal = $('.js-postal');
+let $map_points_box = $('.js-map_points_box');
+let switching = false;
 
 $(function(){
     $("#postal.js-postal, #map_points_box.js-map_points_box, #info_back_button").bind('click', function(){
         if (switching) {
               return false
            }
-           switching = true
-           
-           $frame.toggleClass('is-switched')
-           $postal.toggleClass('is-switched')
-           $map_points_box.toggleClass('is-switched')
+           switching = true;
+           $frame.toggleClass('is-switched');
+           $postal.toggleClass('is-switched');
+           $map_points_box.toggleClass('is-switched');
            window.setTimeout(function () {
-              $frame.children().children().toggleClass('is-active')
-              switching = false
-           }, frameTransitionTime / 2)
-        })
+              $frame.children().children().toggleClass('is-active');
+              switching = false;
+           }, 
+           frameTransitionTime / 2);
+        });
 });
 
 
 
 
 
-
+// clamping great number of postal codes to smaller window
 if (!Function.prototype.bind) {
-  Function.prototype.bind = function (oThis) {
+    Function.prototype.bind = function (oThis) {
     if (typeof this !== "function") {
-      throw new TypeError("Function.prototype.bind - what is trying to be bound is not callable");
+        throw new TypeError("Function.prototype.bind - what is trying to be bound is not callable");
     }
  
     var aArgs = Array.prototype.slice.call(arguments, 1),
         fToBind = this,
         fNOP = function () {},
         fBound = function () {
-          return fToBind.apply(this instanceof fNOP && oThis
-                                 ? this
-                                 : oThis,
-                               aArgs.concat(Array.prototype.slice.call(arguments)));
+            return fToBind.apply(this instanceof fNOP && oThis ? this : oThis, aArgs.concat(Array.prototype.slice.call(arguments)));
         };
- 
     fNOP.prototype = this.prototype;
     fBound.prototype = new fNOP();
- 
     return fBound;
   };
 }
-
 
 (function(w, d){
     var clamp, measure, text, lineWidth,
@@ -406,8 +378,7 @@ if (!Function.prototype.bind) {
     ctn = d.createTextNode.bind(d);
     
     // measurement element is made a child of the clamped element to get it's style
-    measure = ce('span');
-  
+    measure = ce('span');  
     (function(s){
         s.position = 'absolute'; // prevent page reflow
         s.whiteSpace = 'pre'; // cross-browser width results
@@ -432,7 +403,7 @@ if (!Function.prototype.bind) {
         // http://ejohn.org/blog/search-and-dont-replace/
         text.replace(/ /g, function(m, pos) {
             // ignore any further processing if we have total lines
-      if(lineCount === lineClamp) return;
+        if(lineCount === lineClamp) return;
             // create a text node and place it in the measurement element
             measure.appendChild(ctn(text.substr(lineStart, pos - lineStart)));
             // have we exceeded allowed line width?
@@ -457,14 +428,15 @@ if (!Function.prototype.bind) {
                 // yes, we created a new line
                 wasNewLine = true;
         lineCount++;
-            } else {
-                // did not create a new line
-                wasNewLine = false;
-            }
-            // remember last word start position
-            wordStart = pos + 1;
-            // clear measurement element
-            measure.removeChild(measure.firstChild);
+        } 
+        else {
+            // did not create a new line
+            wasNewLine = false;
+        }
+        // remember last word start position
+        wordStart = pos + 1;
+        // clear measurement element
+        measure.removeChild(measure.firstChild);
         });
         // remove the measurement element from the container
         el.removeChild(measure);
@@ -491,60 +463,43 @@ $(window).bind('load', function() {
 });
 
 
-
-
-
-
-
-const openPopupboxButtons = document.querySelectorAll('[data-popupbox-target]')
-const closePopupboxButtons = document.querySelectorAll('[data-close-button]')
-const overlay = document.getElementById('overlay')
+// js code for handling new popupbox with all postal codes 
+const openPopupboxButtons = document.querySelectorAll('[data-popupbox-target]');
+const closePopupboxButtons = document.querySelectorAll('[data-close-button]');
+const overlay = document.getElementById('overlay');
 
 openPopupboxButtons.forEach(button => {
-  button.addEventListener('click', () => {
-    const popupbox = document.querySelector(button.dataset.popupboxTarget)
-    openPopupbox(popupbox)
-  })
-})
+    button.addEventListener('click', () => {
+    const popupbox = document.querySelector(button.dataset.popupboxTarget);
+    openPopupbox(popupbox);
+    })
+});
 
 overlay.addEventListener('click', () => {
-  const popupbox = document.querySelectorAll('.popupbox.active')
-  popupbox.forEach(popupbox => {
+    const popupbox = document.querySelectorAll('.popupbox.active')
+    popupbox.forEach(popupbox => {
     closePopupbox(popupbox)
-  })
-})
+    })
+});
 
 closePopupboxButtons.forEach(button => {
-  button.addEventListener('click', () => {
+    button.addEventListener('click', () => {
     const popupbox = button.closest('.popupbox')
     closePopupbox(popupbox)
-  })
-})
+    })
+});
 
 function openPopupbox(popupbox) {
-  if (popupbox == null) return
-  popupbox.classList.add('active')
-  overlay.classList.add('active')
-}
+    if (popupbox == null) return
+    popupbox.classList.add('active');
+    overlay.classList.add('active');
+};
 
 function closePopupbox(popupbox) {
-  if (popupbox == null) return
-  popupbox.classList.remove('active')
-  overlay.classList.remove('active')
-}
-
-
-
-
-
-
-
-
-})
-
-
-
-
+    if (popupbox == null) return
+    popupbox.classList.remove('active');
+    overlay.classList.remove('active');
+};
 
 
 
