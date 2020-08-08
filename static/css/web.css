@@ -367,6 +367,7 @@ span {
 .popupbox p {
   font-size: 12px;
   font-weight: 400;
+  color: #177098;
 }
 
 .popupbox.active {
@@ -384,6 +385,7 @@ span {
 .popupbox-header .title {
   font-size: 1.25rem;
   font-weight: bold;
+  color: #177098;
 }
 
 .popupbox-header .close-button {
