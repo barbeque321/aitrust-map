@@ -182,7 +182,11 @@ $font-family-base: 'Open Sans', Helvetica, sans-serif;
     transition: all .4s ease-in-out;
     overflow: hidden;
   }
-    
+
+&.is-switched {
+  display: none;
+}
+
 .box:hover {
       background: #95cae8;
       cursor: pointer;
@@ -191,6 +195,7 @@ $font-family-base: 'Open Sans', Helvetica, sans-serif;
 .box:nth-child(2) {
       margin: 0px 0;
     }
+
     
 span {
     display: block;

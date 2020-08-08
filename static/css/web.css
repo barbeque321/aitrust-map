@@ -194,6 +194,10 @@
   margin: 0px 0;
 }
 
+.box.is-switched {
+  display: none;
+}
+
 span {
   display: block;
 }
