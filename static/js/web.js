@@ -331,7 +331,7 @@ L.drawLocal = {
             edit: {
                 tooltip: {
                     text: 'Przeciągnij znaczniki by dokonać zmian',
-                    subtext: 'Kliknij anuluj by odrzucić zmiany'
+                    subtext: 'Kliknij anuluj by odrzucić zmiany lub zapisz by je zatwierdzić'
                 }
             },
             remove: {
