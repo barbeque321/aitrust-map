@@ -342,21 +342,23 @@ L.drawLocal = {
 
 let frameTransitionTime = 500;
 let $frame = $('.js-frame')
-let $stats = $('.js-stats')
+let $postal = $('.js-postal')
+let $map_points_box = $('.js-map_points_box')
+
 let switching = false
 
 $(function(){
-    $("#postal.is-active, #map_points_box.is-active, #info_back_button").bind('click', function(){
+    $("#postal.js-postal, #map_points_box.js-map_points_box, #info_back_button").bind('click', function(){
         if (switching) {
               return false
            }
            switching = true
            
            $frame.toggleClass('is-switched')
-           $stats.toggleClass('is-switched')
+           $postal.toggleClass('is-switched')
+           $map_points_box.toggleClass('is-switched')
            window.setTimeout(function () {
               $frame.children().children().toggleClass('is-active')
-              $stats.children().children().toggleClass('is-active')
               switching = false
            }, frameTransitionTime / 2)
         })
