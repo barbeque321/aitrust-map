@@ -138,8 +138,8 @@ searchControl.on('results', function (data) {
 $(function(){
     $("#update_log_button").bind('click', function(){
             $('#loadingmessage').show();
-            console.log('Sending data...');
             if (latLngs != 0 && theRadius != 0){
+                console.log('Sending data...');
                 $.ajax({
                     type: "GET",
                     url: 'process_loc/',
@@ -176,6 +176,7 @@ $(function(){
                      },
                     });}
             else if (latLngs != 0 && theRadius == 0){
+                console.log('Sending data...');
                 $.ajax({
                     type: "GET",
                     url: 'process_loc2/',
