@@ -339,7 +339,7 @@ let $frame = $('.js-frame')
 let switching = false
 
 $(function(){
-    $("#postal, #map_points_box, #info_back_button").bind('click', function(){
+    $("#postal.is-active, #map_points_box.is-active, #info_back_button").bind('click', function(){
         if (switching) {
               return false
            }
