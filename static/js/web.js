@@ -159,6 +159,7 @@ $(function(){
                         document.getElementById("info_postal_code_sum_difference").innerHTML = " (+" + data.difference_postal_num + ")";
                         document.getElementById("info_adress_sum_difference").innerHTML = " (+" + data.differene_points_num + ")";
                         clamp(document.getElementById('postal_code'), 3).trigger(clamp_event, detail);
+                        document.dispatchEvent(clamp_event);
                     }, 
                     error: function (jqXhr, textStatus, errorThrown) {
                         $('#loadingmessage').hide();
