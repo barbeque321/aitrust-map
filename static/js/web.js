@@ -342,6 +342,7 @@ L.drawLocal = {
 
 let frameTransitionTime = 500;
 let $frame = $('.js-frame')
+let $stats = $('.js-stats')
 let switching = false
 
 $(function(){
@@ -352,8 +353,10 @@ $(function(){
            switching = true
            
            $frame.toggleClass('is-switched')
+           $stats.toggleClass('is-switched')
            window.setTimeout(function () {
               $frame.children().children().toggleClass('is-active')
+              $stats.children().children().toggleClass('is-active')
               switching = false
            }, frameTransitionTime / 2)
         })
