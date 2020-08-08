@@ -375,6 +375,10 @@ generated_data {
   height: 400px;
   max-width: 100%;
 }
+  .popupbox p {
+  font-size: 12px;
+  font-weight: 400;
+}
 
 $.active {
   transform: translate(0%, 0%) scale(1);

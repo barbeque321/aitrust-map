@@ -343,22 +343,7 @@ span {
   font-weight: 400;
 }
 
-
-.module2 {
-  width: 350px;
-  margin: 0rem auto 0rem auto;
-  overflow: hidden;
-}
-
-.module2 a {
-  color: #ffffff;
-  margin: 0;
-  font-size: 14px;
-  font-weight: 600;
-}
-
-
-
+/* Postal codes popup box style */
 
 .popupbox {
   position: absolute;
@@ -373,6 +358,11 @@ span {
   width: 500px;
   height: 400px;
   max-width: 100%;
+}
+
+.popupbox p {
+  font-size: 12px;
+  font-weight: 400;
 }
 
 .popupbox.active {
