@@ -138,7 +138,7 @@ searchControl.on('results', function (data) {
 $(function(){
     $("#update_log_button").bind('click', function(){
             $('#loadingmessage').show();
-            console.log('Sending data from client to server');
+            console.log('Sending data...');
             if (latLngs != 0 && theRadius != 0){
                 $.ajax({
                     type: "GET",
@@ -152,7 +152,7 @@ $(function(){
                     dataType: 'json',
                     success: function(data){
                         $('#loadingmessage').hide();
-                        console.log("Returning data from backend");
+                        console.log("Ready");
                         $('#points_sum').contents()[0].textContent = data.points_sum;
                         $('#postal_code_sum').contents()[0].textContent = data.postal_code_sum;
                         document.getElementById("postal_code").innerHTML = data.postal_code;
@@ -198,7 +198,7 @@ $(function(){
             
                 else {
                     $('#loadingmessage').hide();
-                    console.log("Brak współrzędnych!");
+                    alert("Brak współrzędnych!");
                 };
         
     
@@ -494,7 +494,42 @@ $(window).bind('load', function() {
 
 
 
+const openModalButtons = document.querySelectorAll('[data-modal-target]')
+const closeModalButtons = document.querySelectorAll('[data-close-button]')
+const overlay = document.getElementById('overlay')
 
+openModalButtons.forEach(button => {
+  button.addEventListener('click', () => {
+    const modal = document.querySelector(button.dataset.modalTarget)
+    openModal(modal)
+  })
+})
+
+overlay.addEventListener('click', () => {
+  const modals = document.querySelectorAll('.modal.active')
+  modals.forEach(modal => {
+    closeModal(modal)
+  })
+})
+
+closeModalButtons.forEach(button => {
+  button.addEventListener('click', () => {
+    const modal = button.closest('.modal')
+    closeModal(modal)
+  })
+})
+
+function openModal(modal) {
+  if (modal == null) return
+  modal.classList.add('active')
+  overlay.classList.add('active')
+}
+
+function closeModal(modal) {
+  if (modal == null) return
+  modal.classList.remove('active')
+  overlay.classList.remove('active')
+}
 
 
 
