@@ -326,6 +326,7 @@ span {
   overflow: hidden;
 }
 .module p {
+  display: inline-block;
   color: #ffffff;
   margin: 0;
   font-size: 12px;

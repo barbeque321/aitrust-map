@@ -158,6 +158,12 @@ $(function(){
                         document.getElementById("postal_code").innerHTML = data.postal_code;
                         document.dispatchEvent(clamp_event);
                         clamp(document.getElementById('postal_code'), 3).trigger('clamp_event');
+                        document.getElementById("info_radius").innerHTML = data.rad;
+                        document.getElementById("info_postal_code_sum").innerHTML = data.postal_code_sum;
+                        document.getElementById("info_adress_sum").innerHTML = data.points_sum;
+                        document.getElementById("info_radius_10").innerHTML = data.rad_up_10;
+                        document.getElementById("info_postal_code_sum_10").innerHTML = data.postal_code_sum_up_10;
+                        document.getElementById("info_adress_sum_10").innerHTML = data.points_sum_up_10;
 
                     }, 
                     error: function (jqXhr, textStatus, errorThrown) {
