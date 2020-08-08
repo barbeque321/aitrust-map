@@ -322,13 +322,15 @@ generated_data {
 
 
 .module {
-  border: 1px solid #CCC;
-  width: 250px;
-  margin: 0 0 1em 0;
+  width: 350px;
+  margin: 1rem auto 1rem auto;
   overflow: hidden;
 }
 .module p {
+  color: #ffffff;
   margin: 0;
+  font-size: 12px;
+  font-weight: 400;
 }
 
 
