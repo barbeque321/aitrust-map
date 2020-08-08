@@ -21,10 +21,12 @@ def process_loc(request):
         lng = lng[:9] # unifying the data 
         lat = float(lat)
         lng = float(lng)
-        rad = request.GET.get('rad') 
+        rad = request.GET.get('rad')
         rad = round(float(rad), 2) # unifying the data
         rad = rad/1000 # must be in kilometers!
+        rad = round(float(rad), 2) # unifying the data
         rad_up_10 = rad * 1.1 # radius + 10%
+        rad_up_10 = round(float(rad_up_10), 2) # unifying the data
         theAdressInfo = request.GET.get('theAdressInfo')
         theAdressInfo = str(theAdressInfo)
         R = 6371  # earth radius in kilometers
@@ -104,9 +106,15 @@ def process_loc(request):
         # calculating the amount of postal codes obtained in circle with radius 10% larger
         postal_code_sum_up_10= len(postal_list_no_repeats_up_10)
 
+
+        # counting difference in postal_codes number and adresses number beetween two queries 
+        difference_postal_num = postal_code_sum_up_10 - postal_code_sum
+        differene_points_num = points_sum_up_10 - points_sum
+
         # building dictionary for JsonResponse
         data = {"postal_code": final_postal_string, "points_sum": points_sum, "postal_code_sum": postal_code_sum,
-        "points_sum_up_10": points_sum_up_10, "postal_code_sum_up_10": postal_code_sum_up_10, "rad": rad, "rad_up_10": rad_up_10}
+        "points_sum_up_10": points_sum_up_10, "postal_code_sum_up_10": postal_code_sum_up_10, "rad": rad, "rad_up_10": rad_up_10,
+        "difference_postal_num": difference_postal_num, "differene_points_num": differene_points_num}
         
     return JsonResponse(data)
 

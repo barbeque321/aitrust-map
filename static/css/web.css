@@ -194,7 +194,11 @@
   margin: 0px 0;
 }
 
-.box.is-switched {
+.box.js-postal.is-switched {
+  display: none;
+}
+
+.box.js-map_poits_box.is-switched {
   display: none;
 }
 

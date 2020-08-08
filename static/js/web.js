@@ -162,6 +162,8 @@ $(function(){
                         document.getElementById("info_radius_10").innerHTML = data.rad_up_10;
                         document.getElementById("info_postal_code_sum_10").innerHTML = data.postal_code_sum_up_10;
                         document.getElementById("info_adress_sum_10").innerHTML = data.points_sum_up_10;
+                        document.getElementById("info_postal_code_sum_difference").innerHTML = " (+" + data.difference_postal_num + ")";
+                        document.getElementById("info_adress_sum_difference").innerHTML = " (+" + data.differene_points_num + ")";
                         document.dispatchEvent(clamp_event);
                         clamp(document.getElementById('postal_code'), 3).trigger('clamp_event');
                         
