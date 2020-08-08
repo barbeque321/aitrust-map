@@ -496,7 +496,7 @@ $(window).bind('load', function() {
 
 
 const openPopupboxButtons = document.querySelectorAll('[data-popupbox-target]')
-const closePopupboxButtons = document.querySelectorAll('[data-popupbox-button]')
+const closePopupboxButtons = document.querySelectorAll('[data-close-button]')
 const overlay = document.getElementById('overlay')
 
 openPopupboxButtons.forEach(button => {
