@@ -497,7 +497,7 @@ $(function(){
                         $('#loadingmessage').hide();
                         console.log("Ready");
                         let polygon = data.point_list;
-                        var geojson_data = {
+                        geojson_data = {
                             "type": "FeatureCollection",
                             "features": [{
                                 "type": "Feature",
@@ -513,8 +513,8 @@ $(function(){
                             arr.push([item[1], item[0]]);
                         });
                         geojson_data.features[0].geometry.coordinates.push(arr);
-                        geojson_data.forEach(function(state) {
-                            var polygon = L.polygon(state.geometry.coordinates, {
+                        geojson_data.forEach( function(state) {
+                            var polygon = L.polygon(state.features[0].geometry.coordinates, {
                                 weight: 1,
                                 fillOpacity: 0.7,
                                 color: 'red',
