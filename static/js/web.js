@@ -514,7 +514,6 @@ $(function(){
                         polygon.forEach(function (item, index) {
                             arr.push([item[1], item[0]]);
                         });
-                        geojson_data.features[0].geometry.coordinates.push(arr);
                         var poly = L.polygon(arr).addTo(map);
                     },
                     error: function (jqXhr, textStatus, errorThrown) {
