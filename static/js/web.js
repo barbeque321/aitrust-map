@@ -521,7 +521,7 @@ $(function(){
                         geojson_data.features[0].geometry.coordinates.push(arr);
                         geo_layer = L.geoJson(geojson_data, {
                             style: myStyle,
-                        };
+                        });
                         drawnItems2.addLayer(geo_layer);
 
                     error: function (jqXhr, textStatus, errorThrown) {
