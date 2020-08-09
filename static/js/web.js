@@ -518,6 +518,7 @@ $(function(){
                         var postal_results = L.layerGroup().addTo(map);
                         postal_results.clearLayers();
                         geojson.features[0].geometry.coordinates.push(arr);
+                        console.log(geojson.features);
                         postal_results.addLayer(L.geoJson(geojson));
                         var drawnItems2 = new L.FeatureGroup();
                         var geoJsonGroup = L.geoJson(geojson).addTo(map);
