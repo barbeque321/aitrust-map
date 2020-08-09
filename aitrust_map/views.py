@@ -133,6 +133,13 @@ def draw_polygon(request):
 
         postal_list = request.GET.get('postal_list_to_draw')
 
+        postal_li = list(postal_list.split(",")) 
+
+        postal_str = ""
+
+        for elem in postal_li:
+            postal_str += '"' + elem + '",'
+
         # initialise mysql database connection
         cursor  = connection.cursor()
         
@@ -192,7 +199,7 @@ def draw_polygon(request):
                   [15.4479149995378, 50.9848441966871])
         point_list = get_hull_points(listPts)
         data = {
-        "point_list": point_list, "process_data": process_data, "postal_list": postal_list
+        "point_list": point_list, "process_data": process_data, "postal_list": postal_list, "postal_str": postal_str
         }
     return JsonResponse(data)
 
