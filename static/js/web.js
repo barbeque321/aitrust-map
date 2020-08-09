@@ -520,14 +520,8 @@ $(function(){
                             arr.push([item[1], item[0]]);
                         });
                         geojson_data.features[0].geometry.coordinates.push(arr);
-                        geo_layer = L.geoJson(geojson_data, {
-                            style: myStyle,
-                        });
-                        map.on(geo_layer, function (e) {
-                            drawnItems2.addLayer(e.geo_layer);
-                        });
+                        var poly = L.polygon(arr).addTo(map);
                     },
-
                     error: function (jqXhr, textStatus, errorThrown) {
                         $('#loadingmessage').hide();
                         console.log('ERROR');
