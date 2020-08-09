@@ -521,11 +521,12 @@ $(function(){
                             dashArray: '3'
                         }).addTo(map);
                     });
+                    },
                     error: function (jqXhr, textStatus, errorThrown) {
                         $('#loadingmessage').hide();
                         console.log('ERROR');
                         console.log(jqXhr);
-                    },
+                    }
                 });
     });
 });
