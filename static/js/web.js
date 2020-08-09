@@ -519,7 +519,8 @@ $(function(){
                         });
                         geojson_data.features[0].geometry.coordinates.push(arr);
                         L.geoJson(geojson_data, {
-                            style: myStyle
+                            style: myStyle,
+                            onEachFeature: onEachFeature,
                         }).addTo(map);
                   },
                     error: function (jqXhr, textStatus, errorThrown) {
