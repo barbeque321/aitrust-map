@@ -188,7 +188,7 @@ $(function(){
                 });
             }          
                 else {
-                    // if no fugure drawn on map show popup
+                    // if no figure is drawn on map show popup
                     $('#loadingmessage').hide();
                     alert("Brak współrzędnych!");
                 };
@@ -513,12 +513,12 @@ $(function(){
                             arr.push([item[1], item[0]]);
                         });
                         geojson_data.features[0].geometry.coordinates.push(arr);
-                        geojson_data.forEach({
-                        var polygon = L.polygon(geojson_data.features[0].geometry.coordinates, {
-                            weight: 1,
-                            fillOpacity: 0.7,
-                            color: 'red',
-                            dashArray: '3'
+                        geojson_data.forEach(function(state) {
+                            var polygon = L.polygon(state.geometry.coordinates, {
+                                weight: 1,
+                                fillOpacity: 0.7,
+                                color: 'red',
+                                dashArray: '3'
                         }).addTo(map);
                     });
                     },
