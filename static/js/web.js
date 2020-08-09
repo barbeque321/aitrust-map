@@ -505,6 +505,7 @@ $(function(){
                         console.log("Ready");
                         console.log(data);
                         let polygon = data.point_list;
+                        console.log(polygon);
                         let geojson = {
                             "type": "FeatureCollection",
                             "features": [{
@@ -517,9 +518,11 @@ $(function(){
                             }]
                         };
                         let arr = [];
+                        console.log(arr);
                         polygon.forEach(function (item, index) {
                             arr.push([item[1], item[0]]);
                         });
+                        console.log(arr);
                         geojson.features[0].geometry.coordinates.push(arr);
                         var drawnItems2 = new L.FeatureGroup();
                         var geoJsonGroup = L.geoJson(geojson).addTo(map);
