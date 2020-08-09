@@ -148,9 +148,8 @@ $(function(){
                         console.log("Ready");
                         $('#points_sum').contents()[0].textContent = data.points_sum;
                         $('#postal_code_sum').contents()[0].textContent = data.postal_code_sum;
-                        postal_list_to_draw = data.postal_code;
+                        postal_list_to_draw = data.postal_list_no_repeats;
                         document.getElementById("postal_code").innerHTML = data.postal_code;
-                        console.log(data.postal_list_no_repeats);
                         document.getElementById("postal_codes_popupbox").innerHTML = data.postal_code;
                         document.getElementById("info_radius").innerHTML = data.rad + "km";
                         document.getElementById("info_postal_code_sum").innerHTML = data.postal_code_sum;
@@ -509,6 +508,7 @@ $(function(){
                         $('#loadingmessage').hide();
                         console.log("Ready");
                         console.log(data.process_data);
+                        console.log(data.postal_list);
                         let polygon = data.point_list;
                         // swaping places the lat with the lng
                         let arr = [];

@@ -131,7 +131,8 @@ def process_loc2(request):
 def draw_polygon(request):
     if request.method == "GET":
 
-        postal_list_to_draw = request.GET.get('postal_list_to_draw')
+        postal_array = request.GET.get('postal_list_to_draw')
+        postal_list = postal_array.tolist()
 
         # initialise mysql database connection
         cursor  = connection.cursor()
@@ -192,7 +193,7 @@ def draw_polygon(request):
                   [15.4479149995378, 50.9848441966871])
         point_list = get_hull_points(listPts)
         data = {
-        "point_list": point_list, "process_data": process_data
+        "point_list": point_list, "process_data": process_data, "postal_list": postal_list
         }
     return JsonResponse(data)
 
