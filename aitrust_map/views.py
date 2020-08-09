@@ -139,7 +139,7 @@ def draw_polygon(request):
         
         query  = "SELECT Lng, Lat, kodPocztowy FROM pomorskie WHERE kodPocztowy IN ("
 
-        query += postal_list_to_draw
+        query += postal_list
 
         query += ");"
 
