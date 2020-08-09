@@ -140,6 +140,8 @@ def draw_polygon(request):
         for elem in postal_li:
             postal_str += '"' + elem + '",'
 
+        postal_str = postal_str[:-1]
+
         # initialise mysql database connection
         cursor  = connection.cursor()
         
