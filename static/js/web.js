@@ -484,7 +484,8 @@ function closePopupbox(popupbox) {
 
 
 
-
+var myLayer = L.geoJSON().addTo(map);
+myLayer.addData(geojsonFeature);
 
 
 
@@ -506,7 +507,7 @@ $(function(){
                         console.log(data);
                         let polygon = data.point_list;
                         console.log(polygon);
-                        let geojson = {
+                        var geojson = {
                             "type": "FeatureCollection",
                             "features": [{
                                 "type": "Feature",
@@ -518,12 +519,14 @@ $(function(){
                             }]
                         };
                         let arr = [];
-                        console.log(arr);
                         polygon.forEach(function (item, index) {
                             arr.push([item[1], item[0]]);
                         });
                         console.log(arr);
+                        var postal_results = L.layerGroup().addTo(map);
+                        postal_results.clearLayers();
                         geojson.features[0].geometry.coordinates.push(arr);
+                        postal_results.addLayer(L.geoJson(geojson));
                         var drawnItems2 = new L.FeatureGroup();
                         var geoJsonGroup = L.geoJson(geojson).addTo(map);
                         addNonGroupLayers(geoJsonGroup, drawnItems2);
