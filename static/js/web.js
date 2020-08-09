@@ -514,6 +514,7 @@ $(function(){
                                 }
                             }]
                         };
+                        // swaping places the lat with the lng
                         let arr = [];
                         polygon.forEach(function (item, index) {
                             arr.push([item[1], item[0]]);
@@ -523,6 +524,7 @@ $(function(){
                             style: myStyle,
                         });
                         drawnItems2.addLayer(geo_layer);
+                    },
 
                     error: function (jqXhr, textStatus, errorThrown) {
                         $('#loadingmessage').hide();
