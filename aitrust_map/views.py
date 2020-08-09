@@ -132,7 +132,7 @@ def draw_polygon(request):
     if request.method == "GET":
 
         postal_array = request.GET.get('postal_list_to_draw')
-        postal_list = postal_array.tolist()
+        postal_list = postal_array
 
         # initialise mysql database connection
         cursor  = connection.cursor()
