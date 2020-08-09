@@ -497,12 +497,7 @@ $(function(){
                 console.log('Sending data...');
                 $.ajax({
                     type: "GET",
-                    url: 'process_loc/',
-                    data: {
-                        "lat": latLngs.lat,
-                        "lng": latLngs.lng,
-                        "rad": theRadius,
-                    },
+                    url: 'draw_polygon/',
                     contentType: 'application/json; charset=utf-8',
                     dataType: 'json',
                     success: function(data){
