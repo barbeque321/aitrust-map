@@ -514,7 +514,7 @@ $(function(){
                         });
                         geojson_data.features[0].geometry.coordinates.push(arr);
                         geojson_data.forEach({
-                        var polygon = L.polygon(geojson_data.geometry.coordinates, {
+                        var polygon = L.polygon(geojson_data.features[0].geometry.coordinates, {
                             weight: 1,
                             fillOpacity: 0.7,
                             color: 'red',
