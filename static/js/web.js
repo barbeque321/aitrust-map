@@ -513,7 +513,7 @@ $(function(){
                             arr.push([item[1], item[0]]);
                         });
                         geojson_data.features[0].geometry.coordinates.push(arr);
-                        geojson_data.forEach( function(state) {
+                        geojson_data.forEach(state {
                             var polygon = L.polygon(state.features[0].geometry.coordinates, {
                                 weight: 1,
                                 fillOpacity: 0.7,
