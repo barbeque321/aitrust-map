@@ -481,6 +481,11 @@ function closePopupbox(popupbox) {
     overlay.classList.remove('active');
 };
 
+var myStyle = {
+    "color": "#ff7800",
+    "weight": 5,
+    "opacity": 0.65
+};
 
 
 $(function(){
@@ -513,7 +518,9 @@ $(function(){
                             arr.push([item[1], item[0]]);
                         });
                         geojson_data.features[0].geometry.coordinates.push(arr);
-                        L.geoJson(geojson_data).addTo(map);
+                        L.geoJson(geojson_data, {
+                            style: myStyle
+                        }).addTo(map);
                   },
                     error: function (jqXhr, textStatus, errorThrown) {
                         $('#loadingmessage').hide();
