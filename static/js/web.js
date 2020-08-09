@@ -523,7 +523,9 @@ $(function(){
                         geo_layer = L.geoJson(geojson_data, {
                             style: myStyle,
                         });
-                        drawnItems2.addLayer(geo_layer);
+                        map.on(geo_layer, function (e) {
+                            drawnItems2.addLayer(e.geo_layer);
+                        });
                     },
 
                     error: function (jqXhr, textStatus, errorThrown) {
