@@ -9,6 +9,7 @@ var osmUrl = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
         osm = L.tileLayer(osmUrl, { maxZoom: 17, attribution: osmAttrib }),
         map = new L.Map('map', { center: new L.LatLng(52.415823, 18.874512), zoom: 6 }),
         drawnItems = L.featureGroup().addTo(map);
+        drawnItems2 = L.featureGroup().addTo(map);
 
 L.control.layers({
     'Mapa': osm.addTo(map),
@@ -518,11 +519,11 @@ $(function(){
                             arr.push([item[1], item[0]]);
                         });
                         geojson_data.features[0].geometry.coordinates.push(arr);
-                        L.geoJson(geojson_data, {
+                        geo_layer = L.geoJson(geojson_data, {
                             style: myStyle,
-                            onEachFeature: onEachFeature,
-                        }).addTo(map);
-                  },
+                        };
+                        drawnItems2.addLayer(geo_layer);
+
                     error: function (jqXhr, textStatus, errorThrown) {
                         $('#loadingmessage').hide();
                         console.log('ERROR');
