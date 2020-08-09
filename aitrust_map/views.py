@@ -131,15 +131,16 @@ def process_loc2(request):
 def draw_polygon(request):
     if request.method == "GET":
 
-        postal_array = request.GET.get('postal_list_to_draw')
-        postal_list = postal_array
+        postal_list = request.GET.get('postal_list_to_draw')
+        separator = ', '
+        postal_string = separator.join(postal_list)
 
         # initialise mysql database connection
         cursor  = connection.cursor()
         
         query  = "SELECT Lng, Lat, kodPocztowy FROM pomorskie WHERE kodPocztowy IN ("
 
-        query += postal_list
+        query += postal_string
 
         query += ");"
 
