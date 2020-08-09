@@ -503,6 +503,7 @@ $(function(){
                     success: function(data){
                         $('#loadingmessage').hide();
                         console.log("Ready");
+                        console.log(data);
                         let polygon = data.point_list;
                         let geojson = {
                             "type": "FeatureCollection",
