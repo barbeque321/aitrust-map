@@ -1,6 +1,7 @@
 var latLngs = 0;
 var theRadius = 0;
 var theAdressInfo = 0;
+var postal_list_to_draw;
 
 $(document).ready(function(){
 // create map instance 
@@ -147,6 +148,7 @@ $(function(){
                         console.log("Ready");
                         $('#points_sum').contents()[0].textContent = data.points_sum;
                         $('#postal_code_sum').contents()[0].textContent = data.postal_code_sum;
+                        postal_list_to_draw = data.postal_code;
                         document.getElementById("postal_code").innerHTML = data.postal_code;
                         document.getElementById("postal_codes_popupbox").innerHTML = data.postal_code;
                         document.getElementById("info_radius").innerHTML = data.rad + "km";
@@ -488,7 +490,7 @@ var myStyle = {
     "opacity": 0.65
 };
 
-
+// draw area of postal codes
 $(function(){
     $("#poly").bind('click', function(){
             // show loading image
@@ -496,24 +498,17 @@ $(function(){
                 console.log('Sending data...');
                 $.ajax({
                     type: "GET",
+                    data: {
+                        "postal_list_to_draw": postal_list_to_draw,
+                    },
                     url: 'draw_polygon/',
                     contentType: 'application/json; charset=utf-8',
                     dataType: 'json',
                     success: function(data){
                         $('#loadingmessage').hide();
                         console.log("Ready");
+                        console.log(data.process_data);
                         let polygon = data.point_list;
-                        geojson_data = {
-                            "type": "FeatureCollection",
-                            "features": [{
-                                "type": "Feature",
-                                "properties": {},
-                                "geometry": {
-                                    "type": "Polygon",
-                                    "coordinates": []
-                                }
-                            }]
-                        };
                         // swaping places the lat with the lng
                         let arr = [];
                         polygon.forEach(function (item, index) {

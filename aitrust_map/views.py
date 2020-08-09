@@ -114,7 +114,7 @@ def process_loc(request):
         # building dictionary for JsonResponse
         data = {"postal_code": final_postal_string, "points_sum": points_sum, "postal_code_sum": postal_code_sum,
         "points_sum_up_10": points_sum_up_10, "postal_code_sum_up_10": postal_code_sum_up_10, "rad": rad, "rad_up_10": rad_up_10,
-        "difference_postal_num": difference_postal_num, "differene_points_num": differene_points_num}
+        "difference_postal_num": difference_postal_num, "differene_points_num": differene_points_num, "postal_list_no_repeats": postal_list_no_repeats}
         
     return JsonResponse(data)
 
@@ -128,9 +128,36 @@ def process_loc2(request):
         }
     return JsonResponse(data)
 
-
 def draw_polygon(request):
     if request.method == "GET":
+
+        postal_list_to_draw = request.GET.get('postal_list_to_draw')
+
+        # initialise mysql database connection
+        cursor  = connection.cursor()
+        
+        query  = "SELECT Lng, Lat, kodPocztowy FROM pomorskie WHERE kodPocztowy IN ("
+
+        query += postal_list_to_draw
+
+        query += ");"
+
+        # execute first query
+        cursor.execute(query)
+
+        # return mysql data from query
+        sql_data = cursor.fetchall()
+
+        colnames = ['Lng', 'Lat', 'kodPocztowy']
+        process_data = {}
+        for row in sql_data:
+            colindex = 0
+            for col in colnames:
+                if not col in process_data:
+                    process_data[col] = []
+                process_data[col].append(row[colindex])
+                colindex += 1
+
         # postal_code_to_draw = request.GET.get('postal_code_to_draw')
         listPts = ([15.413973422184, 51.0212037670241],
                   [15.4332214925837, 51.0799312750014],
@@ -165,7 +192,7 @@ def draw_polygon(request):
                   [15.4479149995378, 50.9848441966871])
         point_list = get_hull_points(listPts)
         data = {
-        "point_list": point_list
+        "point_list": point_list, "process_data": process_data
         }
     return JsonResponse(data)
 
