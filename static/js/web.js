@@ -496,10 +496,8 @@ $(function(){
                     success: function(data){
                         $('#loadingmessage').hide();
                         console.log("Ready");
-                        console.log(data);
                         let polygon = data.point_list;
-                        console.log(polygon);
-                        var geojson = {
+                        var geojson_data = {
                             "type": "FeatureCollection",
                             "features": [{
                                 "type": "Feature",
@@ -514,26 +512,15 @@ $(function(){
                         polygon.forEach(function (item, index) {
                             arr.push([item[1], item[0]]);
                         });
-                        console.log(arr);
-                        var postal_results = L.layerGroup().addTo(map);
-                        postal_results.clearLayers();
                         geojson.features[0].geometry.coordinates.push(arr);
-                        console.log(geojson.features);
-                        postal_results.addLayer(L.geoJson(geojson));
-                        var drawnItems2 = new L.FeatureGroup();
-                        var geoJsonGroup = L.geoJson(geojson).addTo(map);
-                        addNonGroupLayers(geoJsonGroup, drawnItems2);
-                        function addNonGroupLayers(sourceLayer, targetGroup) {
-                            if (sourceLayer instanceof L.LayerGroup) {
-                                sourceLayer.eachLayer(function (layer) {
-                                    addNonGroupLayers(layer, targetGroup);
-                                });
-                            } 
-                            else {
-                                targetGroup.addLayer(sourceLayer);
-                            }
-                        };
-                    }, 
+                        geojson_data.forEach(function(geojson_data) {
+                        var polygon = L.polygon(geojson_data.geometry.coordinates, {
+                            weight: 1,
+                            fillOpacity: 0.7,
+                            color: 'white',
+                            dashArray: '3'
+                        }).addTo(map);
+                    });
                     error: function (jqXhr, textStatus, errorThrown) {
                         $('#loadingmessage').hide();
                         console.log('ERROR');
