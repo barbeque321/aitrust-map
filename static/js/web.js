@@ -483,14 +483,6 @@ function closePopupbox(popupbox) {
 
 
 
-
-var myLayer = L.geoJSON().addTo(map);
-myLayer.addData(geojsonFeature);
-
-
-
-
-
 $(function(){
     $("#poly").bind('click', function(){
             // show loading image
