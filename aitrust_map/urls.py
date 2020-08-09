@@ -8,5 +8,5 @@ urlpatterns = [
     path('', views.azure_map_project, name='azure_map_project'),
     url(r'^process_loc/$', views.process_loc, name='process_loc'),
     url(r'^process_loc2/$', views.process_loc2, name='process_loc2'),
-  
+  	url(r'^draw_polygon/$', views.draw_polygon, name='draw_polygon'),
 ]

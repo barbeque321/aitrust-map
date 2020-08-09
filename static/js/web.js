@@ -1,8 +1,6 @@
 var latLngs = 0;
 var theRadius = 0;
 var theAdressInfo = 0;
-var detail = 'clamp fired';
-var clamp_event = new CustomEvent('clamp_event', { detail:detail });
 
 $(document).ready(function(){
 // create map instance 
@@ -482,6 +480,100 @@ function closePopupbox(popupbox) {
     popupbox.classList.remove('active');
     overlay.classList.remove('active');
 };
+
+
+
+
+
+
+
+
+
+
+$(function(){
+    $("#poly").bind('click', function(){
+            // show loading image
+            $('#loadingmessage').show();
+                console.log('Sending data...');
+                $.ajax({
+                    type: "GET",
+                    url: 'process_loc/',
+                    data: {
+                        "lat": latLngs.lat,
+                        "lng": latLngs.lng,
+                        "rad": theRadius,
+                    },
+                    contentType: 'application/json; charset=utf-8',
+                    dataType: 'json',
+                    success: function(data){
+                        $('#loadingmessage').hide();
+                        console.log("Ready");
+                        let polygon = data.point_list;
+                        let geojson = {
+                            "type": "FeatureCollection",
+                            "features": [{
+                                "type": "Feature",
+                                "properties": {},
+                                "geometry": {
+                                    "type": "Polygon",
+                                    "coordinates": []
+                                }
+                            }]
+                        };
+                        let arr = [];
+                        polygon.forEach(function (item, index) {
+                            arr.push([item[1], item[0]]);
+                        });
+                        geojson.features[0].geometry.coordinates.push(arr);
+                        var drawnItems2 = new L.FeatureGroup();
+                        var geoJsonGroup = L.geoJson(geojson).addTo(map);
+                        addNonGroupLayers(geoJsonGroup, drawnItems2);
+                        addNonGroupLayers(sourceLayer, targetGroup) {
+                        if (sourceLayer instanceof L.LayerGroup) {
+                            sourceLayer.eachLayer(function (layer) {
+                                addNonGroupLayers(layer, targetGroup);
+                            });
+                        } else {
+                            targetGroup.addLayer(sourceLayer);
+                        }
+                    }
+                    }, 
+                    error: function (jqXhr, textStatus, errorThrown) {
+                        $('#loadingmessage').hide();
+                        console.log('ERROR');
+                        console.log(jqXhr);
+                    },
+                });
+    });
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 });
