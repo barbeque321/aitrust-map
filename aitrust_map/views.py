@@ -133,7 +133,7 @@ def draw_polygon(request):
 
         postal_list = request.GET.get('postal_list_to_draw')
 
-        postal_li = list(postal_list.split(",")) 
+        postal_li = list(postal_list.split(", ")) 
 
         postal_str = ""
 
