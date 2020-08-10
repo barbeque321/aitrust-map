@@ -224,17 +224,14 @@ def draw_polygon(request):
 
 
         hull_points_dict_list = {}
-        key_list = []
         for key in lat_lng_list:
-            name_of_key = str(key)
-            key_list.append(name_of_key)
             points = get_hull_points(lat_lng_list[key])
             hull_points_dict_list[key] = []
             hull_points_dict_list[key].append(points) 
 
         point_list = get_hull_points(listPts)
         data = {
-        "point_list": point_list, "process_data": process_data, "postal_list": lat_lng_list, "postal_str": key_list
+        "point_list": point_list, "process_data": process_data, "postal_list": lat_lng_list, "postal_str": hull_points_dict_list
         }
     return JsonResponse(data)
 
