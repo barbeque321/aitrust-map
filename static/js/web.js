@@ -514,10 +514,10 @@ $(function(){
                             polygonus = postal_data[key];
                             console.log(polygonus);
                             let arr = [];
-                            var innerArrayLength = polygonus.length;
+                            var innerArrayLength = polygonus[0].length;
                             // loop the inner array
                             for (let j = 0; j < innerArrayLength; j++) {
-                                    arr.push(polygonus[j][1], polygonus[j][0]); 
+                                    arr.push(polygonus[0][j][1], polygonus[j][0]); 
                                     }
                             
                             console.log(arr);
