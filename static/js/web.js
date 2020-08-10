@@ -510,9 +510,11 @@ $(function(){
                         var postal_data = data.postal_str
                         if(Object.keys(postal_data).length) {
                             Object.keys(postal_data).forEach(key => {
-                            let polygon = postal_data[key];
+                            var polygonus;
+                            polygonus = postal_data[key];
+                            console.log(polygonus);
                             let arr = [];
-                            polygon.forEach(function (item, index) {
+                            polygonus.forEach(function (item, index) {
                             arr.push([item[1], item[0]]);
                             });
                             console.log(arr);
