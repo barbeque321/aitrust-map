@@ -515,7 +515,7 @@ $(function(){
                             console.log(polygonus);
                             let arr = [];
                             polygonus.forEach(function (element, index, array) {
-                            arr.push([element[1], element[0]);
+                            arr.push(element[1], element[0]);
                             });
                             console.log(arr);
                             var poly = L.polygon(arr).addTo(map);
