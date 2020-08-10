@@ -167,7 +167,10 @@ def draw_polygon(request):
                 process_data[col].append(row[colindex])
                 colindex += 1
 
-        lat_list = process_data['Lat']
+        lat_list = []
+        lat_list = lat_list.append(process_data['Lng'][2])
+        lat_list = lat_list.append(process_data['Lat'][2])
+
 
         # pseudocode
         # get Lat[n], Lng[n], kodPocztowy[n]
