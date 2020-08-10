@@ -507,23 +507,17 @@ $(function(){
                     success: function(data){
                         $('#loadingmessage').hide();
                         console.log("Ready");
-                        console.log(data.process_data);
-                        console.log(data.postal_list);
-                        console.log(data.postal_str);
                         var postal_data = data.postal_str
                         if(Object.keys(postal_data).length) {
                             Object.keys(postal_data).forEach(key => {
-                            console.log("\n" + key + ": " + postal_data[key]);
+                            let polygon = postal_data[key];
+                            let arr = [];
+                            polygon.forEach(function (item, index) {
+                            arr.push([item[1], item[0]]);
+                            });
+                            var poly = L.polygon(arr).addTo(map);
                             });
                         }
-                        let polygon2 = data.postal_str;
-                        let polygon = data.point_list;
-                        // swaping places the lat with the lng
-                        let arr = [];
-                        polygon.forEach(function (item, index) {
-                            arr.push([item[1], item[0]]);
-                        });
-                        var poly = L.polygon(arr).addTo(map);
                     },
                     error: function (jqXhr, textStatus, errorThrown) {
                         $('#loadingmessage').hide();
