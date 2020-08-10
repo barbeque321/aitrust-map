@@ -514,9 +514,14 @@ $(function(){
                             polygonus = postal_data[key];
                             console.log(polygonus);
                             let arr = [];
-                            polygonus.forEach(function (element, index, array) {
-                            arr.push(element[1], element[0]);
-                            });
+                            for (let i = 0; i < polygonus.length; i++) {
+                                // get the size of the inner array
+                                var innerArrayLength = polygonus[i].length;
+                                // loop the inner array
+                                for (let j = 0; j < innerArrayLength; j++) {
+                                    arr.push(polygonus[1], polygonus[0]); 
+                                    }
+                            }
                             console.log(arr);
                             var poly = L.polygon(arr).addTo(map);
                             });
