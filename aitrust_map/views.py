@@ -186,6 +186,9 @@ def draw_polygon(request):
                 new_lat = process_data['Lng'][index]
                 new_lng = process_data['Lat'][index]
                 lat_lng_list[new_postal].append([new_lat, new_lng])
+
+
+
             
         listPts = ([15.413973422184, 51.0212037670241],
                   [15.4332214925837, 51.0799312750014],
@@ -219,9 +222,15 @@ def draw_polygon(request):
                   [15.4457446017111, 50.9839807988255],
                   [15.4479149995378, 50.9848441966871])
 
+
+        hull_points_dict_list = {}
+        for key in lat_lng_list:
+            points = get_hull_points(lat_lng_list[key])
+            hull_points_dict_list[key].append(points) 
+
         point_list = get_hull_points(listPts)
         data = {
-        "point_list": point_list, "process_data": process_data, "postal_list": lat_lng_list, "postal_str": postal_list_arr
+        "point_list": point_list, "process_data": process_data, "postal_list": lat_lng_list, "postal_str": hull_points_dict_list
         }
     return JsonResponse(data)
 
