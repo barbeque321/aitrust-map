@@ -168,8 +168,10 @@ def draw_polygon(request):
                 colindex += 1
 
         lat_list = []
-        lat_list = lat_list.append(process_data['Lng'][2])
-        lat_list = lat_list.append(process_data['Lat'][2])
+        new_lat = process_data['Lng'][2]
+        new_lng = process_data['Lat'][2]
+        lat_list.append(new_lat)
+        lat_list.append(new_lng)
 
 
         # pseudocode
