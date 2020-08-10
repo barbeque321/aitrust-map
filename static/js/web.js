@@ -519,7 +519,7 @@ $(function(){
                                 var innerArrayLength = polygonus[i].length;
                                 // loop the inner array
                                 for (let j = 0; j < innerArrayLength; j++) {
-                                    arr.push(polygonus[1], polygonus[0]); 
+                                    arr.push(polygonus[j][1], polygonus[j][0]); 
                                     }
                             }
                             console.log(arr);
