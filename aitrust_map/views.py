@@ -233,7 +233,7 @@ def draw_polygon(request):
 
         point_list = get_hull_points(listPts)
         data = {
-        "point_list": point_list, "process_data": process_data, "postal_list": lat_lng_list.type(), "postal_str": key_list
+        "point_list": point_list, "process_data": process_data, "postal_list": lat_lng_list, "postal_str": key_list
         }
     return JsonResponse(data)
 
