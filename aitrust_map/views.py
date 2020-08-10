@@ -167,17 +167,33 @@ def draw_polygon(request):
                 process_data[col].append(row[colindex])
                 colindex += 1
 
-        lat_list = []
+
         postal_list_arr = process_data['kodPocztowy']
-        index = len(postal_list_arr)
-        new_lat = process_data['Lng'][2]
-        new_lng = process_data['Lat'][2]
-        lat_list.append([new_lat, new_lng])
-        new_lat = process_data['Lng'][3]
-        new_lng = process_data['Lat'][3]
-        lat_list.append([new_lat, new_lng])
+        total_index = len(postal_list_arr)
+
+        lat_lng_list = {}
+        for num in range(0,total_index):
+            index = num
+            actual_postal = []
+            new_postal = process_data['kodPocztowy'][index]     
+            if new_postal in actual_postal:
+                new_lat = process_data['Lng'][index]
+                new_lng = process_data['Lat'][index]
+                lat_lng_list[new_postal].append([new_lat, new_lng])
+            else:
+                lat_lng_list[new_postal] = []
+                actual_postal.append(new_postal)
+                new_lat = process_data['Lng'][index]
+                new_lng = process_data['Lat'][index]
+                lat_lng_list[new_postal].append([new_lat, new_lng])
+            
+
 
         # pseudocode
+        # 'Lng' 'Lat' 'kodPocztowy'
+        #  []    []        []
+        #  []    []        []
+        #  []    []        []
         # get Lat[n], Lng[n], kodPocztowy[n]
         # ListOfKeys = kodPocztowy[n]: ([Lat[n], Lng[n]], )
         # If kodPocztowy[n+1] == kodPocztowy[n]
@@ -219,7 +235,7 @@ def draw_polygon(request):
                   [15.4479149995378, 50.9848441966871])
         point_list = get_hull_points(listPts)
         data = {
-        "point_list": point_list, "process_data": process_data, "postal_list": lat_list, "postal_str": listPts
+        "point_list": point_list, "process_data": process_data, "postal_list": lat_lng_list, "postal_str": listPts
         }
     return JsonResponse(data)
 
