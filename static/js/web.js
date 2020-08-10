@@ -509,7 +509,9 @@ $(function(){
                         console.log("Ready");
                         console.log(data.process_data);
                         console.log(data.postal_list);
-                        console.log(data.postal_st);
+                        console.log(data.postal_str);
+                        console.log('postal_code: ', data.postal_str[0])
+                        let polygon2 = data.postal_str;
                         let polygon = data.point_list;
                         // swaping places the lat with the lng
                         let arr = [];
