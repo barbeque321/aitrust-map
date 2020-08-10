@@ -218,9 +218,10 @@ def draw_polygon(request):
                   [15.4455943752375, 50.9835381294996],
                   [15.4457446017111, 50.9839807988255],
                   [15.4479149995378, 50.9848441966871])
+        
         point_list = get_hull_points(listPts)
         data = {
-        "point_list": point_list, "process_data": process_data, "postal_list": lat_lng_list, "postal_str": listPts
+        "point_list": point_list, "process_data": process_data, "postal_list": lat_lng_list, "postal_str": postal_list_arr
         }
     return JsonResponse(data)
 
