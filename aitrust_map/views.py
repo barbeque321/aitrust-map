@@ -167,6 +167,16 @@ def draw_polygon(request):
                 process_data[col].append(row[colindex])
                 colindex += 1
 
+        lat_list = process_data['Lat']
+
+        # pseudocode
+        # get Lat[n], Lng[n], kodPocztowy[n]
+        # ListOfKeys = kodPocztowy[n]: ([Lat[n], Lng[n]], )
+        # If kodPocztowy[n+1] == kodPocztowy[n]
+        # kodPocztowy[0]: append [Lat[n+1], Lng[n+1]]
+        # else
+        # kodPocztowy[n+1]: [Lat[n+1], Lng[n+1]]
+
         # postal_code_to_draw = request.GET.get('postal_code_to_draw')
         listPts = ([15.413973422184, 51.0212037670241],
                   [15.4332214925837, 51.0799312750014],
@@ -201,7 +211,7 @@ def draw_polygon(request):
                   [15.4479149995378, 50.9848441966871])
         point_list = get_hull_points(listPts)
         data = {
-        "point_list": point_list, "process_data": process_data, "postal_list": postal_list, "postal_str": postal_str
+        "point_list": point_list, "process_data": process_data, "postal_list": lat_list, "postal_str": postal_str
         }
     return JsonResponse(data)
 
