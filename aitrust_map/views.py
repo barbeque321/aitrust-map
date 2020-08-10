@@ -172,9 +172,9 @@ def draw_polygon(request):
         total_index = len(postal_list_arr)
 
         lat_lng_list = {}
+        actual_postal = []
         for num in range(0,total_index):
             index = num
-            actual_postal = []
             new_postal = process_data['kodPocztowy'][index]     
             if new_postal in actual_postal:
                 new_lat = process_data['Lng'][index]
