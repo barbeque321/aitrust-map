@@ -510,7 +510,12 @@ $(function(){
                         console.log(data.process_data);
                         console.log(data.postal_list);
                         console.log(data.postal_str);
-                        console.log('postal_code: ', data.postal_str[0])
+                        var postal_data = data.postal_str
+                        if(Object.keys(postal_data).length) {
+                            Object.keys(postal_data).forEach(key => {
+                            console.log("\n" + key + ": " + postal_data[key]);
+                            });
+                        }
                         let polygon2 = data.postal_str;
                         let polygon = data.point_list;
                         // swaping places the lat with the lng
