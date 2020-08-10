@@ -226,7 +226,8 @@ def draw_polygon(request):
         hull_points_dict_list = {}
         key_list = []
         for key in lat_lng_list:
-            key_list.append(key)
+            name_of_key = str(key)
+            key_list.append(name_of_key)
             points = get_hull_points(lat_lng_list[key])
             hull_points_dict_list[key] = []
             hull_points_dict_list[key].append(points) 
