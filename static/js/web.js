@@ -511,12 +511,11 @@ $(function(){
                         if(Object.keys(postal_data).length) {
                             Object.keys(postal_data).forEach(key => {
                             let polygon = postal_data[key];
-                            console.log(polygon);
                             let arr = [];
-                            console.log(arr);
                             polygon.forEach(function (item, index) {
                             arr.push([item[1], item[0]]);
                             });
+                            console.log(arr);
                             var poly = L.polygon(arr).addTo(map);
                             });
                         }
