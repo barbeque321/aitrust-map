@@ -187,21 +187,6 @@ def draw_polygon(request):
                 new_lng = process_data['Lat'][index]
                 lat_lng_list[new_postal].append([new_lat, new_lng])
             
-
-
-        # pseudocode
-        # 'Lng' 'Lat' 'kodPocztowy'
-        #  []    []        []
-        #  []    []        []
-        #  []    []        []
-        # get Lat[n], Lng[n], kodPocztowy[n]
-        # ListOfKeys = kodPocztowy[n]: ([Lat[n], Lng[n]], )
-        # If kodPocztowy[n+1] == kodPocztowy[n]
-        # kodPocztowy[0]: append [Lat[n+1], Lng[n+1]]
-        # else
-        # kodPocztowy[n+1]: [Lat[n+1], Lng[n+1]]
-
-
         listPts = ([15.413973422184, 51.0212037670241],
                   [15.4332214925837, 51.0799312750014],
                   [15.4050494551369, 51.0344862705881],
