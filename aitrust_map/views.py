@@ -455,7 +455,7 @@ def draw_polygon_better(request):
             if new_postal in actual_postal:
                 new_lat = process_data['Lng'][index]
                 new_lng = process_data['Lat'][index]
-                lat_lng_list[new_postal].append([new_lat, new_lng])
+                lat_lng_list[new_postal].append((new_lat, new_lng))
             else:
                 lat_lng_list[new_postal] = []
                 actual_postal.append(new_postal)
@@ -465,9 +465,8 @@ def draw_polygon_better(request):
 
         alfa_shape_points_dict_list = {}
         for key in lat_lng_list:
-            actual_tuple = lat_lng_list[key]
-            actual_list = list(actual_tuple)
-            points = get_alfa_shape_points(actual_list)
+            actual_tuples_list = lat_lng_list[key]
+            points = get_alfa_shape_points(actual_tuples_list)
             alfa_shape_points_dict_list[key] = []
             alfa_shape_points_dict_list[key].append(points) 
 
