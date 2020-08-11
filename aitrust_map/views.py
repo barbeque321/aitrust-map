@@ -10,6 +10,7 @@ from scipy.spatial import Delaunay
 import networkx as nx
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+params = [0.75]
 
 def azure_map_project(request):
     return render(request, 'aitrust_map.html', {})
@@ -348,7 +349,7 @@ def shape_to_some_polygons(shape):
 # #           ALPAHA SHAPE MAIN FUNCTION            #
 # ###################################################
 
-def get_alfa_shape_points(pts,alfas=0.75):
+def get_alfa_shape_points(pts, alfas=1):
     tri_ind = [(0,1),(1,2),(2,0)]
     tri = Delaunay(pts)
     lenghts = {}
