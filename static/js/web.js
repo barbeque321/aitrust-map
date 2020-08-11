@@ -491,6 +491,54 @@ var myStyle = {
 };
 
 // draw area of postal codes
+// $(function(){
+//     $("#poly").bind('click', function(){
+//             // show loading image
+//             $('#loadingmessage').show();
+//                 console.log('Sending data...');
+//                 $.ajax({
+//                     type: "GET",
+//                     data: {
+//                         "postal_list_to_draw": postal_list_to_draw,
+//                     },
+//                     url: 'draw_polygon/',
+//                     contentType: 'application/json; charset=utf-8',
+//                     dataType: 'json',
+//                     success: function(data){
+//                         $('#loadingmessage').hide();
+//                         console.log("Ready");
+//                         var postal_data = data.postal_str
+//                         if(Object.keys(postal_data).length) {
+//                             Object.keys(postal_data).forEach(key => {
+//                             var polygonus;
+//                             polygonus = postal_data[key];
+//                             console.log(polygonus);
+//                             let arr = [];
+//                             var innerArrayLength = polygonus[0].length;
+//                             // loop the inner array
+//                             for (let j = 0; j < innerArrayLength; j++) {
+//                                     arr.push([polygonus[0][j][1], polygonus[0][j][0]]); 
+//                                     }
+                            
+//                             console.log(arr);
+//                             var poly = L.polygon(arr).addTo(map);
+//                             });
+//                         }
+//                     },
+//                     error: function (jqXhr, textStatus, errorThrown) {
+//                         $('#loadingmessage').hide();
+//                         console.log('ERROR');
+//                         console.log(jqXhr);
+//                     }
+//                 });
+//     });
+// });
+
+
+
+
+
+// draw area of postal codes
 $(function(){
     $("#poly").bind('click', function(){
             // show loading image
@@ -501,29 +549,14 @@ $(function(){
                     data: {
                         "postal_list_to_draw": postal_list_to_draw,
                     },
-                    url: 'draw_polygon/',
+                    url: 'draw_polygon_better/',
                     contentType: 'application/json; charset=utf-8',
                     dataType: 'json',
                     success: function(data){
                         $('#loadingmessage').hide();
                         console.log("Ready");
-                        var postal_data = data.postal_str
-                        if(Object.keys(postal_data).length) {
-                            Object.keys(postal_data).forEach(key => {
-                            var polygonus;
-                            polygonus = postal_data[key];
-                            console.log(polygonus);
-                            let arr = [];
-                            var innerArrayLength = polygonus[0].length;
-                            // loop the inner array
-                            for (let j = 0; j < innerArrayLength; j++) {
-                                    arr.push([polygonus[0][j][1], polygonus[0][j][0]]); 
-                                    }
-                            
-                            console.log(arr);
-                            var poly = L.polygon(arr).addTo(map);
-                            });
-                        }
+                        console.log(data.postal_str)
+                        
                     },
                     error: function (jqXhr, textStatus, errorThrown) {
                         $('#loadingmessage').hide();
@@ -533,12 +566,6 @@ $(function(){
                 });
     });
 });
-
-
-
-
-
-
 
 
 

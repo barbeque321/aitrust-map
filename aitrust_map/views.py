@@ -5,6 +5,9 @@ import os
 import json
 from django.db import connection
 import math
+import numpy as np
+from scipy.spatial import Delaunay
+import networkx as nx
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -167,7 +170,6 @@ def draw_polygon(request):
                 process_data[col].append(row[colindex])
                 colindex += 1
 
-
         postal_list_arr = process_data['kodPocztowy']
         total_index = len(postal_list_arr)
 
@@ -187,49 +189,12 @@ def draw_polygon(request):
                 new_lng = process_data['Lat'][index]
                 lat_lng_list[new_postal].append([new_lat, new_lng])
 
-
-
-            
-        listPts = ([15.413973422184, 51.0212037670241],
-                  [15.4332214925837, 51.0799312750014],
-                  [15.4050494551369, 51.0344862705881],
-                  [15.4414447200904, 51.044045040425],
-                  [15.4194705970584, 51.0320655974664],
-                  [15.4199662699941, 51.0316117568038],
-                  [15.433644655413, 51.0294399180875],
-                  [15.4385066561904, 51.0805483023349],
-                  [15.4132619454792, 51.0285069795709],
-                  [15.4576386554641, 50.9867400945641],
-                  [15.4220407377152, 51.0316597560996],
-                  [15.4014502254017, 51.0299148164245],
-                  [15.4221420936325, 51.0619805783075],
-                  [15.4151390895601, 51.0225180901085],
-                  [15.4198609882746, 51.0178453391329],
-                  [15.4197830789713, 51.0185619946637],
-                  [15.4201531445335, 51.0189519170405],
-                  [15.4248930331689, 51.0341888130886],
-                  [15.4345825939314, 51.0386060629985],
-                  [15.3904915874004, 51.0186226505184],
-                  [15.3986676965896, 51.0057241223047],
-                  [15.4352049186695, 51.0476605016435],
-                  [15.4394653824091, 51.021500652971],
-                  [15.4399585048548, 50.9858833271328],
-                  [15.4221460128028, 51.058306470713],
-                  [15.4004136699689, 51.0311436908024],
-                  [15.4064553007771, 51.0278138175592],
-                  [15.408985526436, 51.0288722422194],
-                  [15.4455943752375, 50.9835381294996],
-                  [15.4457446017111, 50.9839807988255],
-                  [15.4479149995378, 50.9848441966871])
-
-
         hull_points_dict_list = {}
         for key in lat_lng_list:
             points = get_hull_points(lat_lng_list[key])
             hull_points_dict_list[key] = []
             hull_points_dict_list[key].append(points) 
 
-        point_list = get_hull_points(listPts)
         data = {
         "point_list": point_list, "process_data": process_data, "postal_list": lat_lng_list, "postal_str": hull_points_dict_list
         }
@@ -305,6 +270,220 @@ def isCCW(start, end, point):
         return True
     else:
         return False
+
+
+
+
+# ###################################################
+# # HELPER FUNCTIONS FOR ALPAHA SHAPE MAIN FUNCTION #
+# ###################################################
+
+def area_of_polygon_xy(x, y):
+    """Calculates the area of an arbitrary polygon given its verticies"""
+    area = 0.0
+    for i in range(-1, len(x)-1):
+        area += x[i] * (y[i+1] - y[i-1])
+    return abs(area) / 2.0
+
+def area_of_polygon_crd(cordinates):
+    """Calculates the area of an arbitrary polygon given its verticies"""
+    x = [v[0] for v in cordinates]
+    y = [v[1] for v in cordinates]
+    return area_of_polygon_xy(x,y)
+
+def area_of_polygon(**kwargs):
+    if 'x' in kwargs and 'y' in kwargs:
+        x = kwargs['x']
+        y = kwargs['y']
+        return area_of_polygon_xy(x, y)
+
+    if 'coordinates' in kwargs:
+        cordinates = kwargs['coordinates']
+        return area_of_polygon_crd(cordinates)
+
+    print("Wrong parameters")
+    return None
+
+def length_of_way(cordinates):
+    """Length of the way"""
+    if len(cordinates)<2:
+        return 0
+    leng = 0
+    for i in range(1,len(cordinates)):
+        crd = cordinates
+        dist = distance(crd[i-1],crd[i-1])
+        leng = leng + dist
+    return leng
+
+def sqrt_sum(a, b):
+    x = (a[0]-b[0])
+    y = (a[1]-b[1])
+    return np.sqrt(x*x+y*y)
+
+def shape_to_some_polygons(shape):
+    G = nx.Graph()
+    allnodes = set()
+    for line in shape:
+        G.add_nodes_from(line)
+        G.add_edge(line[0], line[1])
+        allnodes.add(line[0])
+        allnodes.add(line[1])
+
+    result = []
+
+    while allnodes:
+        node = allnodes.pop()
+        new_node = next(iter(G[node]), None)
+        if not new_node: continue
+
+        G.remove_edge(node, new_node)
+        temp = nx.shortest_path(G, node, new_node)
+        for j,t in enumerate(temp):
+            if t in allnodes:
+                allnodes.remove(t)
+        result.append(temp)
+    return result
+
+# ###################################################
+# #           ALPAHA SHAPE MAIN FUNCTION            #
+# ###################################################
+
+def get_alfa_shape_points(pts,alfas=0.75):
+    tri_ind = [(0,1),(1,2),(2,0)]
+    tri = Delaunay(pts)
+    lenghts = {}
+    for s in tri.simplices:
+        for ind in tri_ind:
+            a = pts[s[ind[0]]]
+            b = pts[s[ind[1]]]
+            line = (a, b)
+            lenghts[line] = sqrt_sum(a, b)
+
+    ls = sorted(lenghts.values())
+
+    mean_length = np.mean(ls)
+    mean_length_index = ls.index(next(filter(lambda x: x>=mean_length, ls)))
+    magic_numbers = [ls[i] for i in range(mean_length_index, len(ls))]
+    magic_numbers[0] = 0
+    sum_magic = np.sum(magic_numbers)
+    for i in range(2, len(magic_numbers)):
+        magic_numbers[i] += magic_numbers[i-1]
+    magic_numbers = [m /sum_magic for m in magic_numbers]
+
+    rez = []
+    for alfa in alfas:
+        i = magic_numbers.index(next(filter(lambda z: z > alfa, magic_numbers), magic_numbers[-1]))
+        av_length = ls[mean_length_index+i]
+
+        lines = {}
+
+        for s in tri.simplices:
+            used = True
+            for ind in tri_ind:
+                if lenghts[(pts[s[ind[0]]], pts[s[ind[1]]])] > av_length:
+                    used = False
+                    break
+            if used == False: continue
+
+            for ind in tri_ind:
+                i, j = s[ind[0]], s[ind[1]]
+                line = (pts[min(i, j)], pts[max(i, j)])
+                lines[line] = line in lines
+
+        good_lines = []
+        for v in lines:
+            if not lines[v]:
+                good_lines.append(v)
+
+        result = shape_to_some_polygons(good_lines)
+        result.sort(key=area_of_polygon_crd, reverse=True)
+        rez.append(result)
+    return rez
+
+
+# ##################################################
+# #        DJANGO REQUEST FOR ALPHA SHAPES         #
+# ##################################################
+
+def draw_polygon_better(request):
+    if request.method == "GET":
+
+        postal_list = request.GET.get('postal_list_to_draw')
+
+        postal_li = list(postal_list.split(", ")) 
+
+        postal_str = ""
+
+        for elem in postal_li:
+            postal_str += '"' + elem + '",'
+
+        postal_str = postal_str[:-1]
+
+        # initialise mysql database connection
+        cursor  = connection.cursor()
+        
+        query  = "SELECT Lng, Lat, kodPocztowy FROM pomorskie WHERE kodPocztowy IN ("
+
+        query += postal_str
+
+        query += ");"
+
+        # execute first query
+        cursor.execute(query)
+
+        # return mysql data from query
+        sql_data = cursor.fetchall()
+
+        colnames = ['Lng', 'Lat', 'kodPocztowy']
+        process_data = {}
+        for row in sql_data:
+            colindex = 0
+            for col in colnames:
+                if not col in process_data:
+                    process_data[col] = []
+                process_data[col].append(row[colindex])
+                colindex += 1
+
+        postal_list_arr = process_data['kodPocztowy']
+        total_index = len(postal_list_arr)
+
+        lat_lng_list = {}   
+        actual_postal = []
+        for num in range(0,total_index):
+            index = num
+            new_postal = process_data['kodPocztowy'][index]     
+            if new_postal in actual_postal:
+                new_lat = process_data['Lng'][index]
+                new_lng = process_data['Lat'][index]
+                lat_lng_list[new_postal].append([new_lat, new_lng])
+            else:
+                lat_lng_list[new_postal] = []
+                actual_postal.append(new_postal)
+                new_lat = process_data['Lng'][index]
+                new_lng = process_data['Lat'][index]
+                lat_lng_list[new_postal].append([new_lat, new_lng])
+
+        alfa_shape_points_dict_list = {}
+        for key in lat_lng_list:
+            np_array_points = np.array(lat_lng_list[key])
+            points = get_alfa_shape_points(np_array_points)
+            alfa_shape_points_dict_list[key] = []
+            alfa_shape_points_dict_list[key].append(points) 
+
+        data = {
+        "point_list": point_list, "process_data": process_data, "postal_list": lat_lng_list, "postal_str": alfa_shape_points_dict_list
+        }
+    return JsonResponse(data)
+
+
+
+
+
+
+
+
+
+
 
 
 
