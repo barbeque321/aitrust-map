@@ -461,7 +461,7 @@ def draw_polygon_better(request):
                 actual_postal.append(new_postal)
                 new_lat = process_data['Lng'][index]
                 new_lng = process_data['Lat'][index]
-                lat_lng_list[new_postal].append([new_lat, new_lng])
+                lat_lng_list[new_postal].append((new_lat, new_lng))
 
         alfa_shape_points_dict_list = {}
         for key in lat_lng_list:
