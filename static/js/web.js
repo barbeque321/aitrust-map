@@ -558,6 +558,22 @@ $(function(){
                         console.log(data.postal_str)
                         console.log(data.postal_list)
                         console.log(data.points)
+                        if(Object.keys(postal_data).length) {
+                            Object.keys(postal_data).forEach(key => {
+                            var polygonus;
+                            polygonus = postal_data[key];
+                            console.log(polygonus);
+                            let arr = [];
+                            var innerArrayLength = polygonus[0].length;
+                            // loop the inner array
+                            for (let j = 0; j < innerArrayLength; j++) {
+                                    arr.push([polygonus[0][0][j][1], polygonus[0][0][j][0]]); 
+                                    }
+                            
+                            console.log(arr);
+                            var poly = L.polygon(arr).addTo(map);
+                            });
+                        }
                     },
                     error: function (jqXhr, textStatus, errorThrown) {
                         $('#loadingmessage').hide();
