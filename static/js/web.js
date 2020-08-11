@@ -556,8 +556,8 @@ $(function(){
                         $('#loadingmessage').hide();
                         console.log("Ready");
                         console.log(data.postal_str)
-                        console.log(data.np_postal_list)
-                        console.log(data.np_array_points)
+                        console.log(data.postal_list)
+                        console.log(data.points)
                     },
                     error: function (jqXhr, textStatus, errorThrown) {
                         $('#loadingmessage').hide();
