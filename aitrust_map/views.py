@@ -462,14 +462,44 @@ def draw_polygon_better(request):
                 new_lat = process_data['Lng'][index]
                 new_lng = process_data['Lat'][index]
                 lat_lng_list[new_postal].append([new_lat, new_lng])
-
+        listPts = ([15.413973422184, 51.0212037670241],
+          [15.4332214925837, 51.0799312750014],
+          [15.4050494551369, 51.0344862705881],
+          [15.4414447200904, 51.044045040425],
+          [15.4194705970584, 51.0320655974664],
+          [15.4199662699941, 51.0316117568038],
+          [15.433644655413, 51.0294399180875],
+          [15.4385066561904, 51.0805483023349],
+          [15.4132619454792, 51.0285069795709],
+          [15.4576386554641, 50.9867400945641],
+          [15.4220407377152, 51.0316597560996],
+          [15.4014502254017, 51.0299148164245],
+          [15.4221420936325, 51.0619805783075],
+          [15.4151390895601, 51.0225180901085],
+          [15.4198609882746, 51.0178453391329],
+          [15.4197830789713, 51.0185619946637],
+          [15.4201531445335, 51.0189519170405],
+          [15.4248930331689, 51.0341888130886],
+          [15.4345825939314, 51.0386060629985],
+          [15.3904915874004, 51.0186226505184],
+          [15.3986676965896, 51.0057241223047],
+          [15.4352049186695, 51.0476605016435],
+          [15.4394653824091, 51.021500652971],
+          [15.4399585048548, 50.9858833271328],
+          [15.4221460128028, 51.058306470713],
+          [15.4004136699689, 51.0311436908024],
+          [15.4064553007771, 51.0278138175592],
+          [15.408985526436, 51.0288722422194],
+          [15.4455943752375, 50.9835381294996],
+          [15.4457446017111, 50.9839807988255],
+          [15.4479149995378, 50.9848441966871])
         alfa_shape_points_dict_list = {}
-        for key in lat_lng_list:
-            actual_list = lat_lng_list[key]
-            np_array_points = hash(tuple(np.array(actual_list)))
-            points = get_alfa_shape_points(np_array_points)
-            alfa_shape_points_dict_list[key] = []
-            alfa_shape_points_dict_list[key].append(points) 
+        # for key in lat_lng_list:
+        #     actual_list = lat_lng_list[key]
+        np_array_points = np.array(listPts)
+        points = get_alfa_shape_points(np_array_points)
+        alfa_shape_points_dict_list[key] = []
+        alfa_shape_points_dict_list[key].append(points) 
 
         data = {
         "point_list": point_list, "process_data": process_data, "postal_list": lat_lng_list, "postal_str": alfa_shape_points_dict_list, "np_array_points": np_array_points
