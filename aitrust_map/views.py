@@ -467,7 +467,7 @@ def draw_polygon_better(request):
         alfa_shape_points_dict_list = {}
         for key in lat_lng_list:
             actual_tuples_list = lat_lng_list[key]
-            points = get_alfa_shape_points(actual_tuples_list)
+            points = get_alfa_shape_points(actual_tuples_list, alfas=params)
             alfa_shape_points_dict_list[key] = []
             alfa_shape_points_dict_list[key].append(points) 
 
