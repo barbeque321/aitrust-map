@@ -497,12 +497,12 @@ def draw_polygon_better(request):
             new_lat = process_data['Lng'][index]
             new_lng = process_data['Lat'][index]  
             if new_postal in actual_postal:
-                if distance(lat_center, lng_center, new_lat, new_lng, rad):
+                if distance(lat_center, lng_center, new_lng, new_lat, rad):
                     lat_lng_list[new_postal].append([new_lat, new_lng])
                 else:
                     pass
             else:
-                if distance(lat_center, lng_center, new_lat, new_lng, rad):
+                if distance(lat_center, lng_center, new_lng, new_lat, rad):
                     lat_lng_list[new_postal] = []
                     actual_postal.append(new_postal)
                     lat_lng_list[new_postal].append([new_lat, new_lng])
