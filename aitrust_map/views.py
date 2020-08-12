@@ -15,8 +15,7 @@ params = [0.75]
 def azure_map_project(request):
     return render(request, 'aitrust_map.html', {})
 
-def in_radius(c_x, c_y, r, x, y):
-    return hypot(c_x-x, c_y-y) <= r
+
 
 def process_loc(request):
     if request.method == "GET":
@@ -135,6 +134,14 @@ def process_loc2(request):
         }
     return JsonResponse(data)
 
+
+
+
+# ###################################################
+# #      DJANGO REQUEST FOR QUICK HULL SHAPE        #
+# ###################################################
+
+
 def draw_polygon(request):
     if request.method == "GET":
 
@@ -203,6 +210,11 @@ def draw_polygon(request):
         "point_list": point_list, "process_data": process_data, "postal_list": lat_lng_list, "postal_str": hull_points_dict_list
         }
     return JsonResponse(data)
+
+
+# ###################################################
+# #       FUNCTIONS FOR QUICK HULL ALGORITHM        #
+# ###################################################
 
 # main execution body of getting quickhall points set for polygon
 def get_hull_points(listPts):
@@ -277,10 +289,13 @@ def isCCW(start, end, point):
 
 
 
-
 # ###################################################
 # # HELPER FUNCTIONS FOR ALPAHA SHAPE MAIN FUNCTION #
 # ###################################################
+
+# check if point is in some radius
+def in_radius(c_x, c_y, r, x, y):
+    return hypot(c_x-x, c_y-y) <= r
 
 def area_of_polygon_xy(x, y):
     """Calculates the area of an arbitrary polygon given its verticies"""
@@ -415,12 +430,12 @@ def draw_polygon_better(request):
         postal_list = request.GET.get('postal_list_to_draw')
         lat_center = request.GET.get('lat') 
         lng_center = request.GET.get('lng') 
-        lat_center = str(lat)
-        lng_center = str(lng)
-        lat_center = lat[:9] # unifying the data 
-        lng_center = lng[:9] # unifying the data 
-        lat_center = float(lat)
-        lng_center = float(lng)
+        lat_center = str(lat_center)
+        lng_center = str(lng_center)
+        lat_center = lat_center [:9] # unifying the data 
+        lng_center = lng_center[:9] # unifying the data 
+        lat_center = float(lat_center)
+        lng_center = float(lng_center)
         rad = request.GET.get('rad')
         rad = round(float(rad), 2) # unifying the data 
 
@@ -460,11 +475,6 @@ def draw_polygon_better(request):
 
         postal_list_arr = process_data['kodPocztowy']
         total_index = len(postal_list_arr)
-
-        # 09-407 <---- bad shit
-        # 83-041 <---- good
-        # 80-001 <---- good
-        # 88-110 <---- bad shit 
 
         lat_lng_list = {}   
         actual_postal = []

@@ -490,7 +490,7 @@ var myStyle = {
     "opacity": 0.65
 };
 
-// draw area of postal codes
+// draw area of postal codes quick algorythm
 // $(function(){
 //     $("#poly").bind('click', function(){
 //             // show loading image
@@ -538,7 +538,7 @@ var myStyle = {
 
 
 
-// draw area of postal codes
+// draw area of postal codes precise algorythm
 $(function(){
     $("#poly").bind('click', function(){
             // show loading image
