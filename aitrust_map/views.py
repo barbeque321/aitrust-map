@@ -298,14 +298,14 @@ def in_radius(c_x, c_y, r, x, y):
     return hypot(c_x-x, c_y-y) <= r
 
 def area_of_polygon_xy(x, y):
-    """Calculates the area of an arbitrary polygon given its verticies"""
+    # Calculates the area of an arbitrary polygon given its verticies
     area = 0.0
     for i in range(-1, len(x)-1):
         area += x[i] * (y[i+1] - y[i-1])
     return abs(area) / 2.0
 
 def area_of_polygon_crd(cordinates):
-    """Calculates the area of an arbitrary polygon given its verticies"""
+    # Calculates the area of an arbitrary polygon given its verticies
     x = [v[0] for v in cordinates]
     y = [v[1] for v in cordinates]
     return area_of_polygon_xy(x,y)
@@ -379,7 +379,6 @@ def get_alfa_shape_points(pts, alfas=1):
             lenghts[line] = sqrt_sum(a, b)
 
     ls = sorted(lenghts.values())
-
     mean_length = np.mean(ls)
     mean_length_index = ls.index(next(filter(lambda x: x>=mean_length, ls)))
     magic_numbers = [ls[i] for i in range(mean_length_index, len(ls))]
@@ -393,7 +392,6 @@ def get_alfa_shape_points(pts, alfas=1):
     for alfa in alfas:
         i = magic_numbers.index(next(filter(lambda z: z > alfa, magic_numbers), magic_numbers[-1]))
         av_length = ls[mean_length_index+i]
-
         lines = {}
 
         for s in tri.simplices:
@@ -432,7 +430,7 @@ def draw_polygon_better(request):
         lng_center = request.GET.get('lng') 
         lat_center = str(lat_center)
         lng_center = str(lng_center)
-        lat_center = lat_center [:9] # unifying the data 
+        lat_center = lat_center[:9] # unifying the data 
         lng_center = lng_center[:9] # unifying the data 
         lat_center = float(lat_center)
         lng_center = float(lng_center)
