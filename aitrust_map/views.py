@@ -8,6 +8,7 @@ import math
 import numpy as np
 from scipy.spatial import Delaunay
 import networkx as nx
+from math import hypot
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 params = [0.75]
