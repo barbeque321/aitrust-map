@@ -551,6 +551,11 @@ $(function(){
                     },
                     url: 'draw_polygon_better/',
                     contentType: 'application/json; charset=utf-8',
+                    data: {
+                        "lat": latLngs.lat,
+                        "lng": latLngs.lng,
+                        "rad": theRadius,
+                    },
                     dataType: 'json',
                     success: function(data){
                         $('#loadingmessage').hide();
