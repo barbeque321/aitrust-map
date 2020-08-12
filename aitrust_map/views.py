@@ -15,6 +15,9 @@ params = [0.75]
 def azure_map_project(request):
     return render(request, 'aitrust_map.html', {})
 
+def in_radius(c_x, c_y, r, x, y):
+    return hypot(c_x-x, c_y-y) <= r
+
 def process_loc(request):
     if request.method == "GET":
         lat = request.GET.get('lat') # must be in degrees!
@@ -410,6 +413,16 @@ def draw_polygon_better(request):
     if request.method == "GET":
 
         postal_list = request.GET.get('postal_list_to_draw')
+        lat_center = request.GET.get('lat') 
+        lng_center = request.GET.get('lng') 
+        lat_center = str(lat)
+        lng_center = str(lng)
+        lat_center = lat[:9] # unifying the data 
+        lng_center = lng[:9] # unifying the data 
+        lat_center = float(lat)
+        lng_center = float(lng)
+        rad = request.GET.get('rad')
+        rad = round(float(rad), 2) # unifying the data 
 
         postal_li = list(postal_list.split(", ")) 
 
@@ -448,6 +461,11 @@ def draw_polygon_better(request):
         postal_list_arr = process_data['kodPocztowy']
         total_index = len(postal_list_arr)
 
+        # 09-407 <---- bad shit
+        # 83-041 <---- good
+        # 80-001 <---- good
+        # 88-110 <---- bad shit 
+
         lat_lng_list = {}   
         actual_postal = []
         for num in range(0,total_index):
@@ -458,11 +476,16 @@ def draw_polygon_better(request):
                 new_lng = process_data['Lat'][index]
                 lat_lng_list[new_postal].append([new_lat, new_lng])
             else:
-                lat_lng_list[new_postal] = []
-                actual_postal.append(new_postal)
                 new_lat = process_data['Lng'][index]
                 new_lng = process_data['Lat'][index]
-                lat_lng_list[new_postal].append([new_lat, new_lng])
+                # if first points xy of postal code are further than 2 rad of circle, remove postal code
+                rad = rad * 2
+                if in_radius(lat_center, lng_center, rad, new_lat, new_lng):
+                    lat_lng_list[new_postal] = []
+                    actual_postal.append(new_postal)
+                    lat_lng_list[new_postal].append([new_lat, new_lng])
+                else:
+                    pass
 
         alfa_shape_points_dict_list = {}
         for key in lat_lng_list:
@@ -471,7 +494,7 @@ def draw_polygon_better(request):
             for point in actual_list:
                 p = (float(point[0]), float(point[1]))
                 points_after.append(p)
-            if len(points_after) < 6:
+            if len(points_after) < 5:
                 pass
             else:
                 points = get_alfa_shape_points(points_after, alfas=params)
