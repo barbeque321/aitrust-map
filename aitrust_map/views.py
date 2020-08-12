@@ -456,19 +456,16 @@ def draw_polygon_better(request):
         actual_postal = []
         for num in range(0,total_index):
             index = num
-            new_postal = process_data['kodPocztowy'][index]     
+            rad = rad * 2
+            new_postal = process_data['kodPocztowy'][index]
+            new_lat = process_data['Lng'][index]
+            new_lng = process_data['Lat'][index]  
             if new_postal in actual_postal:
-                new_lat = process_data['Lng'][index]
-                new_lng = process_data['Lat'][index]
                 if in_radius(lat_center, lng_center, rad, new_lat, new_lng):
                     lat_lng_list[new_postal].append([new_lat, new_lng])
                 else:
                     pass
             else:
-                new_lat = process_data['Lng'][index]
-                new_lng = process_data['Lat'][index]
-                # if first points xy of postal code are further than 2 rad of circle, remove postal code
-                rad = rad * 2
                 if in_radius(lat_center, lng_center, rad, new_lat, new_lng):
                     lat_lng_list[new_postal] = []
                     actual_postal.append(new_postal)
