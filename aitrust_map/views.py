@@ -402,7 +402,10 @@ def get_alfa_shape_points(pts, alfas=1):
 
 def draw_polygon_better(request):
     if request.method == "GET":
-
+        # getting some geo data
+        # it will be used later to double check if coordinates of postal codes
+        # are correct, if not they will be removed from drawing polygons
+        # if all coordinates are wrong postal code will be removed too
         postal_list = request.GET.get('postal_list_to_draw')
         lat_center = request.GET.get('lat') 
         lng_center = request.GET.get('lng') 
@@ -414,19 +417,29 @@ def draw_polygon_better(request):
         lng_center = float(lng_center)
         rad = request.GET.get('rad')
         rad = round(float(rad), 2) # unifying the data 
+        rad = rad/1000 # must be in kilometers!
+        rad = round(float(rad), 2) # unifying the data
 
+        # list of postal codes generated earlier
         postal_li = list(postal_list.split(", ")) 
 
+        # building string of postal codes 
+        # each postal code needs to be in quotes 
         postal_str = ""
 
         for elem in postal_li:
             postal_str += '"' + elem + '",'
 
+        # remove last char from string which is ','
+        # with it it will generate sql query error
         postal_str = postal_str[:-1]
 
         # initialise mysql database connection
         cursor  = connection.cursor()
         
+        # building mysql query from 3 'parts'
+        # the middle part is string containing all postal codes for which
+        # sql will return lats and langs
         query  = "SELECT Lng, Lat, kodPocztowy FROM pomorskie WHERE kodPocztowy IN ("
 
         query += postal_str
