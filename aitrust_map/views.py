@@ -479,7 +479,7 @@ def draw_polygon_better(request):
                 alfa_shape_points_dict_list[key].append(points) 
 
         data = {
-        "postal_str": lat_lng_list, "postal_list": points_after,  "points": alfa_shape_points_dict_list
+        "postal_str": alfa_shape_points_dict_list, "postal_list": points_after, 
         }
     return JsonResponse(data)
 
