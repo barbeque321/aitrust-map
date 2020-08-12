@@ -471,7 +471,7 @@ def draw_polygon_better(request):
             for point in actual_list:
                 p = (float(point[0]), float(point[1]))
                 points_after.append(p)
-            if len(points_after) < 4:
+            if len(points_after) < 6:
                 pass
             else:
                 points = get_alfa_shape_points(points_after, alfas=params)
