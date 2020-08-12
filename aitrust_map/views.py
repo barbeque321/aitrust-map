@@ -298,7 +298,7 @@ def isCCW(start, end, point):
 # check if points are in some radius
 # earth is spheroid here to be more precise in calculations 
 
-def distance(lat1, lons1, lat2, lons2):
+def distance(lat1, lons1, lat2, lons2, rad):
     a = 6378.137  # equitorial radius in km
     b = 6356.752  # polar radius in km
 
