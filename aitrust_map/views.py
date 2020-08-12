@@ -471,12 +471,15 @@ def draw_polygon_better(request):
             for point in actual_list:
                 p = (float(point[0]), float(point[1]))
                 points_after.append(p)
-            points = get_alfa_shape_points(points_after, alfas=params)
-            alfa_shape_points_dict_list[key] = []
-            alfa_shape_points_dict_list[key].append(points) 
+            if len(points_after) < 3:
+                pass
+            else:
+                points = get_alfa_shape_points(points_after, alfas=params)
+                alfa_shape_points_dict_list[key] = []
+                alfa_shape_points_dict_list[key].append(points) 
 
         data = {
-        "postal_list": lat_lng_list, "postal_str": points_after, "points": points
+        "postal_str": lat_lng_list, "postal_list": points_after,  "points": alfa_shape_points_dict_list
         }
     return JsonResponse(data)
 
