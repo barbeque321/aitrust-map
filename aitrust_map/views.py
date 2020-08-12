@@ -233,7 +233,8 @@ def quickhull(listPts, min, max):
     hullPts = hullPts + quickhull(left_of_line_pts, ptC, max)
     return hullPts
 
-# Reterns all points that a LEFT of a line start->end
+# Reterns all points that are 'LEFT' of a line start->end
+# In other words the points cluster is divided in half
 def get_points_left_of_line(start, end, listPts):
     pts = []
     for pt in listPts:
@@ -269,7 +270,7 @@ def get_min_max_x(list_pts):
     return [min_x, min_y], [max_x, max_y]
 
 # Given a line of start->end, will return the distance that
-# point, pt, is from the line.
+# point is from the line
 def distance(start, end, pt): # pt is the point
     x1, y1 = start
     x2, y2 = end
@@ -279,7 +280,7 @@ def distance(start, end, pt): # pt is the point
     result = nom / denom
     return result
 
-# Check is point counter clock wise to line (on left side depending from line orientation)
+# Check if point is 'counter clock wise' to dividing line (lets say on 'left side' of line - depending from line orientation)
 def isCCW(start, end, point):
     answer = (end[0] - start[0]) * (point[1] - start[1]) - (end[1] - start[1]) * (point[0] - start[0])
     if answer < 0:
@@ -309,30 +310,6 @@ def area_of_polygon_crd(cordinates):
     x = [v[0] for v in cordinates]
     y = [v[1] for v in cordinates]
     return area_of_polygon_xy(x,y)
-
-def area_of_polygon(**kwargs):
-    if 'x' in kwargs and 'y' in kwargs:
-        x = kwargs['x']
-        y = kwargs['y']
-        return area_of_polygon_xy(x, y)
-
-    if 'coordinates' in kwargs:
-        cordinates = kwargs['coordinates']
-        return area_of_polygon_crd(cordinates)
-
-    print("Wrong parameters")
-    return None
-
-def length_of_way(cordinates):
-    """Length of the way"""
-    if len(cordinates)<2:
-        return 0
-    leng = 0
-    for i in range(1,len(cordinates)):
-        crd = cordinates
-        dist = distance(crd[i-1],crd[i-1])
-        leng = leng + dist
-    return leng
 
 def sqrt_sum(a, b):
     x = (a[0]-b[0])

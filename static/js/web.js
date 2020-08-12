@@ -548,14 +548,12 @@ $(function(){
                     type: "GET",
                     data: {
                         "postal_list_to_draw": postal_list_to_draw,
-                    },
-                    url: 'draw_polygon_better/',
-                    contentType: 'application/json; charset=utf-8',
-                    data: {
                         "lat": latLngs.lat,
                         "lng": latLngs.lng,
                         "rad": theRadius,
                     },
+                    url: 'draw_polygon_better/',
+                    contentType: 'application/json; charset=utf-8',
                     dataType: 'json',
                     success: function(data){
                         $('#loadingmessage').hide();
