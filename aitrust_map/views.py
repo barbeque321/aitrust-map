@@ -295,9 +295,30 @@ def isCCW(start, end, point):
 # # HELPER FUNCTIONS FOR ALPAHA SHAPE MAIN FUNCTION #
 # ###################################################
 
-# check if point is in some radius
-def in_radius(c_x, c_y, r, x, y):
-    return hypot(c_x-x, c_y-y) <= r
+# check if points are in some radius
+# earth is spheroid here to be more precise in calculations 
+
+def distance(lat1, lons1, lat2, lons2):
+    a = 6378.137  # equitorial radius in km
+    b = 6356.752  # polar radius in km
+
+    lat1 = math.radians(lat1)
+    lons1 = math.radians(lons1)
+    R1 = (((((a ** 2) * math.cos(lat1)) ** 2) + (((b ** 2) * math.sin(lat1)) ** 2)) / (
+                (a * math.cos(lat1)) ** 2 + (b * math.sin(lat1)) ** 2)) ** 0.5  # radius of earth at lat1
+    x1 = R1 * math.cos(lat1) * math.cos(lons1)
+    y1 = R1 * math.cos(lat1) * math.sin(lons1)
+    z1 = R1 * math.sin(lat1)
+
+    lat2 = math.radians(lat2)
+    lons2 = math.radians(lons2)
+    R2 = (((((a ** 2) * math.cos(lat2)) ** 2) + (((b ** 2) * math.sin(lat2)) ** 2)) / (
+                (a * math.cos(lat2)) ** 2 + (b * math.sin(lat2)) ** 2)) ** 0.5  # radius of earth at lat2
+    x2 = R2 * math.cos(lat2) * math.cos(lons2)
+    y2 = R2 * math.cos(lat2) * math.sin(lons2)
+    z2 = R2 * math.sin(lat2)
+
+    return ((x1 - x2) ** 2 + (y1 - y2) ** 2 + (z1 - z2) ** 2) ** 0.5 < rad
 
 def area_of_polygon_xy(x, y):
     # Calculates the area of an arbitrary polygon given its verticies
@@ -446,12 +467,13 @@ def draw_polygon_better(request):
 
         query += ");"
 
-        # execute first query
+        # execute query
         cursor.execute(query)
 
         # return mysql data from query
         sql_data = cursor.fetchall()
 
+        # processing returned sql data to form of dictionary
         colnames = ['Lng', 'Lat', 'kodPocztowy']
         process_data = {}
         for row in sql_data:
@@ -462,6 +484,7 @@ def draw_polygon_better(request):
                 process_data[col].append(row[colindex])
                 colindex += 1
 
+        # geting lenght of array (number of kyes)
         postal_list_arr = process_data['kodPocztowy']
         total_index = len(postal_list_arr)
 
@@ -474,18 +497,23 @@ def draw_polygon_better(request):
             new_lat = process_data['Lng'][index]
             new_lng = process_data['Lat'][index]  
             if new_postal in actual_postal:
-                if in_radius(lat_center, lng_center, rad, new_lat, new_lng):
+                if distance(lat_center, lng_center, new_lat, new_lng, rad):
                     lat_lng_list[new_postal].append([new_lat, new_lng])
                 else:
                     pass
             else:
-                if in_radius(lat_center, lng_center, rad, new_lat, new_lng):
+                if distance(lat_center, lng_center, new_lat, new_lng, rad):
                     lat_lng_list[new_postal] = []
                     actual_postal.append(new_postal)
                     lat_lng_list[new_postal].append([new_lat, new_lng])
                 else:
                     pass
 
+        # here real magic happens boys and girls
+        # some hardcore trigonometry is called to help
+        # I tried KirckPatrick, QuickHall and some other algorithms
+        # none of them was precise enough for this problem
+        # but they were faster 
         alfa_shape_points_dict_list = {}
         for key in lat_lng_list:
             actual_list = lat_lng_list[key]
