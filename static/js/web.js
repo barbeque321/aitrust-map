@@ -149,6 +149,7 @@ $(function(){
                         $('#points_sum').contents()[0].textContent = data.points_sum;
                         $('#postal_code_sum').contents()[0].textContent = data.postal_code_sum;
                         postal_list_to_draw = data.postal_code;
+                        console.log(postal_list_to_draw)
                         document.getElementById("postal_code").innerHTML = data.postal_code;
                         document.getElementById("postal_codes_popupbox").innerHTML = data.postal_code;
                         document.getElementById("info_radius").innerHTML = data.rad + "km";
