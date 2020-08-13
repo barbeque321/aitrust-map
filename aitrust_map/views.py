@@ -9,6 +9,7 @@ import numpy as np
 from scipy.spatial import Delaunay
 import networkx as nx
 from math import hypot
+import re
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 params = [0.75]
@@ -451,7 +452,7 @@ def draw_polygon_better(request):
 
         for elem in postal_li:
             if "-" in elem:
-                elem.replace('-', '')
+                elem = re.sub(r'\W+', '', elem)
                 elem = elem[:2] + "-" + elem[2:]
                 postal_str += '"' + elem + '",'
             else:
