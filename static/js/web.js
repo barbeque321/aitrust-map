@@ -612,8 +612,8 @@ $(function(){
                             polygonus_geo_form.features[0].geometry.coordinates.push(arr);
                             polygonus_geo_form.features[0].properties.popupContent.push(postal_no);
                             var layerpoly = new L.geoJson(polygonus_geo_form.features, options, {
-                                onEachFeature: function (feature, layer) {
-                                layer.bindPopup('<h1>'+features.properties.popupContent+'</h1>');
+                                onEachFeature: function (features, layer) {
+                                layer.bindPopup(features.properties.popupContent);
                                 }
                             }).addTo(map);
                             addNonGroupLayers(layerpoly, drawnItems2);
