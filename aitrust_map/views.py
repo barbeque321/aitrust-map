@@ -490,22 +490,22 @@ def draw_polygon_better(request):
 
         lat_lng_list = {}   
         actual_postal = []
-        for num in range(0,total_index):
+        for num in range(0, total_index):
             index = num
             rad = rad * 2
             new_postal = process_data['kodPocztowy'][index]
-            new_lat = process_data['Lng'][index]
-            new_lng = process_data['Lat'][index]  
+            new_lng = process_data['Lng'][index]
+            new_lat = process_data['Lat'][index]  
             if new_postal in actual_postal:
-                if distance(lat_center, lng_center, new_lng, new_lat, rad):
-                    lat_lng_list[new_postal].append([new_lat, new_lng])
+                if distance(lng_center, lat_center, new_lng, new_lat, rad):
+                    lat_lng_list[new_postal].append([new_lng, new_lat])
                 else:
                     pass
             else:
-                if distance(lat_center, lng_center, new_lng, new_lat, rad):
+                if distance(lng_center, lat_center, new_lng, new_lat, rad):
                     lat_lng_list[new_postal] = []
                     actual_postal.append(new_postal)
-                    lat_lng_list[new_postal].append([new_lat, new_lng])
+                    lat_lng_list[new_postal].append([new_lng, new_lat])
                 else:
                     pass
 
