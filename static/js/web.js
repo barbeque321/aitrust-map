@@ -610,7 +610,7 @@ $(function(){
                                 }]
                             };
                             polygonus_geo_form.features[0].geometry.coordinates.push(arr);
-                            polygonus_geo_form.features[0].properties.push(postal_no);
+                            polygonus_geo_form.features[0].properties.popupContent.push(postal_no);
                             console.log(polygonus_geo_form)
                             var layerpoly = new L.geoJson(polygonus_geo_form.features, options).addTo(map);
                             addNonGroupLayers(layerpoly, drawnItems2);
