@@ -470,16 +470,16 @@ def draw_polygon_better(request):
                 postal_str += '"' + elem + '",'
 
 
-        # remove last char from string which is ','
-        # with it it will generate sql query error
+        # remove last char from finall string with all postal codes, which is ','
+        # leaving this little comma will generate sql query error
         postal_str = postal_str[:-1]
 
         # initialise mysql database connection
         cursor  = connection.cursor()
         
         # building mysql query from 3 'parts'
-        # the middle part is string containing all postal codes for which
-        # sql will return lats and langs
+        # the middle part is previously prepared postal codes final string 
+        # sql will return lats and langs of all points for every postal code in string
         query  = "SELECT Lng, Lat, kodPocztowy FROM pomorskie WHERE kodPocztowy IN ("
 
         query += postal_str
@@ -531,7 +531,8 @@ def draw_polygon_better(request):
         # some hardcore trigonometry is called to help
         # I tried KirckPatrick, QuickHall and some other algorithms
         # none of them was precise enough for this problem
-        # but they were faster 
+        # but they were faster tho
+
         alfa_shape_points_dict_list = {}
         for key in lat_lng_list:
             actual_list = lat_lng_list[key]

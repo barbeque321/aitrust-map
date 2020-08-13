@@ -596,6 +596,7 @@ $(function(){
                                 }]
                             };
                             polygonus_geo_form.features[0].geometry.coordinates.push(arr);
+                            console.log(polygonus_geo_form)
                             var layerpoly = new L.geoJson(polygonus_geo_form.features, options).addTo(map);
                             var poly = L.polygon(arr).addTo(map);
                             });
