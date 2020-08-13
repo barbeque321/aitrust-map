@@ -451,6 +451,8 @@ def draw_polygon_better(request):
 
         for elem in postal_li:
             if "-" in elem:
+                elem.replace('-', '')
+                elem = elem[:2] + "-" + elem[2:]
                 postal_str += '"' + elem + '",'
             else:
                 elem = elem[:2] + "-" + elem[2:]
