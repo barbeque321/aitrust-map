@@ -611,11 +611,12 @@ $(function(){
                             };
                             polygonus_geo_form.features[0].geometry.coordinates.push(arr);
                             polygonus_geo_form.features[0].properties.popupContent.push(postal_no);
-                            var layerpoly = new L.geoJson(polygonus_geo_form.features, options).addTo(map);
-                            var popupContent = polygonus_geo_form.features[0].properties.popupContent;
-                            layerpoly.bindPopup(popupContent);
+                            var layerpoly = new L.geoJson(polygonus_geo_form.features, options, {
+                                onEachFeature: function (feature, layer) {
+                                layer.bindPopup('<h1>'+feature.properties.popupContent+'</h1>');
+                                }
+                            }).addTo(map);
                             addNonGroupLayers(layerpoly, drawnItems2);
-                            // var poly = L.polygon(arr).addTo(map);
                             });
                         }
                     },
