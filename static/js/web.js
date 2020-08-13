@@ -613,7 +613,7 @@ $(function(){
                             polygonus_geo_form.features[0].properties.popupContent.push(postal_no);
                             var layerpoly = new L.geoJson(polygonus_geo_form.features, options, {
                                 onEachFeature: function (feature, layer) {
-                                layer.bindPopup('<h1>'+feature.properties.popupContent+'</h1>');
+                                layer.bindPopup('<h1>'+features.properties.popupContent+'</h1>');
                                 }
                             }).addTo(map);
                             addNonGroupLayers(layerpoly, drawnItems2);
