@@ -450,14 +450,16 @@ def draw_polygon_better(request):
         # each postal code needs to be in quotes 
         postal_str = ""
 
+        # there is ton of unpredicted symbols in database like /, ", ', (), etc.; 
+        # also postal codes are misspelled like "0-0000"; this is one of few steps to 
+        # clearing this garbage; all symbols are removed from postal code string
+        # including "-" sign; then when string is all num only (00000), after the second number "-" symbol is added
+
         for elem in postal_li:
-            if "-" in elem:
-                elem = re.sub(r'\W+', '', elem)
-                elem = elem[:2] + "-" + elem[2:]
-                postal_str += '"' + elem + '",'
-            else:
-                elem = elem[:2] + "-" + elem[2:]
-                postal_str += '"' + elem + '",'
+            elem = re.sub(r'\W+', '', elem)
+            elem = elem[:2] + "-" + elem[2:]
+            postal_str += '"' + elem + '",'
+
 
         # remove last char from string which is ','
         # with it it will generate sql query error
