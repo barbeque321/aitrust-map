@@ -453,12 +453,21 @@ def draw_polygon_better(request):
         # there is ton of unpredicted symbols in database like /, ", ', (), etc.; 
         # also postal codes are misspelled like "0-0000"; this is one of few steps to 
         # clearing this garbage; all symbols are removed from postal code string
-        # including "-" sign; then when string is all num only (00000), after the second number "-" symbol is added
+        # including "-" sign; then when string is all num only (00000), after the second digit "-" symbol is added
+        # also in case ther is none postal code or it is broken beyond repair (not enough digits) it
+        # won't be appended to final list 
 
         for elem in postal_li:
+            # this regular expresion '\W == [^a-zA-Z0-9_], pass only numbers, letters and _ sign
             elem = re.sub(r'\W+', '', elem)
-            elem = elem[:2] + "-" + elem[2:]
-            postal_str += '"' + elem + '",'
+            # checking if all that left is a minimal of 5 digits only
+            if len(elem) < 5 or isdigit(elem) == False:
+                pass
+            else:
+                # adding "-" sign after the second digit
+                elem = elem[:2] + "-" + elem[2:]
+                # adding quotes and comma; final result is string like -> "00-000",
+                postal_str += '"' + elem + '",'
 
 
         # remove last char from string which is ','

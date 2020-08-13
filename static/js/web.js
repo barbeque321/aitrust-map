@@ -563,6 +563,17 @@ $(function(){
                         console.log(data.postal_list)
                         console.log(data.postal_li)
                         var postal_data = data.postal_str
+                        var options = {
+                            style: function (feature) {
+                                return {
+                                    "color": "red",
+                                    "weight": 1,
+                                    "opacity": 1,
+                                    "fillColor": "red",
+                                    "fillOpacity": 0.5
+                                };
+                            }
+                        };
                         if(Object.keys(postal_data).length) {
                             Object.keys(postal_data).forEach(key => {
                             var polygonus;
@@ -571,8 +582,21 @@ $(function(){
                             var innerArrayLength = polygonus[0][0][0].length;
                             // loop the inner array
                             for (let j = 0; j < innerArrayLength; j++) {
-                                    arr.push([polygonus[0][0][0][j][1], polygonus[0][0][0][j][0]]); 
+                                arr.push([polygonus[0][0][0][j][1], polygonus[0][0][0][j][0]]); 
+                                }
+                            var polygonus_geo_form = {
+                                type: "FeatureCollection",
+                                features: [{ 
+                                    type:"Feature", 
+                                    properties: {}, 
+                                    geometry: { 
+                                        type: "Polygon", 
+                                        coordinates: []
                                     }
+                                }]
+                            };
+                            polygonus_geo_form.features[0].geometry.coordinates.push(arr);
+                            var layerpoly = new L.geoJson(polygonus_geo_form.features, options).addTo(map);
                             var poly = L.polygon(arr).addTo(map);
                             });
                         }
