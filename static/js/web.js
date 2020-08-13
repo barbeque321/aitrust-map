@@ -577,10 +577,10 @@ $(function(){
                         var options = {
                             style: function (feature) {
                                 return {
-                                    "color": "red",
+                                    "color": "#3a83a4e0",
                                     "weight": 1,
                                     "opacity": 1,
-                                    "fillColor": "red",
+                                    "fillColor": "#3a83a4e0",
                                     "fillOpacity": 0.5
                                 };
                             }
@@ -589,6 +589,7 @@ $(function(){
                             Object.keys(postal_data).forEach(key => {
                             var polygonus;
                             polygonus = postal_data[key];
+                            var postal_no = key
                             let arr = [];
                             var innerArrayLength = polygonus[0][0][0].length;
                             // loop the inner array
@@ -599,7 +600,9 @@ $(function(){
                                 type: "FeatureCollection",
                                 features: [{ 
                                     type:"Feature", 
-                                    properties: {}, 
+                                    properties: {
+                                        popupContent: []
+                                    }, 
                                     geometry: { 
                                         type: "Polygon", 
                                         coordinates: []
@@ -607,6 +610,7 @@ $(function(){
                                 }]
                             };
                             polygonus_geo_form.features[0].geometry.coordinates.push(arr);
+                            polygonus_geo_form.features[0].properties.push(postal_no);
                             console.log(polygonus_geo_form)
                             var layerpoly = new L.geoJson(polygonus_geo_form.features, options).addTo(map);
                             addNonGroupLayers(layerpoly, drawnItems2);
