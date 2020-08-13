@@ -574,17 +574,6 @@ $(function(){
                         console.log(data.postal_list)
                         console.log(data.postal_li)
                         var postal_data = data.postal_str
-                        var options = {
-                            style: function (feature) {
-                                return {
-                                    "color": "#3a83a4e0",
-                                    "weight": 1,
-                                    "opacity": 1,
-                                    "fillColor": "#3a83a4e0",
-                                    "fillOpacity": 0.5
-                                };
-                            }
-                        };
                         if(Object.keys(postal_data).length) {
                             Object.keys(postal_data).forEach(key => {
                             var polygonus;
@@ -596,6 +585,17 @@ $(function(){
                             for (let j = 0; j < innerArrayLength; j++) {
                                 arr.push([polygonus[0][0][0][j][0], polygonus[0][0][0][j][1]]); 
                                 }
+                            var options = {
+                            style: function (feature) {
+                                return {
+                                    "color": "#3a83a4e0",
+                                    "weight": 1,
+                                    "opacity": 1,
+                                    "fillColor": '#'+(0x1000000+(Math.random())*0xffffff).toString(16).substr(1,6),
+                                    "fillOpacity": 0.5
+                                };
+                            }
+                            };
                             var polygonus_geo_form = {
                                 type: "FeatureCollection",
                                 features: [{ 
