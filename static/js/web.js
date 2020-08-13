@@ -6,11 +6,14 @@ var postal_list_to_draw;
 $(document).ready(function(){
 // create map instance 
 var osmUrl = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-        osmAttrib = '&copy; <a href="http://openstreetmap.org/copyright">OpenStreetMap</a>',
-        osm = L.tileLayer(osmUrl, { maxZoom: 17, attribution: osmAttrib }),
-        map = new L.Map('map', { center: new L.LatLng(52.415823, 18.874512), zoom: 6 }),
-        drawnItems = L.featureGroup().addTo(map);
-        drawnItems2 = L.featureGroup().addTo(map);
+osmAttrib = '&copy; <a href="http://openstreetmap.org/copyright">OpenStreetMap</a>',
+osm = L.tileLayer(osmUrl, { maxZoom: 17, attribution: osmAttrib }),
+map = new L.Map('map', { 
+    center: new L.LatLng(52.415823, 18.874512), 
+    zoom: 6 
+}),
+drawnItems = L.featureGroup().addTo(map);
+drawnItems2 = L.featureGroup().addTo(map);
 
 L.control.layers({
     'Mapa': osm.addTo(map),
@@ -536,7 +539,15 @@ var myStyle = {
 // });
 
 
-
+function addNonGroupLayers(sourceLayer, targetGroup) {
+    if (sourceLayer instanceof L.LayerGroup) {
+        sourceLayer.eachLayer(function (layer) {
+            addNonGroupLayers(layer, targetGroup);
+        });
+    } else {
+        targetGroup.addLayer(sourceLayer);
+    }
+};
 
 
 // draw area of postal codes precise algorythm
@@ -598,7 +609,8 @@ $(function(){
                             polygonus_geo_form.features[0].geometry.coordinates.push(arr);
                             console.log(polygonus_geo_form)
                             var layerpoly = new L.geoJson(polygonus_geo_form.features, options).addTo(map);
-                            var poly = L.polygon(arr).addTo(map);
+                            addNonGroupLayers(layerpoly, drawnItems2);
+                            // var poly = L.polygon(arr).addTo(map);
                             });
                         }
                     },
