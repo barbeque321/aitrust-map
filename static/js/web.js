@@ -611,11 +611,7 @@ $(function(){
                             };
                             polygonus_geo_form.features[0].geometry.coordinates.push(arr);
                             polygonus_geo_form.features[0].properties.popupContent.push(postal_no);
-                            var layerpoly = new L.geoJson(polygonus_geo_form.features, options, {
-                                onEachFeature: function (features, layer) {
-                                layer.bindPopup(features.properties.popupContent);
-                                }
-                            }).addTo(map);
+                            var layerpoly = new L.geoJson(polygonus_geo_form.features, options).addTo(map).bindPopup(postal_no);
                             addNonGroupLayers(layerpoly, drawnItems2);
                             });
                         }
