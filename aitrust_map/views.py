@@ -461,7 +461,7 @@ def draw_polygon_better(request):
             # this regular expresion '\W == [^a-zA-Z0-9_], pass only numbers, letters and _ sign
             elem = re.sub(r'\W+', '', elem)
             # checking if all that left is a minimal of 5 digits only
-            if len(elem) < 5 or isdigit(elem) == False:
+            if len(elem) < 5 or elem.isdigit() == False:
                 pass
             else:
                 # adding "-" sign after the second digit
