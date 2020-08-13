@@ -450,7 +450,11 @@ def draw_polygon_better(request):
         postal_str = ""
 
         for elem in postal_li:
-            postal_str += '"' + elem + '",'
+            if "-" in elem:
+                postal_str += '"' + elem + '",'
+            else:
+                elem = elem[:2] + "-" + elem[2:]
+                postal_str += '"' + elem + '",'
 
         # remove last char from string which is ','
         # with it it will generate sql query error
