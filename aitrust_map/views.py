@@ -439,6 +439,7 @@ def draw_polygon_better(request):
         rad = request.GET.get('rad')
         rad = round(float(rad), 2) # unifying the data 
         rad = rad/1000 # must be in kilometers!
+        rad = rad * 2 
         rad = round(float(rad), 2) # unifying the data
 
         # list of postal codes generated earlier
@@ -490,16 +491,13 @@ def draw_polygon_better(request):
 
         lat_lng_list = {}   
         actual_postal = []
-        check_list = []
         for num in range(0, total_index):
             index = num
-            rad = rad * 2
             new_postal = process_data['kodPocztowy'][index]
             new_lng = process_data['Lng'][index]
             new_lat = process_data['Lat'][index]  
             if new_postal in actual_postal:
                 if distance(lat_center, lng_center, new_lat, new_lng, rad):
-                    check_list.append([lat_center, lng_center, new_lat, new_lng, rad])
                     lat_lng_list[new_postal].append([new_lng, new_lat])
                 else:
                     pass
@@ -507,7 +505,6 @@ def draw_polygon_better(request):
                 if distance(lat_center, lng_center, new_lat, new_lng, rad):
                     lat_lng_list[new_postal] = []
                     actual_postal.append(new_postal)
-                    check_list.append([lat_center, lng_center, new_lat, new_lng, rad])
                     lat_lng_list[new_postal].append([new_lng, new_lat])
                 else:
                     pass
@@ -532,7 +529,7 @@ def draw_polygon_better(request):
                 alfa_shape_points_dict_list[key].append(points) 
 
         data = {
-        "postal_str": alfa_shape_points_dict_list, "postal_list": points_after, "check_list": check_list
+        "postal_str": alfa_shape_points_dict_list, "postal_list": points_after, 
         }
     return JsonResponse(data)
 

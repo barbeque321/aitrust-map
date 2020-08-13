@@ -560,7 +560,6 @@ $(function(){
                         console.log("Ready");
                         console.log(data.postal_str)
                         console.log(data.postal_list)
-                        console.log(data.check_list)
                         var postal_data = data.postal_str
                         if(Object.keys(postal_data).length) {
                             Object.keys(postal_data).forEach(key => {
