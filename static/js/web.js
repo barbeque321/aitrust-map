@@ -611,8 +611,9 @@ $(function(){
                             };
                             polygonus_geo_form.features[0].geometry.coordinates.push(arr);
                             polygonus_geo_form.features[0].properties.popupContent.push(postal_no);
-                            console.log(polygonus_geo_form)
                             var layerpoly = new L.geoJson(polygonus_geo_form.features, options).addTo(map);
+                            var popupContent = polygonus_geo_form.features[0].properties.popupContent;
+                            layerpoly.bindPopup(popupContent);
                             addNonGroupLayers(layerpoly, drawnItems2);
                             // var poly = L.polygon(arr).addTo(map);
                             });
@@ -626,11 +627,6 @@ $(function(){
                 });
     });
 });
-
-
-
-
-
 
 
 
