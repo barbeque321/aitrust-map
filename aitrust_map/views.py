@@ -100,7 +100,7 @@ def process_loc(request):
         # won't be appended to final list 
 
         for elem in postal_list_no_repeats:
-            if len(elem) < 5 or elem == "00-000":
+            if len(elem) <= 5 or elem == "00-000":
                 postal_list_no_repeats.remove(elem)
             else:
                 # this regular expresion '\W == [^a-zA-Z0-9_], pass only numbers, letters and _ sign
