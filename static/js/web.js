@@ -14,13 +14,14 @@ map = new L.Map('map', {
 }),
 drawnItems = L.featureGroup().addTo(map);
 drawnItems2 = L.featureGroup().addTo(map);
+drawnItems3 = L.featureGroup().addTo(map);
 
 L.control.layers({
     'Mapa': osm.addTo(map),
     "Satelita": L.tileLayer('http://www.google.cn/maps/vt?lyrs=s@189&gl=cn&x={x}&y={y}&z={z}', {
         attribution: '&copy; Google'
     })
-}, { 'Zaznaczenia': drawnItems }, { position: 'topleft', collapsed: false }).addTo(map);
+}, { 'Zaznaczenie': drawnItems, 'Kody': drawnItems2, 'Punkty': drawnItems3 }, { position: 'topleft', collapsed: false }).addTo(map);
 
 // create control panel 
 var drawControlFull = new L.Control.Draw({
@@ -570,14 +571,24 @@ $(function(){
                     success: function(data){
                         $('#loadingmessage').hide();
                         console.log("Ready");
-                        console.log(data.postal_str)
-                        console.log(data.postal_list)
-                        console.log(data.postal_li)
-                        var postal_data = data.postal_str
+                        var postal_data = data.postal_alpha_shape_points_dict_list
+                        var points_data = data.lat_lng_list
                         if(Object.keys(postal_data).length) {
                             Object.keys(postal_data).forEach(key => {
-                            var polygonus;
-                            polygonus = postal_data[key];
+                            var heat_points = points_data[key];
+                            var heat_points_arr = [];
+                            var innerArrayLength_heat_points = heat_points[0][0][0].length;
+                            for (let j = 0; j < innerArrayLength_heat_points; j++) {
+                                heat_points_arr.push([heat_points[0][0][0][j][0], heat_points[0][0][0][j][1]]); 
+                                }
+                            var heat = L.heatLayer(heat_points_arr,{
+                                radius: 10,
+                                blur: 15, 
+                                maxZoom: 17,
+                            }).addTo(map);
+                            addNonGroupLayers(heat, drawnItems3);
+
+                            var polygonus = postal_data[key];
                             var postal_no = key
                             let arr = [];
                             var innerArrayLength = polygonus[0][0][0].length;
