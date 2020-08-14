@@ -556,10 +556,7 @@ function addNonGroupLayers(sourceLayer, targetGroup) {
 $(function(){
     $("#poly").bind('click', function(){
             // show loading image
-            if (postal_code_sum > 70) {
-                alert("Maksymalna liczba obszarów do jednoczesnego generowania na mapie to 70!");
-            }
-            else {
+
                 $('#loadingmessage').show();
                     console.log('Sending data...');
                     $.ajax({
@@ -638,7 +635,7 @@ $(function(){
                             console.log(jqXhr);
                         }
                 }); 
-            }            
+             
     });
 });
 
