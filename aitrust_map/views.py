@@ -93,6 +93,7 @@ def process_loc(request):
         postal_list_no_repeats = list(dict.fromkeys(postal_list))
         if "00-000" in postal_list_no_repeats:
             postal_list_no_repeats.remove("00-000")
+        postal_list_no_repeats.sort(key=lambda x: int(x[:-4]))
         separator = ', '
         final_postal_string = separator.join(postal_list_no_repeats) 
         # calculating the amount of postal codes obtained in circle
