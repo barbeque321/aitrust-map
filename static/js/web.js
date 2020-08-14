@@ -571,8 +571,8 @@ $(function(){
                     success: function(data){
                         $('#loadingmessage').hide();
                         console.log("Ready");
-                        var postal_data = data.postal_alpha_shape_points_dict_list
-                        var points_data = data.lat_lng_list
+                        var postal_data = data.postal_alpha_shape_points_dict_list;
+                        var points_data = data.lat_lng_list;
                         if(Object.keys(postal_data).length) {
                             Object.keys(postal_data).forEach(key => {
                             var heat_points = points_data[key];
@@ -589,7 +589,7 @@ $(function(){
                             addNonGroupLayers(heat, drawnItems3);
 
                             var polygonus = postal_data[key];
-                            var postal_no = key
+                            var postal_no = key;
                             let arr = [];
                             var innerArrayLength = polygonus[0][0][0].length;
                             // loop the inner array
