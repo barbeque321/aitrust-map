@@ -587,7 +587,7 @@ $(function(){
                                     heat_points_arr.push([heat_points[j][1], heat_points[j][0]]); 
                                     }
                                 var heat = L.heatLayer(heat_points_arr,{
-                                    radius: 25,
+                                    radius: 17,
                                     blur: 15, 
                                     maxZoom: 17,
                                 }).addTo(map);
@@ -628,7 +628,7 @@ $(function(){
                                     }]
                                 };
                                 polygonus_geo_form.features[0].geometry.coordinates.push(arr);
-                                var layerpoly = new L.geoJson(polygonus_geo_form.features, options).addTo(map).bindPopup().setContent("Kod pocztowy: "+postal_no+"Liczba punktów adresowych"+innerArrayLength_number_of_points);
+                                var layerpoly = new L.geoJson(polygonus_geo_form.features, options).addTo(map).bindPopup("<strong>Kod pocztowy: </strong>"+postal_no+"<br />Liczba punktów adresowych: "+innerArrayLength_number_of_points);
                                 addNonGroupLayers(layerpoly, drawnItems2);
                                 });
                             }
