@@ -91,6 +91,8 @@ def process_loc(request):
         points_sum = len(postal_list)
         # removing repetitions from the list and appending unique postal codes
         postal_list_no_repeats = list(dict.fromkeys(postal_list))
+        if "00-000" in postal_list_no_repeats:
+            postal_list_no_repeats.remove("00-000")
         separator = ', '
         final_postal_string = separator.join(postal_list_no_repeats) 
         # calculating the amount of postal codes obtained in circle
