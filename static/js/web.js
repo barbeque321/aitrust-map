@@ -576,14 +576,8 @@ $(function(){
                         if(Object.keys(postal_data).length) {
                             Object.keys(postal_data).forEach(key => {
                             var heat_points = points_data[key];
-                            console.log(heat_points);
-                            var heat_points_arr = [];
-                            var innerArrayLength_heat_points = heat_points.length;
-                            for (let j = 0; j < innerArrayLength_heat_points; j++) {
-                                heat_points_arr.push([heat_points[j][0], heat_points[j][1]]); 
-                                }
-                            var heat = L.heatLayer(heat_points_arr,{
-                                radius: 10,
+                            var heat = L.heatLayer(heat_points,{
+                                radius: 5,
                                 blur: 15, 
                                 maxZoom: 17,
                             }).addTo(map);
