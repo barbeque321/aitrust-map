@@ -578,9 +578,9 @@ $(function(){
                             var heat_points = points_data[key];
                             console.log(heat_points);
                             var heat_points_arr = [];
-                            var innerArrayLength_heat_points = heat_points[0][0][0].length;
+                            var innerArrayLength_heat_points = heat_points.length;
                             for (let j = 0; j < innerArrayLength_heat_points; j++) {
-                                heat_points_arr.push([heat_points[0][0][0][j][0], heat_points[0][0][0][j][1]]); 
+                                heat_points_arr.push([heat_points[j][0], heat_points[j][1]]); 
                                 }
                             var heat = L.heatLayer(heat_points_arr,{
                                 radius: 10,
