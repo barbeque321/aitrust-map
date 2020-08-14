@@ -557,7 +557,10 @@ $(function(){
     $("#poly").bind('click', function(){
             // show loading image
             if (postal_code_sum > 70) {
-                alert("Maksymalna liczba obszarów do jednoczesnego generowania na mapie to 70!");
+                alert("Maksymalna liczba obszarów do jednoczesnego generowania na mapie to 70. Proszę użyć narzędzia edycji i zmniejszyć obszar.");
+            }
+            if (postal_code_sum == 0) {
+                alert("Brak danych. Proszę zaznaczyć obszar i wygenerować dane.");
             }
             else {
                 $('#loadingmessage').show();
@@ -605,12 +608,13 @@ $(function(){
                                 var innerArrayLength_number_of_points = number_of_points.length;
                                 var options = {
                                 style: function (feature) {
+                                    var random_color = (0x1000000+(Math.random())*0xffffff).toString(16).substr(1,6)
                                     return {
-                                        "color": "#3a83a4e0",
-                                        "weight": 1,
+                                        "color": "#"+random_color,
+                                        "weight": 2,
                                         "opacity": 1,
-                                        "fillColor": '#'+(0x1000000+(Math.random())*0xffffff).toString(16).substr(1,6),
-                                        "fillOpacity": 0.5
+                                        "fillColor": '#'+random_color,
+                                        "fillOpacity": 0.6
                                     };
                                 }
                                 };
@@ -628,7 +632,7 @@ $(function(){
                                     }]
                                 };
                                 polygonus_geo_form.features[0].geometry.coordinates.push(arr);
-                                var layerpoly = new L.geoJson(polygonus_geo_form.features, options).addTo(map).bindPopup("<strong>Kod pocztowy: </strong>"+postal_no+"<br />Liczba punktów adresowych: "+innerArrayLength_number_of_points);
+                                var layerpoly = new L.geoJson(polygonus_geo_form.features, options).addTo(map).bindPopup("<strong>Kod pocztowy: </strong>"+postal_no+"<br /><strong>Liczba punktów adresowych: </strong>"+innerArrayLength_number_of_points);
                                 addNonGroupLayers(layerpoly, drawnItems2);
                                 });
                             }
