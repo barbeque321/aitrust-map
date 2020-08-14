@@ -100,12 +100,11 @@ def process_loc(request):
         # won't be appended to final list 
 
         for elem in postal_list_no_repeats:
-            # this regular expresion '\W == [^a-zA-Z0-9_], pass only numbers, letters and _ sign
-            elem = re.sub(r'\W+', '', elem)
-            # checking if all that left is a minimal of 5 digits only; remove 00000;
-            if len(elem) < 5 or elem.isdigit() == False or elem == "00000":
+            if len(elem) < 5 or elem == "00-000":
                 postal_list_no_repeats.remove(elem)
             else:
+                # this regular expresion '\W == [^a-zA-Z0-9_], pass only numbers, letters and _ sign
+                elem = re.sub(r'\W+', '', elem)
                 # adding "-" sign after the second digit
                 elem = elem[:2] + "-" + elem[2:]
 
