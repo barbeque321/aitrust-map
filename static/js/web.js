@@ -576,6 +576,7 @@ $(function(){
                         if(Object.keys(postal_data).length) {
                             Object.keys(postal_data).forEach(key => {
                             var heat_points = points_data[key];
+                            console.log(heat_points);
                             var heat_points_arr = [];
                             var innerArrayLength_heat_points = heat_points[0][0][0].length;
                             for (let j = 0; j < innerArrayLength_heat_points; j++) {
