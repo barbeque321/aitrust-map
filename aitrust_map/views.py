@@ -460,8 +460,8 @@ def draw_polygon_better(request):
         for elem in postal_li:
             # this regular expresion '\W == [^a-zA-Z0-9_], pass only numbers, letters and _ sign
             elem = re.sub(r'\W+', '', elem)
-            # checking if all that left is a minimal of 5 digits only
-            if len(elem) < 5 or elem.isdigit() == False:
+            # checking if all that left is a minimal of 5 digits only; remove 00000;
+            if len(elem) < 5 or elem.isdigit() == False or elem == "00000":
                 pass
             else:
                 # adding "-" sign after the second digit
