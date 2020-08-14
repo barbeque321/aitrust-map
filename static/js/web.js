@@ -152,8 +152,8 @@ $(function(){
                         console.log("Ready");
                         $('#points_sum').contents()[0].textContent = data.points_sum;
                         $('#postal_code_sum').contents()[0].textContent = data.postal_code_sum;
-                        var postal_list_to_draw = data.postal_code;
-                        var postal_code_sum = data.postal_code_sum;
+                        postal_list_to_draw = data.postal_code;
+                        postal_code_sum = data.postal_code_sum;
                         document.getElementById("postal_code").innerHTML = data.postal_code;
                         document.getElementById("postal_codes_popupbox").innerHTML = data.postal_code;
                         document.getElementById("info_radius").innerHTML = data.rad + "km";
@@ -556,7 +556,10 @@ function addNonGroupLayers(sourceLayer, targetGroup) {
 $(function(){
     $("#poly").bind('click', function(){
             // show loading image
-
+            if (postal_code_sum > 70) {
+                alert("Maksymalna liczba obszarów do jednoczesnego generowania na mapie to 70!");
+            }
+            else {
                 $('#loadingmessage').show();
                     console.log('Sending data...');
                     $.ajax({
@@ -598,6 +601,8 @@ $(function(){
                                 for (let j = 0; j < innerArrayLength; j++) {
                                     arr.push([polygonus[0][0][0][j][0], polygonus[0][0][0][j][1]]); 
                                     }
+                                var number_of_points = points_data[key];
+                                var innerArrayLength_number_of_points = number_of_points.length;
                                 var options = {
                                 style: function (feature) {
                                     return {
@@ -623,7 +628,7 @@ $(function(){
                                     }]
                                 };
                                 polygonus_geo_form.features[0].geometry.coordinates.push(arr);
-                                polygonus_geo_form.features[0].properties.popupContent.push(postal_no);
+                                polygonus_geo_form.features[0].properties.popupContent.push(postal_no, innerArrayLength_number_of_points);
                                 var layerpoly = new L.geoJson(polygonus_geo_form.features, options).addTo(map).bindPopup(postal_no);
                                 addNonGroupLayers(layerpoly, drawnItems2);
                                 });
@@ -635,7 +640,7 @@ $(function(){
                             console.log(jqXhr);
                         }
                 }); 
-             
+            }            
     });
 });
 
