@@ -91,8 +91,24 @@ def process_loc(request):
         points_sum = len(postal_list)
         # removing repetitions from the list and appending unique postal codes
         postal_list_no_repeats = list(dict.fromkeys(postal_list))
-        if "00-000" in postal_list_no_repeats:
-            postal_list_no_repeats.remove("00-000")
+
+        # there is ton of unpredicted symbols in database like /, ", ', (), etc.; 
+        # also postal codes are misspelled like "0-0000"; this is one of few steps to 
+        # clearing this garbage; all symbols are removed from postal code string
+        # including "-" sign; then when string is all num only (00000), after the second digit "-" symbol is added
+        # also in case ther is none postal code or it is broken beyond repair (not enough digits) it
+        # won't be appended to final list 
+
+        for elem in postal_list_no_repeats:
+            # this regular expresion '\W == [^a-zA-Z0-9_], pass only numbers, letters and _ sign
+            elem = re.sub(r'\W+', '', elem)
+            # checking if all that left is a minimal of 5 digits only; remove 00000;
+            if len(elem) < 5 or elem.isdigit() == False or elem == "00000":
+                postal_list_no_repeats.remove(elem)
+            else:
+                # adding "-" sign after the second digit
+                elem = elem[:2] + "-" + elem[2:]
+
         postal_list_no_repeats.sort(key=lambda x: (float(x[:-4]), float(x[3:])))
         separator = ', '
         final_postal_string = separator.join(postal_list_no_repeats) 
