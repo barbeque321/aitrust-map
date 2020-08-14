@@ -152,8 +152,8 @@ $(function(){
                         console.log("Ready");
                         $('#points_sum').contents()[0].textContent = data.points_sum;
                         $('#postal_code_sum').contents()[0].textContent = data.postal_code_sum;
-                        postal_list_to_draw = data.postal_code;
-                        console.log(postal_list_to_draw)
+                        var postal_list_to_draw = data.postal_code;
+                        var postal_code_sum = data.postal_code_sum;
                         document.getElementById("postal_code").innerHTML = data.postal_code;
                         document.getElementById("postal_codes_popupbox").innerHTML = data.postal_code;
                         document.getElementById("info_radius").innerHTML = data.rad + "km";
@@ -545,7 +545,8 @@ function addNonGroupLayers(sourceLayer, targetGroup) {
         sourceLayer.eachLayer(function (layer) {
             addNonGroupLayers(layer, targetGroup);
         });
-    } else {
+    } 
+    else {
         targetGroup.addLayer(sourceLayer);
     }
 };
@@ -555,85 +556,89 @@ function addNonGroupLayers(sourceLayer, targetGroup) {
 $(function(){
     $("#poly").bind('click', function(){
             // show loading image
-            $('#loadingmessage').show();
-                console.log('Sending data...');
-                $.ajax({
-                    type: "GET",
-                    data: {
-                        "postal_list_to_draw": postal_list_to_draw,
-                        "lat": latLngs.lat,
-                        "lng": latLngs.lng,
-                        "rad": theRadius,
-                    },
-                    url: 'draw_polygon_better/',
-                    contentType: 'application/json; charset=utf-8',
-                    dataType: 'json',
-                    success: function(data){
-                        $('#loadingmessage').hide();
-                        console.log("Ready");
-                        var postal_data = data.postal_alpha_shape_points_dict_list;
-                        var points_data = data.lat_lng_list;
-                        if(Object.keys(postal_data).length) {
-                            Object.keys(postal_data).forEach(key => {
-                            var heat_points = points_data[key];
-                            console.log(heat_points);
-                            var heat_points_arr = [];
-                            var innerArrayLength_heat_points = heat_points.length;
-                            for (let j = 0; j < innerArrayLength_heat_points; j++) {
-                                heat_points_arr.push([heat_points[j][1], heat_points[j][0]]); 
-                                }
-                            var heat = L.heatLayer(heat_points_arr,{
-                                radius: 10,
-                                blur: 10, 
-                                maxZoom: 17,
-                            }).addTo(map);
-                            addNonGroupLayers(heat, drawnItems3);
-
-                            var polygonus = postal_data[key];
-                            var postal_no = key;
-                            let arr = [];
-                            var innerArrayLength = polygonus[0][0][0].length;
-                            // loop the inner array
-                            for (let j = 0; j < innerArrayLength; j++) {
-                                arr.push([polygonus[0][0][0][j][0], polygonus[0][0][0][j][1]]); 
-                                }
-                            var options = {
-                            style: function (feature) {
-                                return {
-                                    "color": "#3a83a4e0",
-                                    "weight": 1,
-                                    "opacity": 1,
-                                    "fillColor": '#'+(0x1000000+(Math.random())*0xffffff).toString(16).substr(1,6),
-                                    "fillOpacity": 0.5
-                                };
-                            }
-                            };
-                            var polygonus_geo_form = {
-                                type: "FeatureCollection",
-                                features: [{ 
-                                    type:"Feature", 
-                                    properties: {
-                                        popupContent: []
-                                    }, 
-                                    geometry: { 
-                                        type: "Polygon", 
-                                        coordinates: []
+            if (postal_code_sum > 70) {
+                alert("Maksymalna liczba obszarów do jednoczesnego generowania na mapie to 70!");
+            }
+            else {
+                $('#loadingmessage').show();
+                    console.log('Sending data...');
+                    $.ajax({
+                        type: "GET",
+                        data: {
+                            "postal_list_to_draw": postal_list_to_draw,
+                            "lat": latLngs.lat,
+                            "lng": latLngs.lng,
+                            "rad": theRadius,
+                        },
+                        url: 'draw_polygon_better/',
+                        contentType: 'application/json; charset=utf-8',
+                        dataType: 'json',
+                        success: function(data){
+                            $('#loadingmessage').hide();
+                            console.log("Ready");
+                            var postal_data = data.postal_alpha_shape_points_dict_list;
+                            var points_data = data.lat_lng_list;
+                            if(Object.keys(postal_data).length) {
+                                Object.keys(postal_data).forEach(key => {
+                                var heat_points = points_data[key];
+                                var heat_points_arr = [];
+                                var innerArrayLength_heat_points = heat_points.length;
+                                for (let j = 0; j < innerArrayLength_heat_points; j++) {
+                                    heat_points_arr.push([heat_points[j][1], heat_points[j][0]]); 
                                     }
-                                }]
-                            };
-                            polygonus_geo_form.features[0].geometry.coordinates.push(arr);
-                            polygonus_geo_form.features[0].properties.popupContent.push(postal_no);
-                            var layerpoly = new L.geoJson(polygonus_geo_form.features, options).addTo(map).bindPopup(postal_no);
-                            addNonGroupLayers(layerpoly, drawnItems2);
-                            });
+                                var heat = L.heatLayer(heat_points_arr,{
+                                    radius: 25,
+                                    blur: 15, 
+                                    maxZoom: 17,
+                                }).addTo(map);
+                                addNonGroupLayers(heat, drawnItems3);
+
+                                var polygonus = postal_data[key];
+                                var postal_no = key;
+                                let arr = [];
+                                var innerArrayLength = polygonus[0][0][0].length;
+                                // loop the inner array
+                                for (let j = 0; j < innerArrayLength; j++) {
+                                    arr.push([polygonus[0][0][0][j][0], polygonus[0][0][0][j][1]]); 
+                                    }
+                                var options = {
+                                style: function (feature) {
+                                    return {
+                                        "color": "#3a83a4e0",
+                                        "weight": 1,
+                                        "opacity": 1,
+                                        "fillColor": '#'+(0x1000000+(Math.random())*0xffffff).toString(16).substr(1,6),
+                                        "fillOpacity": 0.5
+                                    };
+                                }
+                                };
+                                var polygonus_geo_form = {
+                                    type: "FeatureCollection",
+                                    features: [{ 
+                                        type:"Feature", 
+                                        properties: {
+                                            popupContent: []
+                                        }, 
+                                        geometry: { 
+                                            type: "Polygon", 
+                                            coordinates: []
+                                        }
+                                    }]
+                                };
+                                polygonus_geo_form.features[0].geometry.coordinates.push(arr);
+                                polygonus_geo_form.features[0].properties.popupContent.push(postal_no);
+                                var layerpoly = new L.geoJson(polygonus_geo_form.features, options).addTo(map).bindPopup(postal_no);
+                                addNonGroupLayers(layerpoly, drawnItems2);
+                                });
+                            }
+                        },
+                        error: function (jqXhr, textStatus, errorThrown) {
+                            $('#loadingmessage').hide();
+                            console.log('ERROR');
+                            console.log(jqXhr);
                         }
-                    },
-                    error: function (jqXhr, textStatus, errorThrown) {
-                        $('#loadingmessage').hide();
-                        console.log('ERROR');
-                        console.log(jqXhr);
-                    }
-                });
+                }); 
+            }            
     });
 });
 
