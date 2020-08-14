@@ -1,7 +1,6 @@
 var latLngs = 0;
 var theRadius = 0;
 var theAdressInfo = 0;
-var postal_list_to_draw;
 
 $(document).ready(function(){
 // create map instance 
@@ -16,14 +15,15 @@ drawnItems = L.featureGroup().addTo(map);
 drawnItems2 = L.featureGroup().addTo(map);
 drawnItems3 = L.featureGroup().addTo(map);
 
+// create layers control panel
 L.control.layers({
     'Mapa': osm.addTo(map),
     "Satelita": L.tileLayer('http://www.google.cn/maps/vt?lyrs=s@189&gl=cn&x={x}&y={y}&z={z}', {
         attribution: '&copy; Google'
     })
-}, { 'Zaznaczenie': drawnItems, 'Kody': drawnItems2, 'Punkty': drawnItems3 }, { position: 'topleft', collapsed: false }).addTo(map);
+}, { 'Zaznaczenie obszaru': drawnItems, 'Kody pocztowe': drawnItems2, 'Zagęszczenie punktów adresowych': drawnItems3 }, { position: 'topleft', collapsed: false }).addTo(map);
 
-// create control panel 
+// create figure drawing panel 
 var drawControlFull = new L.Control.Draw({
     draw: {
         polyline: false,
@@ -96,14 +96,15 @@ map.on('draw:edited', function (e) {
 // add map scale
 L.control.scale().addTo(map);
 
-// add search 
+// add search option
 var searchControl = L.esri.Geocoding.geosearch({
     placeholder: "Wyszukaj lokalizację siedziby",
     title: "Wyszukaj siedzibę",
     zoomToResult: false
     }).addTo(map);
 
-// reverse geocoding
+// reverse geocoding if needed
+// not in use actually
 var results = L.layerGroup().addTo(map);
 var geocodeService = L.esri.Geocoding.geocodeService();
 
@@ -129,7 +130,7 @@ searchControl.on('results', function (data) {
     });
 });
 
-// main js connection function
+// generate data from selected area
 $(function(){
     $("#update_log_button").bind('click', function(){
             // show loading image
@@ -154,6 +155,7 @@ $(function(){
                         $('#postal_code_sum').contents()[0].textContent = data.postal_code_sum;
                         postal_list_to_draw = data.postal_code;
                         postal_code_sum = data.postal_code_sum;
+                        // dynamiclly change values of html elements
                         document.getElementById("postal_code").innerHTML = data.postal_code;
                         document.getElementById("postal_codes_popupbox").innerHTML = data.postal_code;
                         document.getElementById("info_radius").innerHTML = data.rad + "km";
@@ -204,7 +206,7 @@ $(function(){
 });
            
 
-// edition of tooltip messages 
+// edition of tooltip messages text - translation to polish
 L.drawLocal = {
     draw: {
         toolbar: {
@@ -316,7 +318,7 @@ L.drawLocal = {
     }
 };
 
-// js code for handling result box transitions
+// handling information box switching transitions
 let frameTransitionTime = 500;
 let $frame = $('.js-frame');
 let $postal = $('.js-postal');
@@ -340,7 +342,7 @@ $(function(){
         });
 });
 
-// clamping great number of postal codes to smaller window
+// dinamiclly clamping great number of postal codes to smaller box 
 if (!Function.prototype.bind) {
     Function.prototype.bind = function (oThis) {
     if (typeof this !== "function") {
@@ -451,7 +453,8 @@ $(window).bind('load', function() {
   clamp(document.getElementById('postal_code'), 3);
 });
 
-// js code for handling new popupbox with all postal codes 
+// dynamiclly generate window with all postal codes  
+// add overlay to dimm rest of site
 const openPopupboxButtons = document.querySelectorAll('[data-popupbox-target]');
 const closePopupboxButtons = document.querySelectorAll('[data-close-button]');
 const overlay = document.getElementById('overlay');
@@ -495,51 +498,7 @@ var myStyle = {
     "opacity": 0.65
 };
 
-// draw area of postal codes quick algorythm
-// $(function(){
-//     $("#poly").bind('click', function(){
-//             // show loading image
-//             $('#loadingmessage').show();
-//                 console.log('Sending data...');
-//                 $.ajax({
-//                     type: "GET",
-//                     data: {
-//                         "postal_list_to_draw": postal_list_to_draw,
-//                     },
-//                     url: 'draw_polygon/',
-//                     contentType: 'application/json; charset=utf-8',
-//                     dataType: 'json',
-//                     success: function(data){
-//                         $('#loadingmessage').hide();
-//                         console.log("Ready");
-//                         var postal_data = data.postal_str
-//                         if(Object.keys(postal_data).length) {
-//                             Object.keys(postal_data).forEach(key => {
-//                             var polygonus;
-//                             polygonus = postal_data[key];
-//                             console.log(polygonus);
-//                             let arr = [];
-//                             var innerArrayLength = polygonus[0].length;
-//                             // loop the inner array
-//                             for (let j = 0; j < innerArrayLength; j++) {
-//                                     arr.push([polygonus[0][j][1], polygonus[0][j][0]]); 
-//                                     }
-                            
-//                             console.log(arr);
-//                             var poly = L.polygon(arr).addTo(map);
-//                             });
-//                         }
-//                     },
-//                     error: function (jqXhr, textStatus, errorThrown) {
-//                         $('#loadingmessage').hide();
-//                         console.log('ERROR');
-//                         console.log(jqXhr);
-//                     }
-//                 });
-//     });
-// });
-
-
+// add dynamiclly generated layers to group
 function addNonGroupLayers(sourceLayer, targetGroup) {
     if (sourceLayer instanceof L.LayerGroup) {
         sourceLayer.eachLayer(function (layer) {
@@ -552,17 +511,19 @@ function addNonGroupLayers(sourceLayer, targetGroup) {
 };
 
 
-// draw area of postal codes precise algorythm
+// draw area of postal codes front
 $(function(){
     $("#poly").bind('click', function(){
-            // show loading image
+            // allow only 70 postal codes at once
             if (postal_code_sum > 70) {
                 alert("Maksymalna liczba obszarów do jednoczesnego generowania na mapie to 70. Proszę użyć narzędzia edycji i zmniejszyć obszar.");
             }
+            // check if there is at least 1 postal code
             if (postal_code_sum == 0) {
                 alert("Brak danych. Proszę zaznaczyć obszar i wygenerować dane.");
             }
             else {
+                // show loading image
                 $('#loadingmessage').show();
                     console.log('Sending data...');
                     $.ajax({
@@ -600,7 +561,6 @@ $(function(){
                                 var postal_no = key;
                                 let arr = [];
                                 var innerArrayLength = polygonus[0][0][0].length;
-                                // loop the inner array
                                 for (let j = 0; j < innerArrayLength; j++) {
                                     arr.push([polygonus[0][0][0][j][0], polygonus[0][0][0][j][1]]); 
                                     }
