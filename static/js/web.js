@@ -601,6 +601,8 @@ $(function(){
                                 for (let j = 0; j < innerArrayLength; j++) {
                                     arr.push([polygonus[0][0][0][j][0], polygonus[0][0][0][j][1]]); 
                                     }
+                                var number_of_points = points_data[key];
+                                var innerArrayLength_number_of_points = number_of_points.length;
                                 var options = {
                                 style: function (feature) {
                                     return {
@@ -626,7 +628,7 @@ $(function(){
                                     }]
                                 };
                                 polygonus_geo_form.features[0].geometry.coordinates.push(arr);
-                                polygonus_geo_form.features[0].properties.popupContent.push(postal_no);
+                                polygonus_geo_form.features[0].properties.popupContent.push(postal_no, innerArrayLength_number_of_points);
                                 var layerpoly = new L.geoJson(polygonus_geo_form.features, options).addTo(map).bindPopup(postal_no);
                                 addNonGroupLayers(layerpoly, drawnItems2);
                                 });
