@@ -137,8 +137,8 @@ $(function(){
             $('#loadingmessage').show();
             // get geo params of circle
             if (latLngs != 0 && theRadius != 0){
-                if theRadius > 80000
-                {
+                if (theRadius > 80000) {
+                
                     $('#loadingmessage').hide();
                     alert("Maksymalny promień obszaru to 80km. Proszę użyć narzędzia edycji i zmniejszyć obszar.");
                 }
