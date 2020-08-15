@@ -89,6 +89,7 @@ def process_loc(request):
         postal_list = process_data['kodPocztowy']
         # calculating the amount of adress points obtained in circle
         points_sum = len(postal_list)
+
         # removing repetitions from the list and appending unique postal codes
         postal_list_no_repeats = list(dict.fromkeys(postal_list))
 
@@ -98,21 +99,22 @@ def process_loc(request):
         # including "-" sign; then when string is all num only (00000), after the second digit "-" symbol is added
         # also in case ther is none postal code or it is broken beyond repair (not enough digits) it
         # won't be appended to final list 
-
+        checked_postal_list = []
         for elem in postal_list_no_repeats:
             if len(elem) <= 5 or elem == "00-000":
-                postal_list_no_repeats.remove(elem)
+                pass
             else:
                 # this regular expresion '\W == [^a-zA-Z0-9_], pass only numbers, letters and _ sign
                 elem = re.sub(r'\W+', '', elem)
                 # adding "-" sign after the second digit
                 elem = elem[:2] + "-" + elem[2:]
+                checked_postal_list.append(elem)
 
-        postal_list_no_repeats.sort(key=lambda x: (float(x[:-4]), float(x[3:])))
+        checked_postal_list.sort(key=lambda x: (float(x[:-4]), float(x[3:])))
         separator = ', '
-        final_postal_string = separator.join(postal_list_no_repeats) 
+        final_postal_string = separator.join(checked_postal_list) 
         # calculating the amount of postal codes obtained in circle
-        postal_code_sum = len(postal_list_no_repeats)
+        postal_code_sum = len(checked_postal_list)
 
         # getting data from object type and turning arrays into a list from second query
         colnames = ['Id', 'Lng', 'Lat', 'kodPocztowy']
