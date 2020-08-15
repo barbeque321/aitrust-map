@@ -137,43 +137,51 @@ $(function(){
             $('#loadingmessage').show();
             // get geo params of circle
             if (latLngs != 0 && theRadius != 0){
-                console.log('Sending data...');
-                $.ajax({
-                    type: "GET",
-                    url: 'process_loc/',
-                    data: {
-                        "lat": latLngs.lat,
-                        "lng": latLngs.lng,
-                        "rad": theRadius,
-                    },
-                    contentType: 'application/json; charset=utf-8',
-                    dataType: 'json',
-                    success: function(data){
-                        $('#loadingmessage').hide();
-                        console.log("Ready");
-                        $('#points_sum').contents()[0].textContent = data.points_sum;
-                        $('#postal_code_sum').contents()[0].textContent = data.postal_code_sum;
-                        postal_list_to_draw = data.postal_code;
-                        postal_code_sum = data.postal_code_sum;
-                        // dynamiclly change values of html elements
-                        document.getElementById("postal_code").innerHTML = data.postal_code;
-                        document.getElementById("postal_codes_popupbox").innerHTML = data.postal_code;
-                        document.getElementById("info_radius").innerHTML = data.rad + "km";
-                        document.getElementById("info_postal_code_sum").innerHTML = data.postal_code_sum;
-                        document.getElementById("info_adress_sum").innerHTML = data.points_sum;
-                        document.getElementById("info_radius_10").innerHTML = data.rad_up_10 + "km";
-                        document.getElementById("info_postal_code_sum_10").innerHTML = data.postal_code_sum_up_10;
-                        document.getElementById("info_adress_sum_10").innerHTML = data.points_sum_up_10;
-                        document.getElementById("info_postal_code_sum_difference").innerHTML = " (+" + data.difference_postal_num + ")";
-                        document.getElementById("info_adress_sum_difference").innerHTML = " (+" + data.differene_points_num + ")";
-                        clamp(document.getElementById('postal_code'), 3);
-                    }, 
-                    error: function (jqXhr, textStatus, errorThrown) {
-                        $('#loadingmessage').hide();
-                        console.log('ERROR');
-                        console.log(jqXhr);
-                    },
+                if theRadius > 80000
+                {
+                    $('#loadingmessage').hide();
+                    alert("Maksymalny promień obszaru to 80km. Proszę użyć narzędzia edycji i zmniejszyć obszar.");
+                }
+                else {
+                    console.log('Sending data...');
+                    $.ajax({
+                        type: "GET",
+                        url: 'process_loc/',
+                        data: {
+                            "lat": latLngs.lat,
+                            "lng": latLngs.lng,
+                            "rad": theRadius,
+                        },
+                        contentType: 'application/json; charset=utf-8',
+                        dataType: 'json',
+                        success: function(data){
+                            $('#loadingmessage').hide();
+                            console.log("Ready");
+                            $('#points_sum').contents()[0].textContent = data.points_sum;
+                            $('#postal_code_sum').contents()[0].textContent = data.postal_code_sum;
+                            postal_list_to_draw = data.postal_code;
+                            postal_code_sum = data.postal_code_sum;
+                            // dynamiclly change values of html elements
+                            document.getElementById("postal_code").innerHTML = data.postal_code;
+                            document.getElementById("postal_codes_popupbox").innerHTML = data.postal_code;
+                            document.getElementById("info_radius").innerHTML = data.rad + "km";
+                            document.getElementById("info_postal_code_sum").innerHTML = data.postal_code_sum;
+                            document.getElementById("info_adress_sum").innerHTML = data.points_sum;
+                            document.getElementById("info_radius_10").innerHTML = data.rad_up_10 + "km";
+                            document.getElementById("info_postal_code_sum_10").innerHTML = data.postal_code_sum_up_10;
+                            document.getElementById("info_adress_sum_10").innerHTML = data.points_sum_up_10;
+                            document.getElementById("info_postal_code_sum_difference").innerHTML = " (+" + data.difference_postal_num + ")";
+                            document.getElementById("info_adress_sum_difference").innerHTML = " (+" + data.differene_points_num + ")";
+                            clamp(document.getElementById('postal_code'), 3);
+                        }, 
+                        error: function (jqXhr, textStatus, errorThrown) {
+                            $('#loadingmessage').hide();
+                            console.log('ERROR');
+                            console.log(jqXhr);
+                        },
+
                 });
+                }
             }
             else if (latLngs != 0 && theRadius == 0){
                 // get geo params of polygon
