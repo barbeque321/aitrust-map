@@ -581,8 +581,8 @@ def draw_polygon_better(request):
 
 def search_for_airports(request):
     if request.method == "GET":
-        lat = request.GET.get('lat') # must be in degrees!
-        lng = request.GET.get('lng') # must be in degrees!
+        lng = request.GET.get('lat') # must be in degrees!
+        lat = request.GET.get('lng') # must be in degrees!
         lat = str(lat)
         lng = str(lng)
         lat = lat[:9] # unifying the data 
