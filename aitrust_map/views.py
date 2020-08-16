@@ -625,9 +625,9 @@ def search_for_airports(request):
         for row in sql_data:
             colindex = 0
             for col in colnames:
-                if not col in process_data:
-                    process_data[col] = []
-                process_data[col].append(row[colindex])
+                if not col in airports_process_data:
+                    airports_process_data[col] = []
+                airports_process_data[col].append(row[colindex])
                 colindex += 1
         airports_names_list = airports_process_data['Name']
 
