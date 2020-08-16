@@ -657,8 +657,8 @@ $(function(){
                                 var airport_info = airports_data[key];
                                 var airport_name = key;
                                 console.log(key);
-                                drawnItems4.addLayer(L.marker([airport_info[0][1], airport_info[0][0]]).bindPopup("<strong>Lotnisko: </strong>"+airport_name+"<br /><strong>IATA: </strong>"));
-
+                                var marker_layer = new L.marker([airport_info[0][1], airport_info[0][0]]).addTo(map).bindPopup("<strong>Lotnisko: </strong>"+airport_name+"<br /><strong>IATA: </strong>");
+                                addNonGroupLayers(marker_layer, drawnItems4);
                                 });
                             }  
                         }, 
