@@ -316,7 +316,7 @@ def isCCW(start, end, point):
 # # HELPER FUNCTIONS FOR ALPAHA SHAPE MAIN FUNCTION #
 # ###################################################
 
-# check if points are in some radius
+# check if points are in given radius
 # earth is spheroid here to be more precise in calculations 
 
 def distance(lat1, lons1, lat2, lons2, rad):
@@ -579,7 +579,69 @@ def draw_polygon_better(request):
 
 
 
+def search_for_airports(request):
+    if request.method == "GET":
+        lat = request.GET.get('lat') # must be in degrees!
+        lng = request.GET.get('lng') # must be in degrees!
+        lat = str(lat)
+        lng = str(lng)
+        lat = lat[:9] # unifying the data 
+        lng = lng[:9] # unifying the data 
+        lat = float(lat)
+        lng = float(lng)
+        rad = request.GET.get('rad')
+        rad = round(float(rad), 2) # unifying the data
+        rad = rad/1000 # must be in kilometers!
+        rad = round(float(rad), 2) # unifying the data
+        R = 6371  # earth radius in kilometers
 
+        # border points max-min
+        # the bounding latitudes are obtained by adding/subtracting the radius from the latitude
+        maxLat = lat + math.degrees(rad/R)
+        minLat = lat - math.degrees(rad/R)
+        maxLng = lng + math.degrees(math.asin(rad/R) / math.cos(math.radians(lat)))
+        minLng = lng - math.degrees(math.asin(rad/R) / math.cos(math.radians(lat)))
+
+        # border points max-min + 10%
+        maxLat_up_10 = lat + math.degrees(rad_up_10/R)
+        minLat_up_10 = lat - math.degrees(rad_up_10/R)
+        maxLng_up_10 = lng + math.degrees(math.asin(rad_up_10/R) / math.cos(math.radians(lat)))
+        minLng_up_10 = lng - math.degrees(math.asin(rad_up_10/R) / math.cos(math.radians(lat)))
+
+        # initialise mysql database connection
+        cursor  = connection.cursor()
+
+        # dictionary for first sql query
+        params = { 'lat': lat, 'lng': lng, 'minLat': minLat, 'minLng': minLng, 'maxLat': maxLat, 'maxLng': maxLng, 'rad': rad, 'R': R }
+        
+        # mysql first query
+        # initially, the boundary data serves as a pre-filter
+        # that the query refers to a limited range of data in the database to make search efficient 
+        # then using spherical law of cosines a more accurate circle is drawn and excess points are removed
+        query  = """SELECT Airport_Id, Name, City, Country, IATA, ICAO, Lat, Lng, FROM airports WHERE Lat BETWEEN %(minLat)s AND %(maxLat)s AND Lng BETWEEN %(minLng)s AND %(maxLng)s AND ACOS(SIN(RADIANS(%(lat)s))*SIN(RADIANS(Lat)) + COS(RADIANS(%(lat)s))*COS(RADIANS(Lat))*COS(RADIANS(Lng)-RADIANS(%(lng)s)))*%(R)s < %(rad)s;"""
+
+        # execute first query
+        cursor.execute(query, params)
+
+        # return mysql data from query
+        sql_data = cursor.fetchall()
+
+        colnames = ['Airport_Id', 'Name', 'City', 'Country', 'IATA', 'ICAO', 'Lat', 'Lng']
+        airports_process_data = {}
+        for row in sql_data:
+            colindex = 0
+            for col in colnames:
+                if not col in process_data:
+                    process_data[col] = []
+                process_data[col].append(row[colindex])
+                colindex += 1
+        airports_names_list = airports_process_data['Name']
+
+
+    data = {
+        "airports": airports_names_list
+        }
+    return JsonResponse(data)
 
 
 

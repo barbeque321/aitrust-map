@@ -622,7 +622,53 @@ $(function(){
 
 
 
+// generate data from selected area
+$(function(){
+    $("#search_airports").bind('click', function(){
+            // show loading image
+            $('#loadingmessage').show();
+            // get geo params of circle
+            if (latLngs != 0 && theRadius != 0){
+                if (theRadius > 300000) {
+                
+                    $('#loadingmessage').hide();
+                    alert("Maksymalny promień obszaru to 300km. Proszę użyć narzędzia edycji i zmniejszyć obszar.");
+                }
+                if (theRadius < 300000){
+                    console.log('Sending data...');
+                    $.ajax({
+                        type: "GET",
+                        url: 'process_loc/',
+                        data: {
+                            "lat": latLngs.lat,
+                            "lng": latLngs.lng,
+                            "rad": theRadius,
+                        },
+                        contentType: 'application/json; charset=utf-8',
+                        dataType: 'json',
+                        success: function(data){
+                            $('#loadingmessage').hide();
+                            console.log("Ready");
+                            console.log(data.airports);
 
+                    
+                        }, 
+                        error: function (jqXhr, textStatus, errorThrown) {
+                            $('#loadingmessage').hide();
+                            console.log('ERROR');
+                            console.log(jqXhr);
+                        },
+
+                });
+                }
+            }        
+                else {
+                    // if no figure is drawn on map show popup
+                    $('#loadingmessage').hide();
+                    alert("Brak współrzędnych!");
+                };
+    });
+});
 
 
 
