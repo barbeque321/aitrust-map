@@ -656,25 +656,8 @@ $(function(){
                                 Object.keys(airports_data).forEach(key => {
                                 var airport_info = airports_data[key];
                                 var airport_name = key;
-                                var arr = [airport_info[0][0], airport_info[0][1]]; 
-                                console.log(arr);
-                                console.log(airport_info[0][0]);
-                                console.log(airport_info[0][1]);
-                                var airport_geo_form = {
-                                    type: "FeatureCollection",
-                                    features: [{ 
-                                        type:"Feature", 
-                                        properties: {
-                                            popupContent: []
-                                        }, 
-                                        geometry: { 
-                                            type: "Point", 
-                                            coordinates: []
-                                        }
-                                    }]
-                                };
-                                airport_geo_form.features[0].geometry.coordinates.push(arr);
-                                drawnItems4.addLayer(L.marker([airport_info[0][1], airport_info[0][0]])).bindPopup("<strong>Lotnisko: </strong>"+airport_name+"<br /><strong>IATA: </strong>");
+                                console.log(key);
+                                drawnItems4.addLayer(L.marker([airport_info[0][1], airport_info[0][0]]).bindPopup("<strong>Lotnisko: </strong>"+airport_name+"<br /><strong>IATA: </strong>"));
 
                                 });
                             }  
