@@ -581,8 +581,8 @@ def draw_polygon_better(request):
 
 def search_for_airports(request):
     if request.method == "GET":
-        lng = request.GET.get('lat') # must be in degrees!
-        lat = request.GET.get('lng') # must be in degrees!
+        lat = request.GET.get('lat') # must be in degrees!
+        lng = request.GET.get('lng') # must be in degrees!
         lat = str(lat)
         lng = str(lng)
         lat = lat[:9] # unifying the data 
@@ -612,7 +612,7 @@ def search_for_airports(request):
         # initially, the boundary data serves as a pre-filter
         # that the query refers to a limited range of data in the database to make search efficient 
         # then using spherical law of cosines a more accurate circle is drawn and excess points are removed
-        query  = """SELECT Airport_Id, Name, City, Country, IATA, ICAO, Lat, Lng, FROM airports WHERE Lat BETWEEN %(minLat)s AND %(maxLat)s AND Lng BETWEEN %(minLng)s AND %(maxLng)s AND ACOS(SIN(RADIANS(%(lat)s))*SIN(RADIANS(Lat)) + COS(RADIANS(%(lat)s))*COS(RADIANS(Lat))*COS(RADIANS(Lng)-RADIANS(%(lng)s)))*%(R)s < %(rad)s;"""
+        query  = """SELECT Airport_Id, Name, City, Country, IATA, ICAO, Lat, Lng FROM airports WHERE Lat BETWEEN %(minLat)s AND %(maxLat)s AND Lng BETWEEN %(minLng)s AND %(maxLng)s AND ACOS(SIN(RADIANS(%(lat)s))*SIN(RADIANS(Lat)) + COS(RADIANS(%(lat)s))*COS(RADIANS(Lat))*COS(RADIANS(Lng)-RADIANS(%(lng)s)))*%(R)s < %(rad)s;"""
 
         # execute first query
         cursor.execute(query, params)
