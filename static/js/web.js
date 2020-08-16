@@ -657,7 +657,7 @@ $(function(){
                                 var airport_info = airports_data[key];
                                 var airport_name = key;
                                 let arr = [];
-                                arr.push([airport_info[0][0], airport_info[0][1]]); 
+                                arr.push([airport_info[0][1], airport_info[0][0]]); 
                                     
                                 var airport_geo_form = {
                                     type: "FeatureCollection",
