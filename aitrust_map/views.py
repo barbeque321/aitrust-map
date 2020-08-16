@@ -639,6 +639,8 @@ def search_for_airports(request):
         airport_names = []
         for num in range(0, total_index):
             index = num
+            new_airport_IATA = "None"
+            new_airpoty_ICAO = "None"
             new_airport_name = airports_process_data['Name'][index]
             new_airport_lng = airports_process_data['Lng'][index]
             new_airport_lat = airports_process_data['Lat'][index]  
