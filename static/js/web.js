@@ -656,8 +656,7 @@ $(function(){
                                 Object.keys(airports_data).forEach(key => {
                                 var airport_info = airports_data[key];
                                 var airport_name = key;
-                                let arr = [];
-                                arr.push([airport_info[0][1], airport_info[0][0]]); 
+                                var arr = [airport_info[0][0], airport_info[0][1]]; 
                                     
                                 var airport_geo_form = {
                                     type: "FeatureCollection",
@@ -667,7 +666,7 @@ $(function(){
                                             popupContent: []
                                         }, 
                                         geometry: { 
-                                            type: "MultiPoint", 
+                                            type: "Point", 
                                             coordinates: []
                                         }
                                     }]
