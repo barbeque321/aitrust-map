@@ -656,8 +656,11 @@ $(function(){
                                 Object.keys(airports_data).forEach(key => {
                                 var airport_info = airports_data[key];
                                 var airport_name = key;
-                                console.log(key);
-                                var marker_layer = new L.marker([airport_info[0][1], airport_info[0][0]]).addTo(map).bindPopup("<strong>Lotnisko: </strong>"+airport_name+"<br /><strong>IATA: </strong>");
+                                var country_name = airport_info[0][3]
+                                var city_name = airport_info[0][2]
+                                var IATA_name = airport_info[0][4]
+                                var ICAO_name = airport_info[0][5]
+                                var marker_layer = new L.marker([airport_info[0][1], airport_info[0][0]]).addTo(map).bindPopup("<strong>Lotnisko: </strong>"+airport_name+"<br /><strong>Country: </strong>"+country_name+"<br /><strong>City: </strong>"+city_name+"<br /><strong>IATA: </strong>"+IATA_name+"<br /><strong>ICAO: </strong>"+ICAO_name);
                                 addNonGroupLayers(marker_layer, drawnItems4);
                                 });
                             }  
