@@ -643,8 +643,8 @@ def search_for_airports(request):
             new_airpoty_ICAO = "None"
             new_airport_name = airports_process_data['Name'][index]
             new_airport_name = re.sub(r'\W+', '', new_airport_name)
-            float(new_airport_lng) = airports_process_data['Lng'][index]
-            float(new_airport_lat) = airports_process_data['Lat'][index]  
+            new_airport_lng = float(airports_process_data['Lng'][index])
+            new_airport_lat = float(airports_process_data['Lat'][index]) 
             new_airport_city = airports_process_data['City'][index]
             new_airport_city = re.sub(r'\W+', '', new_airport_city)
             new_airport_country = airports_process_data['Country'][index]
