@@ -638,7 +638,7 @@ $(function(){
                     console.log('Sending data...');
                     $.ajax({
                         type: "GET",
-                        url: 'process_loc/',
+                        url: 'search_for_airports/',
                         data: {
                             "lat": latLngs.lat,
                             "lng": latLngs.lng,
