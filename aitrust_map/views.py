@@ -642,16 +642,21 @@ def search_for_airports(request):
             new_airport_IATA = "None"
             new_airpoty_ICAO = "None"
             new_airport_name = airports_process_data['Name'][index]
-            new_airport_lng = airports_process_data['Lng'][index]
-            new_airport_lat = airports_process_data['Lat'][index]  
+            new_airport_name = re.sub(r'\W+', '', new_airport_name)
+            float(new_airport_lng) = airports_process_data['Lng'][index]
+            float(new_airport_lat) = airports_process_data['Lat'][index]  
             new_airport_city = airports_process_data['City'][index]
+            new_airport_city = re.sub(r'\W+', '', new_airport_city)
             new_airport_country = airports_process_data['Country'][index]
+            new_airport_country = re.sub(r'\W+', '', new_airport_country)
             if airports_process_data['IATA'][index]:
                 new_airport_IATA = airports_process_data['IATA'][index]
+                new_airport_IATA = re.sub(r'\W+', '', new_airport_IATA)
             else:
                 pass
             if airports_process_data['ICAO'][index]:
                 new_airpoty_ICAO = airports_process_data['ICAO'][index]
+                new_airpoty_ICAO = re.sub(r'\W+', '', new_airpoty_ICAO)
             else:
                 pass
             airports_lat_lng_list[new_airport_name] = []
