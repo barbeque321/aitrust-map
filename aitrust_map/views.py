@@ -602,12 +602,6 @@ def search_for_airports(request):
         maxLng = lng + math.degrees(math.asin(rad/R) / math.cos(math.radians(lat)))
         minLng = lng - math.degrees(math.asin(rad/R) / math.cos(math.radians(lat)))
 
-        # border points max-min + 10%
-        maxLat_up_10 = lat + math.degrees(rad_up_10/R)
-        minLat_up_10 = lat - math.degrees(rad_up_10/R)
-        maxLng_up_10 = lng + math.degrees(math.asin(rad_up_10/R) / math.cos(math.radians(lat)))
-        minLng_up_10 = lng - math.degrees(math.asin(rad_up_10/R) / math.cos(math.radians(lat)))
-
         # initialise mysql database connection
         cursor  = connection.cursor()
 
