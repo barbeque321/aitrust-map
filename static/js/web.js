@@ -657,7 +657,9 @@ $(function(){
                                 var airport_info = airports_data[key];
                                 var airport_name = key;
                                 var arr = [airport_info[0][0], airport_info[0][1]]; 
-                                    
+                                console.log(arr);
+                                console.log(airport_info[0][0]);
+                                console.log(airport_info[0][1]);
                                 var airport_geo_form = {
                                     type: "FeatureCollection",
                                     features: [{ 
@@ -672,7 +674,7 @@ $(function(){
                                     }]
                                 };
                                 airport_geo_form.features[0].geometry.coordinates.push(arr);
-                                drawnItems4.addLayer(L.marker(airport_info[0][0][0],airport_info[0][0][1])).bindPopup("<strong>Lotnisko: </strong>"+airport_name+"<br /><strong>IATA: </strong>");
+                                drawnItems4.addLayer(L.marker(airport_info[0][0],airport_info[0][1])).bindPopup("<strong>Lotnisko: </strong>"+airport_name+"<br /><strong>IATA: </strong>");
 
                                 });
                             }  
