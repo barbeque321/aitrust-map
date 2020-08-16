@@ -674,7 +674,7 @@ $(function(){
                                     }]
                                 };
                                 airport_geo_form.features[0].geometry.coordinates.push(arr);
-                                drawnItems4.addLayer(L.marker([airport_info[0][0], airport_info[0][1]])).bindPopup("<strong>Lotnisko: </strong>"+airport_name+"<br /><strong>IATA: </strong>");
+                                drawnItems4.addLayer(L.marker([airport_info[0][1], airport_info[0][0]])).bindPopup("<strong>Lotnisko: </strong>"+airport_name+"<br /><strong>IATA: </strong>");
 
                                 });
                             }  
