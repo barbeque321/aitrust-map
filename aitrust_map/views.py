@@ -655,7 +655,7 @@ def search_for_airports(request):
             else:
                 pass
             airports_lat_lng_list[new_airport_name] = []
-            airports_lat_lng_list[new_airport_name].append(new_airport_lng, new_airport_lat, new_airport_city, new_airport_country, new_airport_IATA, new_airpoty_ICAO)
+            airports_lat_lng_list[new_airport_name].append([new_airport_lng, new_airport_lat, new_airport_city, new_airport_country, new_airport_IATA, new_airpoty_ICAO])
 
 
 
