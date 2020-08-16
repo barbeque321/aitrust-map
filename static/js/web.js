@@ -667,7 +667,7 @@ $(function(){
                                             popupContent: []
                                         }, 
                                         geometry: { 
-                                            type: "Point", 
+                                            type: "MultiPoint", 
                                             coordinates: []
                                         }
                                     }]
