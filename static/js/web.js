@@ -14,6 +14,7 @@ map = new L.Map('map', {
 drawnItems = L.featureGroup().addTo(map);
 drawnItems2 = L.featureGroup().addTo(map);
 drawnItems3 = L.featureGroup().addTo(map);
+drawnItems4 = L.featureGroup().addTo(map);
 
 // create layers control panel
 L.control.layers({
@@ -650,8 +651,34 @@ $(function(){
                             $('#loadingmessage').hide();
                             console.log("Ready");
                             console.log(data.airports);
-
-                    
+                            var airports_data = data.airports;
+                            if(Object.keys(airports_data).length) {
+                                Object.keys(airports_data).forEach(key => {
+                                var airport_info = airports_data[key];
+                                var airport_name = key;
+                                let arr = [];
+                                var innerArrayLength = airport_info[0].length;
+                                for (let j = 0; j < innerArrayLength; j++) {
+                                    arr.push([airport_info[j][0], airport_info[j][1]]); 
+                                    }
+                                var airport_geo_form = {
+                                    type: "FeatureCollection",
+                                    features: [{ 
+                                        type:"Feature", 
+                                        properties: {
+                                            popupContent: []
+                                        }, 
+                                        geometry: { 
+                                            type: "Marker", 
+                                            coordinates: []
+                                        }
+                                    }]
+                                };
+                                airport_geo_form.features[0].geometry.coordinates.push(arr);
+                                var layerpoly = new L.geoJson(airport_geo_form.features).addTo(map).bindPopup("<strong>Lotnisko: </strong>"+airport_name+"<br /><strong>IATA: </strong>");
+                                addNonGroupLayers(layerpoly, drawnItems4);
+                                });
+                            }  
                         }, 
                         error: function (jqXhr, textStatus, errorThrown) {
                             $('#loadingmessage').hide();

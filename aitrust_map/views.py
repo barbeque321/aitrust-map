@@ -635,14 +635,14 @@ def search_for_airports(request):
         airports_names_list = airports_process_data['Name']
         total_index = len(airports_names_list)
 
-        airports_lat_lng_list = {}   
+        airports_data_list = {}   
         airport_names = []
         for num in range(0, total_index):
             index = num
             new_airport_IATA = "None"
             new_airpoty_ICAO = "None"
             new_airport_name = airports_process_data['Name'][index]
-            new_airport_name = re.sub(r'\W+', '', new_airport_name)
+            new_airport_name = re.sub(r'\W+', ' ', new_airport_name)
             new_airport_lng = float(airports_process_data['Lng'][index])
             new_airport_lat = float(airports_process_data['Lat'][index]) 
             new_airport_city = airports_process_data['City'][index]
@@ -659,13 +659,13 @@ def search_for_airports(request):
                 new_airpoty_ICAO = re.sub(r'\W+', '', new_airpoty_ICAO)
             else:
                 pass
-            airports_lat_lng_list[new_airport_name] = []
-            airports_lat_lng_list[new_airport_name].append([new_airport_lng, new_airport_lat, new_airport_city, new_airport_country, new_airport_IATA, new_airpoty_ICAO])
+            airports_data_list[new_airport_name] = []
+            airports_data_list[new_airport_name].append([new_airport_lng, new_airport_lat, new_airport_city, new_airport_country, new_airport_IATA, new_airpoty_ICAO])
 
 
 
     data = {
-        "airports": airports_lat_lng_list
+        "airports": airports_data_list
         }
     return JsonResponse(data)
 
