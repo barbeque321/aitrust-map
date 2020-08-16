@@ -667,7 +667,7 @@ $(function(){
                                             popupContent: []
                                         }, 
                                         geometry: { 
-                                            type: "Marker", 
+                                            type: "Point", 
                                             coordinates: []
                                         }
                                     }]
