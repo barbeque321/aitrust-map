@@ -78,7 +78,7 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'airports',
+        'NAME': 'pomorskie',
         'USER': 'djangouser2',
         'PASSWORD': 'siedzi@nastoleiokokole',
         'HOST': '51.195.46.168',

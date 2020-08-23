@@ -630,12 +630,12 @@ $(function(){
             $('#loadingmessage').show();
             // get geo params of circle
             if (latLngs != 0 && theRadius != 0){
-                if (theRadius > 300000) {
+                if (theRadius > 600000) {
                 
                     $('#loadingmessage').hide();
-                    alert("Maksymalny promień obszaru to 300km. Proszę użyć narzędzia edycji i zmniejszyć obszar.");
+                    alert("Maksymalny promień obszaru to 600km. Proszę użyć narzędzia edycji i zmniejszyć obszar.");
                 }
-                if (theRadius < 300000){
+                if (theRadius < 600000){
                     console.log('Sending data...');
                     $.ajax({
                         type: "GET",
