@@ -524,7 +524,7 @@ function addNonGroupLayers(sourceLayer, targetGroup) {
 $(function(){
     $("#poly").bind('click', function(){
             // allow only 70 postal codes at once
-            if (postal_code_sum > 70) {
+            if (postal_code_sum > 1100) {
                 alert("Maksymalna liczba obszarów do jednoczesnego generowania na mapie to 70. Proszę użyć narzędzia edycji i zmniejszyć obszar.");
             }
             // check if there is at least 1 postal code
