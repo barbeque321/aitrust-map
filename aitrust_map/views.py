@@ -81,11 +81,14 @@ def process_loc(request):
         process_data = {}
         for row in sql_data:
             colindex = 0
-            for col in colnames:
-                if not col in process_data:
+            for col in colnames:                     
+                if not col in process_data:          
                     process_data[col] = []
                 process_data[col].append(row[colindex])
                 colindex += 1
+
+
+
         postal_list = process_data['kodPocztowy']
         # calculating the amount of adress points obtained in circle
         points_sum = len(postal_list)
@@ -505,13 +508,17 @@ def draw_polygon_better(request):
         query += postal_str
 
         query += ");"
-
+        
+        debug_info = 0
+        
         # execute query
         cursor.execute(query)
 
         # return mysql data from query
         sql_data = cursor.fetchall()
-
+        
+        debug_info = 1
+        
         # processing returned sql data to form of dictionary
         colnames = ['Lng', 'Lat', 'kodPocztowy']
         process_data = {}
@@ -568,7 +575,7 @@ def draw_polygon_better(request):
                 alfa_shape_points_dict_list[key].append(points) 
 
         data = {
-        "postal_alpha_shape_points_dict_list": alfa_shape_points_dict_list, "lat_lng_list": lat_lng_list
+        "postal_alpha_shape_points_dict_list": alfa_shape_points_dict_list, "lat_lng_list": lat_lng_list, "debug_info": debug_info, "sql_data": sql_data
         }
     return JsonResponse(data)
 

@@ -549,6 +549,8 @@ $(function(){
                         success: function(data){
                             $('#loadingmessage').hide();
                             console.log("Ready");
+                            console.log(data.debug_info);
+                            console.log(data.sql_data);
                             var postal_data = data.postal_alpha_shape_points_dict_list;
                             var points_data = data.lat_lng_list;
                             if(Object.keys(postal_data).length) {
